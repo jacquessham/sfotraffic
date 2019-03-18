@@ -5,7 +5,7 @@ suppressMessages(library(forecast))
 library(ggplot2)
 
 
-path <- "/Users/jacquessham/Documents/SelfProjects/SFOTraffic"
+path <- # Your path
 setwd(path)
 # Load Data into dataframe
 airtraffic <- read.csv("Air_Traffic_Passenger_Statistics.csv")
@@ -54,7 +54,7 @@ points(valid_pax, type='l', col="red")
 sqrt(mean((valid_pax - model_hw_add_pred$mean[1:24])**2))
 
 
-# Then look at the "multiplicative
+# Then look at the "multiplicative"
 model_hw_mult <- HoltWinters(x = train_pax, seasonal = "multiplicative")
 plot(model_hw_mult)
 model_hw_mult_pred <- forecast(model_hw_mult, h=24, level=0.95)
@@ -102,3 +102,12 @@ legend("topleft", legend = c("Observed", "Predicted"),
 plot(forecast(object = model_sarima, h = 24, level = 0.95))
 # Calculate RMSE
 sqrt(mean((valid_pax - unlist(forecast(object = model_sarima, h = 24, level = 0.95)[4]))**2))
+
+
+########### Result ##################
+# We found that multiplicative Holt-Winters is best on prediction
+# Use this model to predict 2018 and 2019
+pred <- forecast(model_hw_mult, h=48, level=0.95)
+plot(pred)
+# Result of 2018 and 2019
+unname(unlist(pred[4]))[25:48]

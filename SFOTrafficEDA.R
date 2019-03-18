@@ -5,7 +5,7 @@ suppressMessages(library(ggplot2))
 suppressMessages(library(treemapify))
 suppressMessages(library(scales))
 
-path <- "/Users/jacquessham/Documents/SelfProjects/SFOTraffic"
+path <- # Your path
 setwd(path)
 # Load Data into dataframe
 airtraffic <- read.csv("Air_Traffic_Passenger_Statistics.csv")

@@ -84,10 +84,54 @@ We have did some EDA for the data set, we have visualized:<br>
 
 # Predict the passenger traffic in 2018 and 2019
 #### Problem on time series data
-Autocorrelation occurs in the data set, it means that a given data point is highly correlated with data point(s) from previous period. It violates one of the assumption of linear regression, so we need to predict in other approach. In this project, I will demostrate 3 approaches.
+Autocorrelation occurs in the data set, it means that a given data point is highly correlated with data point(s) from previous period. It violates one of the assumption of linear regression, so we need to predict in other approach. In this project, I will demostrate 3 approaches.<br>
+<br>
+We will split the whole data set about 80:20 split. The training set is roughly 10 years, or between 2005 and 2015. The reminding data of 2016 and 2017 is validation set.
+<br>
+<br>
+We will use RMSE for model evaluation.
 
-## Approach 1: Holt-Winters
+## Approach 1: Holt-Winters Method
 Holt-Winters Methods predicts by using exponential smoothing techniques, in other words, the model is learned by taking an exponentially weighted moving average and do not need any assumption. <br>
 
 The model plot is learned as follow:<br>
 ![Screenshot](hw_plot.png)
+<br>
+The RMSE of this model is 0.1946
+
+<br>
+The model was learned in additive exponentially weighted moving average. Another option is to use multiplicative exponentially weighted moving average. <br>
+
+The model using multiplicative exponentially weighted moving average plot is below:<br>
+![Screenshot](hw_plot_m.png)
+<br>
+The RMSE of this model is 0.1342
+
+## Approach 2: Box-Jenkins Method
+Box-Jenkins Method is an autoregressive integrated moving average model which is learned by converting the data set into stationary. In this project, we use ARIMA and SARIMA models. The difference between the two is that ARIMA is non-seasonal while SARIMA is seasonal.
+
+#### ARIMA
+For the sake of simplicity, we will use "auto.arima()" function to skip the steps on determine the hypermeters on ARIMA and SARIMA models.<br>
+<br>
+Using "auto.arima()" function found the best fit is ARIMA(0,1,0).<br>
+The model plot is learned as follow:<br>
+![Screenshot](arima.png)
+<br>
+It looks like the forecast is constant, simply because our ARIMA model is fitted by only taking difference from the last period. <br>
+The RMSE of this model is 0.6746
+
+#### SARIMA
+Using "auto.arima()" function found the best fit is SARIMA(0,1,0)(0,1,1)[12].<br>
+Using "auto.arima()" function found the best fit is ARIMA(0,1,0).<br>
+The model plot is learned as follow:<br>
+![Screenshot](sarima.png)
+<br>
+The RMSE of this model is 0.1812
+
+## Result
+Compare the RMSE among all models we learned, we found that multiplicative Holt-Winters is best on prediction. We will use this model to predict passenger counts between 2018 and 2019.<br>
+The model plot is learned as follow:<br>
+![Screenshot](result_plot.png)
+<br>
+The result of prediction between January, 2018 and December 2019 are:<br>
+![Screenshot](results.png)
