@@ -83,3 +83,11 @@ We have did some EDA for the data set, we have visualized:<br>
 8 - Heatmap for United Passenger count<br>
 
 # Predict the passenger traffic in 2018 and 2019
+#### Problem on time series data
+Autocorrelation occurs in the data set, it means that a given data point is highly correlated with data point(s) from previous period. It violates one of the assumption of linear regression, so we need to predict in other approach. In this project, I will demostrate 3 approaches.
+
+## Approach 1: Holt-Winters
+Holt-Winters Methods predicts by using exponential smoothing techniques, in other words, the model is learned by taking an exponentially weighted moving average and do not need any assumption. <br>
+
+The model plot is learned as follow:<br>
+![Screenshot](hw_plot.png)
