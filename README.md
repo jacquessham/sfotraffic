@@ -74,13 +74,21 @@ When we look at the data set in the previous project, we found that there are en
 # EDA
 We have did some EDA for the data set, we have visualized:<br>
 1 - Line Chart for passenger count by year <br>
+![Screenshot](line_annual_pax_count.png)
 2 - Bar Chart for passenger count with geo_summ by month<br>
+![Screenshot](bar_pax_count.png)
 3 - Line Chart for growth rate<br>
+![Screenshot](line_growth.png)
 4 - Pie Chart for passenger type<br>
+![Screenshot](pie_activity.png)
 5 - Found the top 5 airlines in passenger counts by domestic and international<br>
-6 - Line Chart for passenger count for domestic and international low cost carrier<br>
+<br>
+6 - Bar Chart for passenger count for international low cost carrier<br>
+![Screenshot](bar_intl_lcc.png)
 7 - Tree map for terminal traffic<br>
+![Screenshot](tree_dom_terminal.png)
 8 - Heatmap for United Passenger count<br>
+![Screenshot](heat_map.png)
 
 # Predict the passenger traffic in 2018 and 2019
 #### Problem on time series data

@@ -5,7 +5,7 @@ suppressMessages(library(ggplot2))
 suppressMessages(library(treemapify))
 suppressMessages(library(scales))
 
-path <- # Your path
+path <- "/Users/jacquessham/Documents/SelfProjects/SFOTraffic"
 setwd(path)
 # Load Data into dataframe
 airtraffic <- read.csv("Air_Traffic_Passenger_Statistics.csv")
@@ -51,11 +51,11 @@ pax_year %<>% slice(2:n())
 
 # Line Graph for passenger count
 pax_year %>% group_by(year) %>% ggplot() +
-  geom_line(aes(x = year, y = sumpax/1000000, group = 1, color = "red")) +
+  geom_line(aes(x = ts(year), y = sumpax/1000000, group = 1, color = "red")) +
   ggtitle("SFO Passenger Count between 2005 and 2017") +
   theme_minimal() + theme(legend.position="none") +
-  scale_x_discrete(name = "Year") +
-  scale_y_discrete(name = "Passengers (Millions)")
+  scale_x_continuous(name = "Year", breaks= pretty_breaks()) +
+  scale_y_continuous(name = "Passengers (Millions)", breaks= pretty_breaks())
 
 growth_rate <- function(x){
   rate <- x / lag(x) - 1
