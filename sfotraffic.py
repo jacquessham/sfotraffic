@@ -2,6 +2,8 @@ import pandas as pd
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from fbprophet import Prophet
+from fbprophet.plot import plot_plotly
+import plotly.offline as py
 
 
 # Load file and rename period and passenger count columns
@@ -49,5 +51,18 @@ df_val['y'] = df_val['y']
 df_val['yhat'] = df_val['yhat']
 df_val['se'] = (df_val['yhat'] - df_val['y'])**2
 rmse = df_val['se'].sum()**(1/2)
-print(df_val)
+
+# Validation Result
+prediction[['ds','yhat']].to_csv('fbprophet_validation.csv', index=False)
 print(rmse)
+
+# Plot validation result
+fig = plot_plotly(model, prediction)
+py.plot(fig, filename='fbprophet_plot.html')
+
+# Predict 2018-2019
+future_beyond = [datetime(2016, 1, 1) + relativedelta(months=i, day=31)
+                 for i in range(48)]
+future_beyond = pd.DataFrame(data=future_beyond, columns=['ds'])
+prediction_result = model.predict(future_beyond)
+prediction_result[['ds','yhat']].to_csv('fbprophet_result.csv', index=False)

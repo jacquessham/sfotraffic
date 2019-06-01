@@ -136,6 +136,16 @@ The model plot is learned as follow:<br>
 <br>
 The RMSE of this model is 0.1812
 
+## Approach 3: Linear Model
+Recently, Facebook release a new time series package for R and Python called Facebook Prophet. You may find more information at <a href="https://facebook.github.io/prophet/">this website</a>. Therefore, I have given a shot to try to use.
+
+However, only linear model is available in this package. Box-Jenkins Methods and Holt-Winters Methods are not available in this package.
+
+The model plot is learned as follow:<br>
+![Screenshot](fbprophet_plot.png)
+<br>
+The RMSE of this model is 1.0493
+
 ## Result
 Compare the RMSE among all models we learned, we found that multiplicative Holt-Winters is best on prediction. We will use this model to predict passenger counts between 2018 and 2019.<br>
 The model plot is learned as follow:<br>
