@@ -146,6 +146,9 @@ The model plot is learned as follow:<br>
 <br>
 The RMSE of this model is 1.0493
 
+Feel free to read my blog on my feedback of using Facebook Prophet in Python:<br>
+<a href="https://medium.com/@jjsham/trying-facebook-prophet-for-time-series-model-3170cfd416fa">click here</a>
+
 ## Result
 Compare the RMSE among all models we learned, we found that multiplicative Holt-Winters is best on prediction. We will use this model to predict passenger counts between 2018 and 2019.<br>
 The model plot is learned as follow:<br>
