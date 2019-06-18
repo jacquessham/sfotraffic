@@ -1,4 +1,4 @@
-# SFO Traffic
+# SFO Passenger Traffic Prediction
 
 We have a data set on SFO traffic between July, 2005 and Decemeber, 2017. It includes the passenger counts on each airline every month in the given period. I have two goals:<br>
 1 - Visualize the data set for EDA purpose<br>
