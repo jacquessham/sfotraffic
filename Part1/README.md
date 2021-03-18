@@ -1,10 +1,10 @@
-# SFO Passenger Traffic Prediction
+# Part 1 - SFO Passenger Traffic Prediction (2018-2019)/Original Work
 
 We have a data set on SFO traffic between July, 2005 and Decemeber, 2017. It includes the passenger counts on each airline every month in the given period. I have two goals:<br>
 1 - Visualize the data set for EDA purpose<br>
 2 - Predict the passenger traffic in 2018 and 2019 <br>
 
-In this project, I will use R because I would like to demonstrate the functionality of ggplot and R has a better package for time series model.<br>
+In this part of the project, I will use R because I would like to demonstrate the functionality of ggplot and R has a better package for time series model.<br>
 
 Noted that I have been doing EDA on this data set previously with Charles Siu. Some of the visualizations here is collaborative with him. 
 
@@ -12,28 +12,38 @@ Noted that I have been doing EDA on this data set previously with Charles Siu. S
 The data set is an open source data set obtained from DataSF<br>
 <a href="https://datasf.org/opendata/">Open SF</a>
 
-The data set consists of 12 columns,<br>
-the columns indicates the destination/origin with passenger counts the airline carry each month.<br>
-As well as, the price type and boarding area of the airlines.<br>
-<br>
-In the given period, there are 17,959 observations.
+The data set consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [Data Folder](/)
+
+## Goal and Plan
+The goal of this part of the project is to utilize the data set to predict the passenger traffic between 2018-2019 in SFO. In order to do this, we will take the following steps to achieve our goal:<br>
+<ol>
+	<li>Data Cleansing</li>
+	<li>EDA</li>
+	<li>Model Training</li>
+	<li>Model Validation</li>
+	<li>Prediction</li>
+</ol>
 
 ## Data Cleansing
 Before doing EDA, we shall change the column names for our convenience.<br>
-After that, the columns we have are:<br>
-1 - date<br>
-2 - op_airlines<br>
-3 - op_code<br>
-4 - pub_airlines<br>
-5 - pub_code<br>
-6 - geo_summ<br>
-7 - geo_region<br>
-8 - type<br>
-9 - price<br>
-10 - terminal<br>
-11 - boarding_area<br>
-12 - pax_count<br>
+After that, the column names become:<br>
+<ul>
+<li>date</li>
+<li>op_airlines</li>
+<li>op_code</li>
+<li>pub_airlines</li>
+<li>pub_code</li>
+<li>geo_summ</li>
+<li>geo_region</li>
+<li>type</li>
+<li>price</li>
+<li>terminal</li>
+<li>boarding_area</li>
+<li>pax_count</li>
+</ul>
 <br>
+
+
 #### Date
 The date in the data set is in the format of YYYYMM, the first thing we should do is to split the year and month into two columns. That would append two more columns to the dataframe. Be sure to convert year in integer for convenience for modeling later.
 
