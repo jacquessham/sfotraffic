@@ -1,17 +1,30 @@
 # Data
 
-
 ## Original Data Set (For Part 1)
 The data set is an open source data set obtained from DataSF<br>
 <a href="https://datasf.org/opendata/">Open SF</a>
 
 The data set consists of 12 columns,<br>
-the columns indicates the destination/origin with passenger counts the airline carry each month.<br>
-As well as, the price type and boarding area of the airlines.<br>
-<br>
-In the given period, there are 17,959 observations.
+the columns indicates the destination/origin with passenger counts the airline carry each month, and the price type and boarding area of the airlines. In the given period, there are 17,959 observations.
 
 The columns consists of:
+<ul>
+	<li>Activity Period</li>
+	<li>Operating Airline</li>
+	<li>Operating Airline IATA Code</li>
+	<li>Published Airline</li>
+	<li>Published Airline IATA Code</li>
+	<li>GEO Summary</li>
+	<li>Activity Type</li>
+	<li>Price Category</li>
+	<li>Terminal</li>
+	<li>Boarding Area</li>
+	<li>Passenger Count</li>
+</ul>
+<br>
+In Part 1, in both EDA and model training R script have converted the column names to the following column names, respectively:
+<br><br>
+
 <ul>
 <li>date</li>
 <li>op_airlines</li>
@@ -32,7 +45,7 @@ The columns consists of:
 The date in the data set is in the format of YYYYMM.
 
 #### op_airlines, op_code, pub_airlines, pub_code
-Someties airlines may outsource the airplane operations to other airlines. For example, some region flights of United Airlines are operated by Skywest Airlines. While United Airlines is called published airlines, Skywest Airlines is called operation airlines. In this data set, the row for such flight, we would have Skywest Airlines in op_airlines and United Airlines in pub_airlines. op_code and pub_code are simply the IATA of operation and publish airlines.
+Sometimes airlines may outsource the airplane operations to other airlines. For example, some region flights of United Airlines are operated by Skywest Airlines. While United Airlines is called published airlines, Skywest Airlines is called operation airlines. In this data set, the row for such flight, we would have Skywest Airlines in op_airlines and United Airlines in pub_airlines. op_code and pub_code are simply the IATA of operation and publish airlines.
 
 #### geo_summ
 The column indicates whether the flight is domestic or international. Flights from/to Canada are counted as international.
@@ -43,7 +56,9 @@ The column indicates the region the flight is from/to.
 #### type
 Enplaned - Departure<br>
 Deplaned - Arrival<br>
-Thru/Transit - Transit flights
+Thru/Transit - Transit flights<br>
+<br>
+Note that Thru/Transit is not used consistently.
 
 #### price
 Low Fare or not. If the airline is not a low cost carrier, the data set indicates as "Other". We will change this to "Full Service" which is the proper term for airline contrast with low cost carrier
@@ -57,10 +72,9 @@ The boarding_area the flight is embarked. In SFO, each terminal may have more th
 #### pax_count
 The passenger count, the column may be treated as the response variable.
 
-<br>
-<br>
-When we look at the data set in the previous project, we found that there are entries with inaccurate data or uncleaned data. Such as:<br>
-1 - Some entries with United Airlines is recorded as United Airlines - Pre 07/01/2013<br>
-2 - Emirates are typed inconsistently, some entries are typed with extra whitespace<br>
-3 - Some airlines are recorded as low cost carrier but supposed to be full service ailrine, and the other way around<br>
-<br>
+
+## Data Set for Part 1.1
+Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the [Part 1.1 ETL folder (Coming Soon...)](/). By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training.
+
+## Data Set for Part 2
+The data set used in Part 2 is the same as the data set used in Part 1.1, you may refer the [Part 1.1 ETL folder (Coming Soon...)](/).

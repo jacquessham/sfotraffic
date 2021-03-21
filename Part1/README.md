@@ -1,18 +1,18 @@
-# Part 1 - SFO Passenger Traffic Prediction (2018-2019)/Original Work
+# Part 1 - SFO Passenger Traffic Prediction (2018-2019)/ Original Work
 
-We have a data set on SFO traffic between July, 2005 and Decemeber, 2017. It includes the passenger counts on each airline every month in the given period. I have two goals:<br>
+We have a data set on SFO traffic between July, 2005 and Decemeber, 2017. It includes the passenger counts on each airline every month in the given period. I have two goals for this project:<br>
 1 - Visualize the data set for EDA purpose<br>
-2 - Predict the passenger traffic in 2018 and 2019 <br>
+2 - Predict the passenger traffic and growth rate in 2018 and 2019 <br>
 
-In this part of the project, I will use R because I would like to demonstrate the functionality of ggplot and R has a better package for time series model.<br>
+In this part of the project, I will use R because I would like to demonstrate the functionality of ggplot and R has a better package for time series model. And since Facebook has released a new time-series statistical-learning package, Prophet (Python package), I will also use Python and Prophet to predict the passenger traffic in order to compare the prediction accuracy.<br>
 
-Noted that I have been doing EDA on this data set previously with Charles Siu. Some of the visualizations here is collaborative with him. 
+Noted that I have been doing EDA on this data set previously with <a href="https://github.com/chunheisiu">Charles Siu</a>. Some of the EDA visualizations in here is collaboration with him. 
 
 ## About the data set
 The data set is an open source data set obtained from DataSF<br>
 <a href="https://datasf.org/opendata/">Open SF</a>
 
-The data set consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [Data Folder](/)
+The data set consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [Data Folder](../Data).
 
 ## Goal and Plan
 The goal of this part of the project is to utilize the data set to predict the passenger traffic between 2018-2019 in SFO. In order to do this, we will take the following steps to achieve our goal:<br>
@@ -24,55 +24,16 @@ The goal of this part of the project is to utilize the data set to predict the p
 	<li>Prediction</li>
 </ol>
 
-## Data Cleansing
-Before doing EDA, we shall change the column names for our convenience.<br>
-After that, the column names become:<br>
+## Files
+There are 2 R scripts and 1 Python script can be found in this folder or subfolder:
 <ul>
-<li>date</li>
-<li>op_airlines</li>
-<li>op_code</li>
-<li>pub_airlines</li>
-<li>pub_code</li>
-<li>geo_summ</li>
-<li>geo_region</li>
-<li>type</li>
-<li>price</li>
-<li>terminal</li>
-<li>boarding_area</li>
-<li>pax_count</li>
+	<li>SFOTrafficEDA.R - The EDA R script (Located in the [EDA folder](/EDA))</li>
+	<li>sfotraffic.R - The model training R script</li>
+	<li>sfotraffic.py - The model training Python script</li>
 </ul>
-<br>
 
-
-#### Date
-The date in the data set is in the format of YYYYMM, the first thing we should do is to split the year and month into two columns. That would append two more columns to the dataframe. Be sure to convert year in integer for convenience for modeling later.
-
-#### op_airlines, op_code, pub_airlines, pub_code
-Someties airlines may outsource the airplane operations to other airlines. For example, some region flights of United Airlines are operated by Skywest Airlines. While United Airlines is called published airlines, Skywest Airlines is called operation airlines. In this data set, the row for such flight, we would have Skywest Airlines in op_airlines and United Airlines in pub_airlines. op_code and pub_code are simply the IATA of operation and publish airlines.
-
-#### geo_summ
-The column indicates whether the flight is domestic or international. Flights from/to Canada are counted as international.
-
-#### geo_region
-The column indicates the region the flight is from/to.
-
-#### type
-Enplaned - Departure<br>
-Deplaned - Arrival<br>
-Thru/Transit - Transit flights
-
-#### price
-Low Fare or not. If the airline is not a low cost carrier, the data set indicates as "Other". We will change this to "Full Service" which is the proper term for airline contrast with low cost carrier
-
-#### terminal
-SFO has 3 domestic terminals, denoted as Terminal 1, 2, 3, and 1 international terminal, denoted as International.
-
-#### boarding_area
-The boarding_area the flight is embarked. In SFO, each terminal may have more than 1 boarding area but the boarding area code do not duplicated in other terminals.
-
-#### pax_count
-The passenger count, we can treat this as the response variable.
-
+## Data Cleansing
+In both the EDA and model training R script, we have changed the column names and you may find the detail in the [Data Folder](../Data) under the section <i>Original Data Set (For Part 1)</i>. 
 <br>
 <br>
 When we look at the data set in the previous project, we found that there are entries with inaccurate data or uncleaned data. Such as:<br>
@@ -80,9 +41,19 @@ When we look at the data set in the previous project, we found that there are en
 2 - Emirates are typed inconsistently, some entries are typed with extra whitespace<br>
 3 - Some airlines are recorded as low cost carrier but supposed to be full service ailrine, and the other way around<br>
 <br>
+Therefore, in both the EDA R script, we have made the following changes to make the data be more consistent and accurated visualizations:
+<ol>
+	<li>Unify the <i>United Airlines</i> entries, make any entry related to United Airlines to have a consistent record in the airline columns.</li>
+	<li>Omit the extra whitespace in any <i>Emirates</i> entry in the airline columns.</li>
+	<li>Reclassify the wrongly identified airlines in the price categories</li>
+</ol>
+<br><br>
+In the model training R and Python script, we have only restructured the date columns and aggregate the passenger count column by month/year for model training. The passenger count column is now count in millions.
 
+## EDA
+You may learn more about the data set in the [EDA folder](../EDA).
 
-# Predict the passenger traffic in 2018 and 2019
+## Predict the passenger traffic in 2018 and 2019
 #### Problem on time series data
 Autocorrelation occurs in the data set, it means that a given data point is highly correlated with data point(s) from previous period. It violates one of the assumption of linear regression, so we need to predict in other approach. In this project, I will demostrate 3 approaches.<br>
 <br>
@@ -95,7 +66,7 @@ We will use RMSE for model evaluation.
 Holt-Winters Methods predicts by using exponential smoothing techniques, in other words, the model is learned by taking an exponentially weighted moving average and do not need any assumption. <br>
 
 The model plot is learned as follow:<br>
-![Screenshot](hw_plot.png)
+![Screenshot](Images/hw_plot.png)
 <br>
 The RMSE of this model is 0.1946
 
@@ -103,7 +74,7 @@ The RMSE of this model is 0.1946
 The model was learned in additive exponentially weighted moving average. Another option is to use multiplicative exponentially weighted moving average. <br>
 
 The model using multiplicative exponentially weighted moving average plot is below:<br>
-![Screenshot](hw_plot_m.png)
+![Screenshot](Images/hw_plot_m.png)
 <br>
 The RMSE of this model is 0.1342
 
@@ -115,7 +86,7 @@ For the sake of simplicity, we will use "auto.arima()" function to skip the step
 <br>
 Using "auto.arima()" function found the best fit is ARIMA(0,1,0).<br>
 The model plot is learned as follow:<br>
-![Screenshot](arima.png)
+![Screenshot](Images/arima.png)
 <br>
 It looks like the forecast is constant, simply because our ARIMA model is fitted by only taking difference from the last period. <br>
 The RMSE of this model is 0.6746
@@ -124,7 +95,7 @@ The RMSE of this model is 0.6746
 Using "auto.arima()" function found the best fit is SARIMA(0,1,0)(0,1,1)[12].<br>
 Using "auto.arima()" function found the best fit is ARIMA(0,1,0).<br>
 The model plot is learned as follow:<br>
-![Screenshot](sarima.png)
+![Screenshot](Images/sarima.png)
 <br>
 The RMSE of this model is 0.1812
 
@@ -132,19 +103,21 @@ The RMSE of this model is 0.1812
 Recently, Facebook release a new time series package for R and Python called Facebook Prophet. You may find more information at <a href="https://facebook.github.io/prophet/">this website</a>. Therefore, I have given a shot to try to use.
 
 However, only linear model is available in this package. Box-Jenkins Methods and Holt-Winters Methods are not available in this package.
-
-The model plot is learned as follow:<br>
-![Screenshot](fbprophet_plot.png)
 <br>
-The RMSE of this model is 1.0493
+The script first changed the column names, reformat the date column, and aggregate the passenger count in Month/Year in millions. Then immediately fit the data set to the training model.
+<br>
+The model plot is learned as follow:<br>
+![Screenshot](Images/fbprophet_plot.png)
+<br>
+The RMSE of this model is 1.0493 which is higher than either Holt-Winters or Box-Jerkins models.
 
-Feel free to read my blog on my feedback of using Facebook Prophet in Python:<br>
+Feel free to read my blog to learn more about my feedback of using Facebook Prophet in Python:<br>
 <a href="https://medium.com/@jjsham/trying-facebook-prophet-for-time-series-model-3170cfd416fa">click here</a>
 
 ## Result
 Compare the RMSE among all models we learned, we found that multiplicative Holt-Winters is best on prediction. We will use this model to predict passenger counts between 2018 and 2019.<br>
 The model plot is learned as follow:<br>
-![Screenshot](result_plot.png)
+![Screenshot](Images/result_plot.png)
 <br>
 The result of prediction between January, 2018 and December 2019 are:<br>
-![Screenshot](results.png)
+![Screenshot](Images/results.png)
