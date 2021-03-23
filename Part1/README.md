@@ -1,17 +1,18 @@
 # Part 1 - SFO Passenger Traffic Prediction (2018-2019)/ Original Work
 
 We have a data set on SFO traffic between July, 2005 and Decemeber, 2017. It includes the passenger counts on each airline every month in the given period. I have two goals for this project:<br>
-1 - Visualize the data set for EDA purpose<br>
-2 - Predict the passenger traffic and growth rate in 2018 and 2019 <br>
-
-In this part of the project, I will use R because I would like to demonstrate the functionality of ggplot and R has a better package for time series model. And since Facebook has released a new time-series statistical-learning package, Prophet (Python package), I will also use Python and Prophet to predict the passenger traffic in order to compare the prediction accuracy.<br>
-
+<ol>
+<li>Visualize the data set for EDA purpose</li>
+<li>Predict the passenger traffic and growth rate in 2018 and 2019</li>
+</ol>
+<br>
+In this part of the project, I will use R because I would like to demonstrate the functionality of ggplot and R has a better package for time series model. And since Facebook has released a new time-series statistical-learning package, Prophet (Python package), I will also use Python and Prophet to predict the passenger traffic in order to compare the prediction accuracy.
+<br>
 Noted that I have been doing EDA on this data set previously with <a href="https://github.com/chunheisiu">Charles Siu</a>. Some of the EDA visualizations in here is collaboration with him. 
 
 ## About the data set
-The data set is an open source data set obtained from DataSF<br>
-<a href="https://datasf.org/opendata/">Open SF</a>
-
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>.
+<br>
 The data set consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [Data Folder](../Data).
 
 ## Goal and Plan
@@ -27,7 +28,7 @@ The goal of this part of the project is to utilize the data set to predict the p
 ## Files
 There are 2 R scripts and 1 Python script can be found in this folder or subfolder:
 <ul>
-	<li>SFOTrafficEDA.R - The EDA R script (Located in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1/EDA">EDA folder</a> )</li>
+	<li>SFOTrafficEDA.R - The EDA R script (Located in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1/EDA">EDA folder</a>)</li>
 	<li>sfotraffic.R - The model training R script</li>
 	<li>sfotraffic.py - The model training Python script</li>
 </ul>
@@ -47,11 +48,11 @@ Therefore, in both the EDA R script, we have made the following changes to make 
 	<li>Omit the extra whitespace in any <i>Emirates</i> entry in the airline columns.</li>
 	<li>Reclassify the wrongly identified airlines in the price categories</li>
 </ol>
-<br><br>
+<br>
 In the model training R and Python script, we have only restructured the date columns and aggregate the passenger count column by month/year for model training. The passenger count column is now count in millions.
 
 ## EDA
-You may learn more about the data set in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1/EDA">EDA folder</a>.
+The data set consists of data between 2006 and 2017. Before we build the predictive model, we shall understand more about the insights about the data set. You may learn more about the data set in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1/EDA">EDA folder</a>.
 
 ## Predict the passenger traffic in 2018 and 2019
 #### Problem on time series data
