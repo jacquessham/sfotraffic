@@ -27,7 +27,7 @@ The goal of this part of the project is to utilize the data set to predict the p
 ## Files
 There are 2 R scripts and 1 Python script can be found in this folder or subfolder:
 <ul>
-	<li>SFOTrafficEDA.R - The EDA R script (Located in the [EDA folder](/EDA) )</li>
+	<li>SFOTrafficEDA.R - The EDA R script (Located in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1/EDA">EDA folder</a> )</li>
 	<li>sfotraffic.R - The model training R script</li>
 	<li>sfotraffic.py - The model training Python script</li>
 </ul>
@@ -51,7 +51,7 @@ Therefore, in both the EDA R script, we have made the following changes to make 
 In the model training R and Python script, we have only restructured the date columns and aggregate the passenger count column by month/year for model training. The passenger count column is now count in millions.
 
 ## EDA
-You may learn more about the data set in the [EDA folder](/EDA).
+You may learn more about the data set in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1/EDA">EDA folder</a>.
 
 ## Predict the passenger traffic in 2018 and 2019
 #### Problem on time series data
