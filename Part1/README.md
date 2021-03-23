@@ -11,9 +11,7 @@ In this part of the project, I will use R because I would like to demonstrate th
 Noted that I have been doing EDA on this data set previously with <a href="https://github.com/chunheisiu">Charles Siu</a>. Some of the EDA visualizations in here is collaboration with him. 
 
 ## About the data set
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>.
-<br>
-The data set consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [Data Folder](../Data).
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>. It consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [Data Folder](../Data).
 
 ## Goal and Plan
 The goal of this part of the project is to utilize the data set to predict the passenger traffic between 2018-2019 in SFO. In order to do this, we will take the following steps to achieve our goal:<br>
@@ -37,10 +35,12 @@ There are 2 R scripts and 1 Python script can be found in this folder or subfold
 In both the EDA and model training R script, we have changed the column names and you may find the detail in the [Data Folder](../Data) under the section <i>Original Data Set (For Part 1)</i>. 
 <br>
 <br>
-When we look at the data set in the previous project, we found that there are entries with inaccurate data or uncleaned data. Such as:<br>
-1 - Some entries with United Airlines is recorded as United Airlines - Pre 07/01/2013<br>
-2 - Emirates are typed inconsistently, some entries are typed with extra whitespace<br>
-3 - Some airlines are recorded as low cost carrier but supposed to be full service ailrine, and the other way around<br>
+When we look at the data set in the previous project, we found that there are entries with inaccurate data or uncleaned data. Such as:
+<ol>
+<li>Some entries with United Airlines is recorded as United Airlines - Pre 07/01/2013</li>
+<li>Emirates are typed inconsistently, some entries are typed with extra whitespace</li>
+<li>Some airlines are recorded as low cost carrier but supposed to be full service ailrine, and the other way around.</li>
+</ol>
 <br>
 Therefore, in both the EDA R script, we have made the following changes to make the data be more consistent and accurated visualizations:
 <ol>
