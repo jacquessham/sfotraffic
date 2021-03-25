@@ -1,9 +1,14 @@
 # Data
 
-In this folder consists of the original data sets, tranformed data sets, and ETL scripts for all parts of this project.
+In this folder consists of the original data sets, tranformed data sets, and ETL scripts for all parts of this project. The following is the list of data files contained in this folder:
+<ul>
+	<li>Air_Traffic_Passenger_Statistics.csv</li>
+	<li>sfopax_eda.csv</li>
+	<li>sfopax_month.csv</li>
+</ul>
 
 ## Original Data Set (For Part 1)
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>. Since this is the original data set used by Part 1, it does not have a ETL script.
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>. Since this is the original data set used by Part 1, it does not have a ETL script. <i>Air_Traffic_Passenger_Statistics.csv</i> is used for Part 1.
 
 The data set consists of 12 columns,<br>
 the columns indicates the destination/origin with passenger counts the airline carry each month, and the price type and boarding area of the airlines. In the given period, there are 17,959 observations.
@@ -75,7 +80,7 @@ The passenger count, the column may be treated as the response variable.
 
 
 ## Data Set for Part 1.1
-Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the [Part 1.1 ETL folder](/ETL_part1_1). By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training.
+Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the [Part 1.1 ETL folder](/ETL_part1_1). By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training. The ETL code in the Part 1.1 ETL folder transform <i>Air_Traffic_Passenger_Statistics.csv</i> to <i>sfopax_eda.csv</i> for EDA and <i>sfopax_month.csv</i> for predictive model.
 
 ## Data Set for Part 2
 The data set used in Part 2 is the same as the data set used in Part 1.1, you may refer the [Part 1.1 ETL folder](/ETL_part1_1).
