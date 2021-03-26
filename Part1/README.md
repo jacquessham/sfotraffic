@@ -122,3 +122,6 @@ The model plot is learned as follow:<br>
 <br>
 The result of prediction between January, 2018 and December 2019 are:<br>
 ![Screenshot](Images/results.png)
+
+## Follow up
+Since this model is done in 2019 and mostly using R, I have re-done the project fully in Python and in a better documented manner in [Part 1.1](../Part1_1) using the same approach. And since the 2020 pandemic has disrupted the airline industry catastrophically, you may find how I response and improve the predictive model in [Part 2](../Part2).
