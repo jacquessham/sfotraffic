@@ -44,5 +44,5 @@ After all the steps have been processed, the script would save the file to <i>sf
 The script would take extra step to aggregate passenger count by month/year and save the file to <i>sfopax_month.csv</i> for predictive model training.
 
 ## Part 1.1
-Once the data sets are prepared and saved in the [Data Folder](../). We may explore the data set in the [Part 1.1 EDA folder](../Part1_1/EDA) or the prediction in the [Part 1.1 folder](../Part1_1/).
+Once the data sets are prepared and saved in the [Data Folder](../). We may explore the data set in the [Part 1.1 EDA folder](../Part1_1/EDA/) or the prediction in the [Part 1.1 folder](../Part1_1/).
 
