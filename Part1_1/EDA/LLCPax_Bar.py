@@ -27,24 +27,25 @@ data = []
 data.append(go.Bar(name='XL Airways France', 
                    x=df_xlair['year'], y=df_xlair['pax_count'],
                    text=df_xlair['pax_count'], textposition='auto',
-                   textfont=dict(color='white'),
+                   textfont=dict(color='gray'),
                    marker=dict(color='rgb(51, 255, 153)')))
 
 data.append(go.Bar(name='Wow Air', 
                    x=df_wow['year'], y=df_wow['pax_count'],
                    text=df_wow['pax_count'], textposition='auto',
-                   textfont=dict(color='white'),
+                   textfont=dict(color='gray'),
                    marker=dict(color='rgb(255, 255, 153)')))
 
 data.append(go.Bar(name='WestJet Airlines', 
 	               x=df_wj['year'], y=df_wj['pax_count'],
 	               text=df_wj['pax_count'], textposition='auto',
-	               textfont=dict(color='white'),
+	               textfont=dict(color='gray'),
 	               marker=dict(color='rgb(255, 178, 102)')))
 
 fig_title = 'Annual Passenger Traffic on International Low Cost Carrier'
-layout = dict(title=fig_title,
-              barmode='stack', xaxis=dict(tickmode='linear'))
+layout = dict(title={'text':fig_title, 'x':0.5},
+              barmode='stack', xaxis=dict(tickmode='linear'),
+              plot_bgcolor='rgba(0,0,0,0)')
 
 fig = go.Figure(data=data, layout=layout)
 

@@ -20,7 +20,8 @@ data = [go.Pie(labels=df['type'],values=df['pax_count'],
 	           marker=dict(colors=['rgb(0, 204, 102)',
 	          	                  'rgb(255, 153, 91)',
 	          	                  'rgb(102, 178, 255)']))]
-layout = dict(title='Percentage of Airplane Activities')
+layout = dict(title={'text':'Percentage of Airplane Activities',
+	                 'x':0.5})
 fig = go.Figure(data=data, layout=layout)
 
 plotly.offline.plot(fig, filename='type_pie.html')

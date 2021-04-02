@@ -25,9 +25,10 @@ data.append(go.Scatter(x=df['year'], y=df['growth'],
               line=dict(color='rgb(102,178,255)')))
 
 ## Prepare layout
-layout = dict(title='SFO Passenger Traffic Growth Rate',
-	          xaxis=dict(title='Date'), 
-	          yaxis=dict(title='Rate (%)'))
+layout = dict(title={'text':'SFO Passenger Traffic Growth Rate','x':0.5},
+              xaxis=dict(title='Date', linecolor='gray'), 
+              yaxis=dict(title='Rate (%)', gridcolor='gray'),
+              plot_bgcolor='rgba(0,0,0,0)')
 
 # Plot and fix layout
 fig = go.Figure(data=data, layout=layout)

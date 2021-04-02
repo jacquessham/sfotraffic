@@ -31,7 +31,7 @@ data.append(go.Treemap(labels=df_plot['pub_airlines'],
 	                   parents=df_plot['terminal']))
 # Layout
 fig_title = 'Domestic Passenger Traffic by Airline and Terminal'
-layout = dict(title=fig_title,
+layout = dict(title={'text':fig_title, 'x': 0.5},
 	          treemapcolorway=['rgb(153, 153, 255)','rgb(255, 153, 253)',
 	                           'rgb(255, 153, 153)','rgb(255, 204, 153)'])
 
