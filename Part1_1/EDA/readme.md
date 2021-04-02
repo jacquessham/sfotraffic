@@ -33,10 +33,10 @@ There is a rapid growth in passenger traffic in international low cost flights, 
 <br>
 ### Terminal Usage
 6 - Tree map for terminal traffic
-<img src='terminalpax_treemap.png'>
+<img src='Images/terminalpax_treemap.png'>
 This is the distribution of the passenger traffic by terminal and airlines, we can see most of the SFO passengers take the United flights in terminal 3, followed by American Airlines, Southwest Airlines, Delta Airlines.
 
 ### Largest Stalkholder
 7 - Heatmap for United Passenger count
-<img src='uapax_heat.png'>
+<img src='Images/uapax_heat.png'>
 From the tree map we have seen, we have learnt United Airlines is the largest stalkholder in SFO. Let's drill down the passenger count with United flights: we can see the colour turn from yellow to red in a steady increasingly pace in the last 10 years.
