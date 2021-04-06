@@ -28,5 +28,5 @@ Coming Soon...
 Coming Soon...
 
 ## EDA
-The data set consists of data between 2005 and 2017. Before we build the predictive model, we shall understand more about the insights about the data set. You may learn more about the data set in the [EDA folder](/EDA/).
+The data set consists of data between 2005 and 2017. Before we build the predictive model, we shall understand more about the insights about the data set. You may learn more about the data set in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1_1/EDA">EDA folder</a>.
 
