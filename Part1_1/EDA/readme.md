@@ -2,6 +2,23 @@
 This EDA is an effort to re-do the Part 1 EDA in Python and Plotly. Likewise, we are using the same data set on SFO passenger traffic between July, 2005 and December, 2017. It includes the passenger count on each airline every month in the given period. The data set consists of 12 columns with 17,959 observations, and you may find more detail about the data set in the [data folder](../../Data). I have been doing EDA with this data set previously with <a href="https://github.com/chunheisiu">Charles Siu</a>. Some of the EDA visualizations in here is collaboration with him in the <a href="https://github.com/chunheisiu/SFO-Passenger-Stats">SFO-Passebger-Stats</a> project.
 
 ## Overview
+The primary goal for EDA is to understand the data set and explore the insight of the data set to train an accuated predictive model. Since it is a times series data set, it is necessary to understand the trend and seasonality of the data. This time, we would replicate the graphs we have done in Part 1 EDA with Python and Plotly, and also a dashborad to project a dynamic and upgraded visualizations. This documentation will first provide a link to the dashboard, then a static report afterward.
+
+## Dashboard
+Coming Soon...
+
+## Files
+Besides the script for dashboard, this folder contains 8 python scripts for the static report:
+<ul>
+	<li>AnnualPaxGrowth_Line.py</li>
+	<li>AnnualPax_Line</li>
+	<li>LLCPax_Bar.py</li>
+	<li>MonthPax_Bar.py</li>
+	<li>TerminalPax_Tree.py</li>
+	<li>Type_Pie.py</li>
+	<li>UAPax_heat.py</li>
+</ul>
+
 
 ## Result
 ### Data Set at a Glance
@@ -40,3 +57,10 @@ This is the distribution of the passenger traffic by terminal and airlines, we c
 7 - Heatmap for United Passenger count
 <img src='Images/uapax_heat.png'>
 From the tree map we have seen, we have learnt United Airlines is the largest stalkholder in SFO. Let's drill down the passenger count with United flights: we can see the colour turn from yellow to red in a steady increasingly pace in the last 10 years.
+
+## Reflection on EDA and Scripts
+Coming Soon...
+
+## Next Step
+You may click [here](../) to learn more about the predictive model and the prediction.
+
