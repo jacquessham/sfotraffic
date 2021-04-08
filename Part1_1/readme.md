@@ -22,7 +22,13 @@ The goal of this part of the project is to utilize the data set to predict the p
 </ol>
 
 ## Files
-Coming Soon...
+In this part, the folder contains the following files:
+<ul>
+	<li>sfotraffic_arima.py</li>
+	<li>sfotraffic_hw.py</li>
+	<li>sfotraffic_prophet.py</li>
+	<li>sfotraffic_report.py</li>
+</ul>
 
 ## Data Cleansing
 Coming Soon...
