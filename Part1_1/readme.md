@@ -27,7 +27,8 @@ In this part, the folder contains the following files:
 	<li>sfotraffic_arima.py</li>
 	<li>sfotraffic_hw.py</li>
 	<li>sfotraffic_prophet.py</li>
-	<li>sfotraffic_report.py</li>
+	<li>plot_pred</li>
+	<li>sfotraffic_modeltraining.py</li>
 </ul>
 <br>
 
@@ -43,6 +44,21 @@ The file imports the following packages:
 	<li>mean_squared_error from sklearn.metrics</li>
 </ul>
 <i>pandas</i> is used for data managerment. <i>pmdarima</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
+<br><br>
+After <i>result_arima()</i> is called, the data is imported directly and transformed for model training, reformat date column and divide pax_count by 1 million. Then split the training data and testing data: data between 2005-2015 belongs to training data (year<=2015), 2016-2017(year>2015) belongs to testing data. The data set is static that the filter is fixed in 2015.
+<br><br>
+The function has calls <i>auto_arima()</i> which the function operates grid search to find the optimal model and return to you (Hyperparameter setting may be found in the Model Training section). After that, it makes prediction for the given period defined in the function parameter (Default at 24 months), and calculate the RMSE. The RMSE is only calculated with 24 months prediction (2016-2017) even the function parameter is greater than 24.
+<br><br>
+The function would finally declare a dictionary and return the following:
+<ul>
+	<li>result['summary']: Model summary - Object (Require users to convert to string)</li>
+	<li>result['X_train']: Training data set - Dataframe</li>
+	<li>result['X_test']: Testing data set - Dataframe</li>
+	<li>result['pred']: Prediction between 2016-2017 with dates - Dataframe</li>
+	<li>result['rmse']: RMSE - float</li>
+</ul>
+<br><br>
+Both training data set and testing data set has date and passenger traffic in column names: <i>date</i> and <i>pax_count</i>. pred data frame has date and prediction in column name: <i>date</i> and <i>pred</i>.
 
 ### sfotraffic_hw.py
 The file contains the following function:
@@ -56,6 +72,22 @@ The file imports the following packages:
 	<li>mean_squared_error from sklearn.metrics</li>
 </ul>
 <i>pandas</i> is used for data managerment. <i>statsmodels.tsa.holtwinters</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
+<br><br>
+After <i>result_hw()</i> is called, the data is imported directly and transformed for model training, reformat date column and divide pax_count by 1 million. Then split the training data and testing data: data between 2005-2015 belongs to training data (year<=2015), 2016-2017(year>2015) belongs to testing data. The data set is static that the filter is fixed in 2015.
+<br><br>
+The function has calls <i>ExponentialSmoothing()</i> which fits data set and return the model. <i>ExponentialSmoothing()</i> is called twice, one for additive method and multiplicative method. the model with <i>model_add</i> is the model object trained with additive method, while <i>model_mul</i> is the model object trained with multiplicative method. After that, it makes prediction for the given period defined in the function parameter (Default at 24 months), and calculate the RMSE for both models. The RMSE is only calculated with 24 months prediction (2016-2017) even the function parameter is greater than 24.
+<br><br>
+The function would finally declare a dictionary and return the following:
+<ul>
+	<li>result['X_train']: Training data set - Dataframe</li>
+	<li>result['X_test']: Testing data set - Dataframe</li>
+	<li>result['pred_add']: Prediction between 2016-2017 with dates (Additive model)- Dataframe</li>
+	<li>result['pred_mul']: Prediction between 2016-2017 with dates (Multiplicative model)- Dataframe</li>
+	<li>result['rmse_add']: RMSE (Additive model) - float</li>
+	<li>result['rmse_mul']: RMSE (Multiplicative model) - float</li>
+</ul>
+<br><br>
+Both training data set and testing data set has date and passenger traffic in column names: <i>date</i> and <i>pax_count</i>. pred data frame has date and prediction in column name: <i>date</i> and <i>pred</i>.
 
 ### sfotraffic_prophet.py
 The file contains the following function:
@@ -69,7 +101,18 @@ The file imports the following packages:
 	<li>mean_squared_error from sklearn.metrics</li>
 </ul>
 <i>pandas</i> is used for data managerment. <i>prophet.Prophet</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
-
+<br><br>
+Facebook Prophet follows sklearn syntax. The function first declare an object with <i>Prophet()</i>, then fit with training data. Lastly, it makes prediction for the given period defined in the function parameter (Default at 24 months), and calculate the RMSE for both models. The RMSE is only calculated with 24 months prediction (2016-2017) even the function parameter is greater than 24.
+<br><br>
+The function would finally declare a dictionary and return the following:
+<ul>
+	<li>result['X_train']: Training data set - Dataframe</li>
+	<li>result['X_test']: Testing data set - Dataframe</li>
+	<li>result['pred']: Prediction between 2016-2017 with dates (Additive model)- Dataframe</li>
+	<li>result['rmse']: RMSE (Additive model) - float</li>
+</ul>
+<br><br>
+Both training data set and testing data set has date and passenger traffic in column names: <i>date</i> and <i>pax_count</i>. pred data frame has date and prediction in column name: <i>date</i> and <i>pred</i>.
 ### plot_pred.py
 The file contains the following function:
 <ul>
@@ -81,15 +124,36 @@ The file imports the following packages:
 	<li>Plotly</li>
 </ul>
 <i>pandas</i> is used for data managerment. <i>Plotly</i> is used for generating visualizations.
+<br><br>
+<i>plot_pred()</i> required the following paramenters:
+<ol>
+	<li>X_train - Training data set</li>
+	<li>X_test - Testing data set</li>
+	<li>yhat - Prediction made from a predictive model</li>
+	<li>model_name - Chart title</li>
+	<li>html_filename - The filename of the html saved after the chart is generated</li>
+</ol>
+<br><br>
+<i>plot_pred()</i> generates a line chart with 3 lines: Training data set in gray, testing data set in blue, and prediction in red. X-axis is the date dimension and y-axis is the passenger traffic in millions. The function is dynamic that can be used for result of different predictive models. <i>model_name</i> will be used as title. Once the chart is generated, it will saved in html with <i>html_filename</i>. Then, the chart can be downloaded in a png file, but the png required to be done manually.
 
-### sfotraffic_report.py
-Coming Soon...
+### sfotraffic_modeltraining.py
+This file imports the following scripts:
+<ul>
+	<li>sfotraffic_arima.py</li>
+	<li>sfotraffic_hw.py</li>
+	<li>sfotraffic_prophet.py</li>
+	<li>plot_pred.py</li>
+</ul>
+The scripts first called the model training function from <i>sfotraffic_arima.py</i>, <i>sfotraffic_hw.py</i>, and <i>sfotraffic_prophet.py</i> and recieve an object contains RMSE, prediction. Then it would print the RMSE on the command line, and plot the prediction of each model by calling <i>plot_pred()</i> and save the plotly chart in html page in the [Images folder](/Images). Lastly, the script save the RMSE of all models and model summary of Box-Jerkins model in <i>ModelTrainingResults.txt</i> in the [Results folder](/Results).
 
 ## Data Cleansing and ETL Process
 The data cleansing part was done to keep entry records be more consistent. For example, some of the Continental Airlines entries was recorded "United Airlines - Pre 2013"; and some of the full service airlines were labeled as low cost carriers, while some low cost carriers were labeled as full cost carrier. For the convienence for both EDA and model training phases, the ETL process transformed the original data set to 2 different data set, <i>sfopax_eda.csv</i> and <i>sfopax_month.csv</i>. If you are interested what has done to improve the data quality, you may find more details in the [Data Folder](../Data) and [ETL Folder](../Data/ETL_part1_1). 
 
 ## EDA
 The data set consists of data between 2005 and 2017. Before we build the predictive model, we shall understand more about the insights about the data set. You may learn more about the data set in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part1_1/EDA">EDA folder</a>. The EDA process used <i>sfopax_eda.csv</i> as the data set contains more detail about the flights regards on airlines, destinations, and other details.
+<br><br>
+The annual passenger traffic looks like this:
+<img src='Images/annualpax_line.png'>
 
 ## Model Training
 ### Strategy
@@ -100,12 +164,11 @@ The problem to times-series data is the each data point is highly correlated wit
 	<li><i>Facebook Prophet</i> for General Additive Model</li>
 </ul>
 <br>
-
 I would use <i>sfopax_month.csv</i> in the [Data Folder](../Data), which the data set is aggregated to monthly passenger count, to train the predictive models using the above packages in Python and validate which predictive models is the most accurated.
 <br><br>
 The data set would be splited to roughly 80:20 split for training and validating data set. The training set is roughly 10 years between 2005-2015; the remaining data from 2016-2017 is the validation set. RMSE would be used for model evaluation, whichever the model has the lowest RMSE is the most accurated model. We would choose that model to predict the passenger traffic between 2018-2019. 
 <br><br>
-<b><i>sfotraffic_report.py</i> is the script of driver script for model training, model validation, and prediction. (More description about this script is coming soon...)</b>
+<i>sfotraffic_modeltraining.py</i> is the script of driver script for model training. The script trains the predictive model with different algorithms first, then print the result and metrics on command line and save in text file afterward. <i>ModelTrainingResults.txt</i> in the [Results](/Results) folder contains such information.
 
 ### Approach 1: Box-Jerkins Method
 Box-Jenkins Method is an autoregressive integrated moving average model which is learned by converting the data set into stationary. In this project, we use ARIMA and SARIMA models. The difference between the two is that ARIMA is non-seasonal while SARIMA is seasonal. <i>pmdarima</i>is a Python package similar to the <i>auto.arima()</i> in R's <i>forecast</i> package. Convienently, you may import <i>pmdarima</i> and use the same syntax <i>auto.arima()</i> to achieve the same goal in Python to find the best hyperparameters for your Box-Jerkins model.
@@ -127,16 +190,9 @@ The script has a function of <i>arima_model()</i> first imported the data from <
 	<li>trace = True</li>
 	<li>stepwise = True</li>
 </ul>
-<i>auto.arima()</i> would return the best model in an object from the grid search, you may use .summary() to obtain the parameters of the model. Once the best Box-Jerkins model is found for this data set, the scripts predicts the passenger traffic between 2016-2017 and calculates the RMSE. Note that the RMSE is calculated based on passenger count in millions. If you would like to learn more how Box-Jerkins model works or understand the meaning of the hyperparameters, I recommend this <a href="https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/">blog post</a> to learn more. The scripts would finally declare a dictionary and return the following:
-<ul>
-	<li>Model summary</li>
-	<li>Training data set</li>
-	<li>Testing data set</li>
-	<li>Prediction between 2016-2017 with dates</li>
-	<li>RMSE</li>
-</ul>
+<i>auto.arima()</i> would return the best model in an object from the grid search, you may use .summary() to obtain the parameters of the model. Once the best Box-Jerkins model is found for this data set, the scripts predicts the passenger traffic between 2016-2017 and calculates the RMSE. Note that the RMSE is calculated based on passenger count in millions. If you would like to learn more how Box-Jerkins model works or understand the meaning of the hyperparameters, I recommend this <a href="https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/">blog post</a> to learn more. 
 <br>
-This function is called in <i>sfotraffic_report.py</i> for model training phases.
+This function is called in <i>sfotraffic_modeltraining.py</i> for model training phases.
 <br><br><br>
 The plot for the result is:
 <img src='Images/bj_pred.png'>
@@ -175,7 +231,7 @@ Once the models are trained, the scipt would predict the passenger traffic for 2
 	<li>hw multiplicative model RMSE</li>
 </ul>
 <br>
-This function is called in <i>sfotraffic_report.py</i> for model training phases.
+This function is called in <i>sfotraffic_modeltraining.py</i> for model training phases.
 <br>
 The plot for the results are:
 <img src='Images/hw_add_pred.png'>
@@ -195,7 +251,7 @@ The function <i>gam_model()</i> in the script helps you to train the model with 
 	<li>RMSE</li>
 </ul>
 <br>
-This function is called in <i>sfotraffic_report.py</i> for model training phases.
+This function is called in <i>sfotraffic_modeltraining.py</i> for model training phases.
 <br>
 The plot for the results are:
 <img src='Images/gam_pred.png'>
