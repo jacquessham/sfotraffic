@@ -29,26 +29,58 @@ In this part, the folder contains the following files:
 	<li>sfotraffic_prophet.py</li>
 	<li>sfotraffic_report.py</li>
 </ul>
+<br>
+
 ### sfotraffic_arima.py
-The files contains the following function:
+The file contains the following function:
 <ul>
 	<li>result_arima()</li>
 </ul>
-More details are coming soon...
+The file imports the following packages:
+<ul>
+	<li>pandas</li>
+	<li>pmdarima</li>
+	<li>mean_squared_error from sklearn.metrics</li>
+</ul>
+<i>pandas</i> is used for data managerment. <i>pmdarima</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
 
 ### sfotraffic_hw.py
-The files contains the following function:
+The file contains the following function:
 <ul>
 	<li>result_hw()</li>
 </ul>
-More details are coming soon...
+The file imports the following packages:
+<ul>
+	<li>pandas</li>
+	<li>statsmodels.tsa.holtwinters</li>
+	<li>mean_squared_error from sklearn.metrics</li>
+</ul>
+<i>pandas</i> is used for data managerment. <i>statsmodels.tsa.holtwinters</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
 
 ### sfotraffic_prophet.py
-The files contains the following function:
+The file contains the following function:
 <ul>
 	<li>result_gam()</li>
 </ul>
-More details are coming soon...
+The file imports the following packages:
+<ul>
+	<li>pandas</li>
+	<li>prophet.Prophet (Facebook Prophet)</li>
+	<li>mean_squared_error from sklearn.metrics</li>
+</ul>
+<i>pandas</i> is used for data managerment. <i>prophet.Prophet</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
+
+### plot_pred.py
+The file contains the following function:
+<ul>
+	<li>plot_pred()</li>
+</ul>
+The file imports the following packages:
+<ul>
+	<li>pandas</li>
+	<li>Plotly</li>
+</ul>
+<i>pandas</i> is used for data managerment. <i>Plotly</i> is used for generating visualizations.
 
 ### sfotraffic_report.py
 Coming Soon...
@@ -67,10 +99,12 @@ The problem to times-series data is the each data point is highly correlated wit
 	<li><i>statsmodels.tsa.holtwinters</i> for Holts-Winters Method</li>
 	<li><i>Facebook Prophet</i> for General Additive Model</li>
 </ul>
+<br>
+
 I would use <i>sfopax_month.csv</i> in the [Data Folder](../Data), which the data set is aggregated to monthly passenger count, to train the predictive models using the above packages in Python and validate which predictive models is the most accurated.
-<br>
+<br><br>
 The data set would be splited to roughly 80:20 split for training and validating data set. The training set is roughly 10 years between 2005-2015; the remaining data from 2016-2017 is the validation set. RMSE would be used for model evaluation, whichever the model has the lowest RMSE is the most accurated model. We would choose that model to predict the passenger traffic between 2018-2019. 
-<br>
+<br><br>
 <b><i>sfotraffic_report.py</i> is the script of driver script for model training, model validation, and prediction. (More description about this script is coming soon...)</b>
 
 ### Approach 1: Box-Jerkins Method
@@ -78,14 +112,7 @@ Box-Jenkins Method is an autoregressive integrated moving average model which is
 <br>
 The pmdarima package follows R style and syntax. The syntax is very similar to the forecast package in R but pmdarima only takes the responsive variable column, in our case, the pax_count column. The <i>auto.arima()</i> takes the the pax_count column, the range (minimum and maximum) of hyperparameters including: p, q, d, P, Q, D, m, then the <i>auto.arima()</i> would find the best model using Box-Jerkins methods (Both ARIMA and SARIMA while setting seasonal=True, turn off if seasonality is not a concern, so that SARIMA model is ignored).
 <br>
-<i>sfotraffic_arima.py</i> is the file that used this method to train the model. The file imports the following packages:
-<ul>
-	<li>pandas</li>
-	<li>calendar</li>
-	<li>pmdarima</li>
-	<li>mean_squared_error from sklearn.metrics</li>
-</ul>
-<i>pandas</i> is used for data managerment. <i>calendar</i> is used for date format. <i>pmdarima</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
+<i>sfotraffic_arima.py</i> is the file that used this method to train the model.
 <br><br>
 The script has a function of <i>arima_model()</i> first imported the data from <i>sfopax_month.csv</i> and split the data to training and testing data set. Then, use <i>auto.arima()</i> to grid search the best model with the following hyperparameters:
 <ul>
@@ -104,13 +131,15 @@ The script has a function of <i>arima_model()</i> first imported the data from <
 <ul>
 	<li>Model summary</li>
 	<li>Training data set</li>
+	<li>Testing data set</li>
 	<li>Prediction between 2016-2017 with dates</li>
 	<li>RMSE</li>
 </ul>
 <br>
 This function is called in <i>sfotraffic_report.py</i> for model training phases.
 <br><br><br>
-<b>A plot for the result will be coming soon...</b>
+The plot for the result is:
+<img src='Images/bj_pred.png'>
 <br><br>
 The RMSE of this model is 0.1340.
 
@@ -118,14 +147,7 @@ The RMSE of this model is 0.1340.
 ### Approach 2: Holts-Winters Method
 Holt-Winters Methods predicts by using exponential smoothing techniques, in other words, the model is learned by taking an exponentially weighted moving average and do not need any assumption. The best package of Holts-Winters method is <i>statsmodels</i> in my opinion, where the function of <i>ExponentialSmoothing()</i> can be called in <i>statsmodels.tsa.holtwinters</i>.
 <br>
-The function allows you to smooth the trend in additive or multiplicative methods. For our purpose, we would train models with both methods and be validated in the model validation phase. <i>sfotraffic_hw.py</i> is the file that used this method to train the model. The file imports the following packages:
-<ul>
-	<li>pandas</li>
-	<li>calendar</li>
-	<li>statsmodels.tsa.holtwinters</li>
-	<li>mean_squared_error from sklearn.metrics</li>
-</ul>
-<i>pandas</i> is used for data managerment. <i>calendar</i> is used for date format. <i>statsmodels.tsa.holtwinters</i> is for model training. <i>mean_squared_error</i> is used for calculating RMSE.
+The function allows you to smooth the trend in additive or multiplicative methods. For our purpose, we would train models with both methods and be validated in the model validation phase. <i>sfotraffic_hw.py</i> is the file that used this method to train the model. 
 <br><br>
 The script has a function of <i>result_hw()</i> first imported the data from <i>sfopax_month.csv</i> and split the data to training and testing data set. Then, the script use following hyperparameters to smooth the trend in additive method:
 <ul>
@@ -146,6 +168,7 @@ This model would be called the hw multiplicative model.
 Once the models are trained, the scipt would predict the passenger traffic for 2016-2017 based on both models and obtain the RMSE for both models. At the end of the function, the following would be return in the <i>result</i> dictionary:
 <ul>
 	<li>Training Data set</li>
+	<li>Testing Data set</li>
 	<li>hw additive model prediction</li>
 	<li>hw additive model RMSE</li>
 	<li>hw multiplicative model prediction</li>
@@ -154,19 +177,16 @@ Once the models are trained, the scipt would predict the passenger traffic for 2
 <br>
 This function is called in <i>sfotraffic_report.py</i> for model training phases.
 <br>
-<b>A plot for the result will be coming soon...</b>
+The plot for the results are:
+<img src='Images/hw_add_pred.png'>
+<br><br>
+<img src='Images/hw_mul_pred.png'>
 <br><br>
 The RMSE of the hw additive model is 0.2077.<br>
 The RMSE of the hw multiplicative model is 0.1037.
 
 ### Approach 3: Generalized Additive Model
-The generalized additive model used non-linear predictors to fit the time-series data points in order to find the trend and seasonality. The model aims to use the nonlinear relationship to explain the distribution of the time-series data points. Facebook's Facebook Prophet is a Python package (Also available in R) is a good package for training the predictive model with this method. <i>sfotraffic_prophet.py</i> is the file that used this method to train the model. The file imports the following packages:
-<ul>
-	<li>pandas</li>
-	<li>calendar</li>
-	<li>prophet.Prophet (Facebook Prophet)</li>
-	<li>mean_squared_error from sklearn.metrics</li>
-</ul>
+The generalized additive model used non-linear predictors to fit the time-series data points in order to find the trend and seasonality. The model aims to use the nonlinear relationship to explain the distribution of the time-series data points. Facebook's Facebook Prophet is a Python package (Also available in R) is a good package for training the predictive model with this method. <i>sfotraffic_prophet.py</i> is the file that used this method to train the model. 
 <br>
 The function <i>gam_model()</i> in the script helps you to train the model with this package. Facebook Prophet follows sklearn style syntax, so after importing the data, the script declare an Prophet object and fit the data set with <i>.fit()</i>. Then, use <i>.predict()</i> to predict the passenger traffic between 2016-2017. Lastly, calculate RMSE. At the end of the function, the following would be return in the <i>result</i> dictionary:
 <ul>
@@ -177,12 +197,28 @@ The function <i>gam_model()</i> in the script helps you to train the model with 
 <br>
 This function is called in <i>sfotraffic_report.py</i> for model training phases.
 <br>
-<b>A plot for the result will be coming soon...</b>
+The plot for the results are:
+<img src='Images/gam_pred.png'>
 <br><br>
 The RMSE of this model is 0.2136.
 
-## Model validation
-Coming Soon...
+## Model Validation
+We are going to evaluate models with the lowest RMSE. We would first compare the RMSE among all models and verify the prediction is useful. The reason why we shall verify the prediction is useful because sometimes the predictive model is overtrained that sometimes it return a flat meaning take the average of the training data, so we have to make sure the prediction the model made is useful and appliable.
+
+### Evaluation with RMSE
+The RMSE of the models are:
+<ul>
+	<li>Box-Jerkins model: 0.1340</li>
+	<li>Holts-Winter trend additive model: 0.2077</li>
+	<li>Holts-Winter trend multiplicative model: 0.1037</li>
+	<li>Generalized additive model: 0.2136</li>
+</ul>
+<br>
+Based on the RMSE among all models, we conclude that Holts-Winter trend multiplicative model has the lowest RMSE and we would pick this model as the best model for prediction.
+
+### Verification with Prediction
+Coming soon...
+
 
 ## Result and Prediction
 Coming Soon...

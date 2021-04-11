@@ -1,5 +1,4 @@
 import pandas as pd
-import calendar
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_squared_error as mse
 
@@ -10,13 +9,11 @@ def result_hw(pred_period=24):
     # Reformat dataframe
     df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
     df['year'] = df['date'].dt.year
-    df['month'] = df['date'].dt.month
-    df['month_abbr'] = df['month'].apply(lambda x: calendar.month_abbr[x])
     df['pax_count'] = df['pax_count']/1000000
 
     # Split train/test
-    X_train = df[df['year']<=2015]
-    X_test = df[df['year']>2015]
+    X_train = df[df['year']<=2015][['date','pax_count']]
+    X_test = df[df['year']>2015][['date','pax_count']]
 
     # Model training
     model_add = ExponentialSmoothing(X_train['pax_count'], trend='add',
@@ -45,7 +42,8 @@ def result_hw(pred_period=24):
     
     # Save result
     result = {}
-    result['X_train'] = X_train[['date','pax_count']]
+    result['X_train'] = X_train
+    result['X_test'] = X_test
     result['pred_add'] = pred_add
     result['rmse_add'] = hw_rmse_add
     result['pred_mul'] = pred_mul
