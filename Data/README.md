@@ -5,6 +5,8 @@ In this folder consists of the original data sets, tranformed data sets, and ETL
 	<li>Air_Traffic_Passenger_Statistics.csv</li>
 	<li>sfopax_eda.csv</li>
 	<li>sfopax_month.csv</li>
+	<li>Air_Traffic_Passenger_Statistics_2020.csv</li>
+	<li>Air_Traffic_Cargo_Statistics_2020.csv</li>
 </ul>
 
 ## Original Data Set (For Part 1)
