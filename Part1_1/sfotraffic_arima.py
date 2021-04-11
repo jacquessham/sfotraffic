@@ -3,7 +3,7 @@ import calendar
 import pmdarima as pm
 from sklearn.metrics import mean_squared_error as mse
 
-def arima_model(pred_period=24):
+def result_arima(pred_period=24):
     # Use monthly data
     df = pd.read_csv('../Data/sfopax_month.csv')
 
