@@ -7,10 +7,11 @@ In this folder consists of the original data sets, tranformed data sets, and ETL
 	<li>sfopax_month.csv</li>
 	<li>Air_Traffic_Passenger_Statistics_2020.csv</li>
 	<li>Air_Traffic_Cargo_Statistics_2020.csv</li>
+	<li>Air_Traffic_Landings_Statistics_2020.csv</li>
 </ul>
 
 ## Original Data Set (For Part 1)
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>. Since this is the original data set used by Part 1, it does not have a ETL script. <i>Air_Traffic_Passenger_Statistics.csv</i> is used for Part 1.
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">page</a>. Since this is the original data set used by Part 1, it does not have a ETL script. <i>Air_Traffic_Passenger_Statistics.csv</i> is used for Part 1.
 
 The data set consists of 12 columns,<br>
 the columns indicates the destination/origin with passenger counts the airline carry each month, and the price type and boarding area of the airlines. In the given period, there are 17,959 observations.
@@ -87,3 +88,8 @@ Part 1.1 used the same data set as Part 1 except we have transform the original 
 ## Data Set for Part 2
 The data set used in Part 2 is the same as the data set used in Part 1.1, you may refer the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL_part1_1">Part 1.1 ETL folder</a>.
 
+## Cargo Data Set
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Cargo-Statistics/u397-j8nr">page</a>. The data set is used for Part 3. The data has not been used yet.
+
+## Air Traffic Landings Data Set
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Landings-Statistics/fpux-q53t">page</a>. The data set is used for future data visualization purpose. The data has not been used yet.
