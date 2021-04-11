@@ -100,10 +100,10 @@ The model plot is learned as follow:<br>
 <br>
 The RMSE of this model is 0.1812
 
-## Approach 3: Linear Model
+## Approach 3: General Additive Model
 Recently, Facebook release a new time series package for R and Python called Facebook Prophet. You may find more information at <a href="https://facebook.github.io/prophet/">this website</a>. Therefore, I have given a shot to try to use.
 
-However, only linear model is available in this package. Box-Jenkins Methods and Holt-Winters Methods are not available in this package.
+However, only general additive model is available in this package. Box-Jenkins Methods and Holt-Winters Methods are not available in this package.
 <br>
 The script first changed the column names, reformat the date column, and aggregate the passenger count in Month/Year in millions. Then immediately fit the data set to the training model.
 <br>
