@@ -4,7 +4,7 @@ from sklearn.metrics import mean_squared_error as mse
 from prophet import Prophet
 
 
-def linear_model(pred_period=24):
+def gam_model(pred_period=24):
 	# Use monthly data
 	df = pd.read_csv('../Data/sfopax_month.csv')
 	# Reformat data frame
