@@ -5,7 +5,7 @@ This EDA is an effort to re-do the Part 1 EDA in Python and Plotly. Likewise, we
 The primary goal for EDA is to understand the data set and explore the insight of the data set to train an accuated predictive model. Since it is a times series data set, it is necessary to understand the trend and seasonality of the data. This time, we would replicate the graphs we have done in Part 1 EDA with Python and Plotly, and also a dashborad to project a dynamic and upgraded visualizations. This documentation will first provide a link to the dashboard, then a static report afterward.
 
 ## Dashboard
-Coming Soon...
+The EDA in this part comes in 2 formats: static markdown style and dynamic dashboard. The static markdown style report can be found in the below section in this page. But if you wish to explore the data set with a dynamic dashboard, you may find more about that in the [Dashboard folder (Coming Soon...)](/EDA_Dashboard).
 
 ## Files
 Besides the script for dashboard, this folder contains 8 python scripts for the static report:
@@ -18,9 +18,24 @@ Besides the script for dashboard, this folder contains 8 python scripts for the 
 	<li>Type_Pie.py</li>
 	<li>UAPax_heat.py</li>
 </ul>
+<br>
+The script file names are named with the purpose of the script (What to analyze) with a underline followed by the type of the chart, including: Line chart, bar chart, pie chart, treemap, and heatmap.
 
+### Packages Used
+All of the scripts for the static report used the following packages:
+<ul>
+	<li>pandas</li>
+	<li>plotly</li>
+</ul>
+pandas is used for data management and Plotly is used for generating the chart. Each script uses plotly.graph_objs to generate the charts and save the chart in html. Once the chart is save and displayed in html, it requires users to download the chart from the html page manually.
+<br>
+For <i>MonthPax_Bar.py</i> and <i>UAPax_heat.py</i>, they additionally import the <i>calendar</i> package to convert month to abbreviated format.
+<br>
+Each script tried to match the colour used in the charts of Part 1 EDA, although it may be off by a little bit. The only disappointment comes from the treemap chart because Plotly treemap package works differently with R ggplot.
 
-## Result
+## Result (Static Report)
+The scripts generates charts with Plotly according to the data set from <i>sfopax_eda.csv</i> and produce the following findings. The plots and analysis are identical with the EDA in Part 1 but the charts are generated with Python and Plotly. The findings below are not interactive and presented to you in a markdown format. If you wish to explore the data set with a dynamic dashboard, you may find more about that in the [Dashboard folder (Coming Soon...)](/EDA_Dashboard). The charts in the static report is aimed to replicate from the charts generated with R and ggplot in Part 1 EDA, the results are the same although the appearance may vary.
+
 ### Data Set at a Glance
 1 - Line Chart for passenger count by year
 <img src='Images/annualpax_line.png'>
