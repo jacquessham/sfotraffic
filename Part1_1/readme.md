@@ -29,6 +29,29 @@ In this part, the folder contains the following files:
 	<li>sfotraffic_prophet.py</li>
 	<li>sfotraffic_report.py</li>
 </ul>
+### sfotraffic_arima.py
+The files contains the following function:
+<ul>
+	<li>result_arima()</li>
+</ul>
+More details are coming soon...
+
+### sfotraffic_hw.py
+The files contains the following function:
+<ul>
+	<li>result_hw()</li>
+</ul>
+More details are coming soon...
+
+### sfotraffic_prophet.py
+The files contains the following function:
+<ul>
+	<li>result_gam()</li>
+</ul>
+More details are coming soon...
+
+### sfotraffic_report.py
+Coming Soon...
 
 ## Data Cleansing and ETL Process
 The data cleansing part was done to keep entry records be more consistent. For example, some of the Continental Airlines entries was recorded "United Airlines - Pre 2013"; and some of the full service airlines were labeled as low cost carriers, while some low cost carriers were labeled as full cost carrier. For the convienence for both EDA and model training phases, the ETL process transformed the original data set to 2 different data set, <i>sfopax_eda.csv</i> and <i>sfopax_month.csv</i>. If you are interested what has done to improve the data quality, you may find more details in the [Data Folder](../Data) and [ETL Folder](../Data/ETL_part1_1). 
@@ -48,7 +71,7 @@ I would use <i>sfopax_month.csv</i> in the [Data Folder](../Data), which the dat
 <br>
 The data set would be splited to roughly 80:20 split for training and validating data set. The training set is roughly 10 years between 2005-2015; the remaining data from 2016-2017 is the validation set. RMSE would be used for model evaluation, whichever the model has the lowest RMSE is the most accurated model. We would choose that model to predict the passenger traffic between 2018-2019. 
 <br>
-<b><i>sfotraffic_report.py<i> is the script of driver script for model training, model validation, and prediction. (More description about this script is coming soon...)</b>
+<b><i>sfotraffic_report.py</i> is the script of driver script for model training, model validation, and prediction. (More description about this script is coming soon...)</b>
 
 ### Approach 1: Box-Jerkins Method
 Box-Jenkins Method is an autoregressive integrated moving average model which is learned by converting the data set into stationary. In this project, we use ARIMA and SARIMA models. The difference between the two is that ARIMA is non-seasonal while SARIMA is seasonal. <i>pmdarima</i>is a Python package similar to the <i>auto.arima()</i> in R's <i>forecast</i> package. Convienently, you may import <i>pmdarima</i> and use the same syntax <i>auto.arima()</i> to achieve the same goal in Python to find the best hyperparameters for your Box-Jerkins model.
@@ -88,7 +111,7 @@ The script has a function of <i>arima_model()</i> first imported the data from <
 This function is called in <i>sfotraffic_report.py</i> for model training phases.
 <br><br><br>
 <b>A plot for the result will be coming soon...</b>
-<br>
+<br><br>
 The RMSE of this model is 0.1340.
 
 
@@ -132,8 +155,8 @@ Once the models are trained, the scipt would predict the passenger traffic for 2
 This function is called in <i>sfotraffic_report.py</i> for model training phases.
 <br>
 <b>A plot for the result will be coming soon...</b>
-<br>
-The RMSE of the hw additive model is 0.2077.
+<br><br>
+The RMSE of the hw additive model is 0.2077.<br>
 The RMSE of the hw multiplicative model is 0.1037.
 
 ### Approach 3: Generalized Additive Model
@@ -155,7 +178,7 @@ The function <i>gam_model()</i> in the script helps you to train the model with 
 This function is called in <i>sfotraffic_report.py</i> for model training phases.
 <br>
 <b>A plot for the result will be coming soon...</b>
-<br>
+<br><br>
 The RMSE of this model is 0.2136.
 
 ## Model validation
