@@ -57,7 +57,7 @@ The function would finally declare a dictionary and return the following:
 	<li>result['pred']: Prediction between 2016-2017 with dates - Dataframe</li>
 	<li>result['rmse']: RMSE - float</li>
 </ul>
-<br><br>
+<br>
 Both training data set and testing data set has date and passenger traffic in column names: <i>date</i> and <i>pax_count</i>. pred data frame has date and prediction in column name: <i>date</i> and <i>pred</i>.
 
 ### sfotraffic_hw.py
@@ -86,7 +86,7 @@ The function would finally declare a dictionary and return the following:
 	<li>result['rmse_add']: RMSE (Additive model) - float</li>
 	<li>result['rmse_mul']: RMSE (Multiplicative model) - float</li>
 </ul>
-<br><br>
+<br>
 Both training data set and testing data set has date and passenger traffic in column names: <i>date</i> and <i>pax_count</i>. pred data frame has date and prediction in column name: <i>date</i> and <i>pred</i>.
 
 ### sfotraffic_prophet.py
@@ -111,8 +111,10 @@ The function would finally declare a dictionary and return the following:
 	<li>result['pred']: Prediction between 2016-2017 with dates (Additive model)- Dataframe</li>
 	<li>result['rmse']: RMSE (Additive model) - float</li>
 </ul>
-<br><br>
+<br>
 Both training data set and testing data set has date and passenger traffic in column names: <i>date</i> and <i>pax_count</i>. pred data frame has date and prediction in column name: <i>date</i> and <i>pred</i>.
+
+
 ### plot_pred.py
 The file contains the following function:
 <ul>
@@ -270,11 +272,14 @@ The RMSE of the models are:
 	<li>Generalized additive model: 0.2136</li>
 </ul>
 <br>
-Based on the RMSE among all models, we conclude that Holts-Winter trend multiplicative model has the lowest RMSE and we would pick this model as the best model for prediction.
+Based on the RMSE among all models, we conclude that <b>Holts-Winter trend multiplicative model</b> has the lowest RMSE and we would pick this model as the best model for prediction.
 
 ### Verification with Prediction
-Coming soon...
-
+Let's recall the prediction chart for <b>Holts-Winter trend multiplicative model</b>:
+<br><br>
+<img src='Images/hw_mul_pred.png'>
+<br>
+By looking at the prediction chart, we can see that prediction is useful because the red line is able to catch the trend and seasonality. Therefore, we can use this model to predict the passenger traffic in 2018-2019.
 
 ## Result and Prediction
 Coming Soon...
