@@ -282,7 +282,21 @@ Let's recall the prediction chart for <b>Holts-Winter trend multiplicative model
 By looking at the prediction chart, we can see that prediction is useful because the red line is able to catch the trend and seasonality. Therefore, we can use this model to predict the passenger traffic in 2018-2019.
 
 ## Result and Prediction
-Coming Soon...
+The passenger traffic between 2018-2019 we predict is the following:
+<table style="width:75%">
+	<tr>
+		<th>Date (Month, Year)</th>
+		<th>Passenger Traffic (Millions)</th>
+	</tr>
+	<tr>
+		<td>Jan, 2018</td>
+		<td>4.13</td>
+	</tr>
+	<tr>
+		<td>Feb, 2018</td>
+		<td>3.78</td>
+	</tr>
+</table>
 
 ## Reflection
 Coming Soon...
