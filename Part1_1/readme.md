@@ -29,6 +29,7 @@ In this part, the folder contains the following files:
 	<li>sfotraffic_prophet.py</li>
 	<li>plot_pred</li>
 	<li>sfotraffic_modeltraining.py</li>
+	<li>sfotraffic_pred.py</li>
 </ul>
 <br>
 
@@ -147,6 +148,16 @@ This file imports the following scripts:
 	<li>plot_pred.py</li>
 </ul>
 The scripts first called the model training function from <i>sfotraffic_arima.py</i>, <i>sfotraffic_hw.py</i>, and <i>sfotraffic_prophet.py</i> and recieve an object contains RMSE, prediction. Then it would print the RMSE on the command line, and plot the prediction of each model by calling <i>plot_pred()</i> and save the plotly chart in html page in the [Images folder](/Images). Lastly, the script save the RMSE of all models and model summary of Box-Jerkins model in <i>ModelTrainingResults.txt</i> in the [Results folder](/Results).
+
+### sfotraffic_pred.py
+This file imports the following scripts:
+<ul>
+	<li>pandas</li>
+	<li>statsmodels</li>
+	<li>plotly</li>
+</ul>
+<br>
+The script predicts the passenger traffic between 2018-2019 based on the optimal model found in the model training phase. It imports the data from <i>sfopax_month.csv</i> in the [Data Folder](../Data) and extract the data between 2005-2015 to train the model. Once the model is trained, it will produce the prediction between 2016-2019 from the model. After that, the script would plot the prediction between 2018-2019 and the data between 2005-2017 from <i>sfopax_month.csv</i>. Lastly, the script save the prediction between 2018-2019 and save as <i>sfopred.csv</i> in the [Results folder](/Results).
 
 ## Data Cleansing and ETL Process
 The data cleansing part was done to keep entry records be more consistent. For example, some of the Continental Airlines entries was recorded "United Airlines - Pre 2013"; and some of the full service airlines were labeled as low cost carriers, while some low cost carriers were labeled as full cost carrier. For the convienence for both EDA and model training phases, the ETL process transformed the original data set to 2 different data set, <i>sfopax_eda.csv</i> and <i>sfopax_month.csv</i>. If you are interested what has done to improve the data quality, you may find more details in the [Data Folder](../Data) and [ETL Folder](../Data/ETL_part1_1). 
@@ -282,6 +293,8 @@ Let's recall the prediction chart for <b>Holts-Winter trend multiplicative model
 By looking at the prediction chart, we can see that prediction is useful because the red line is able to catch the trend and seasonality. Therefore, we can use this model to predict the passenger traffic in 2018-2019.
 
 ## Result and Prediction
+In this phase, we would use <i>sfotraffic_pred.py</i> to make prediction, save the prediction as csv file, and visualize on a line chart. This script only import packages including pandas, statsmodel, and plotly. The script would obtain the data set and retrain the model because we did not save the model previously, and make the prediction between 2016-2019. Since the model only trained with 2005-2015 data, we shall not include the data in 2016-2017 to train the predictive model. However, time-series data depends on previous period data, therefore, it is necessary to predict 2016-2017 in order to obtain the prediction between 2018-2019. Once the prediction in 2018-2019 is obtained, the result is saved as <i>sfopred.csv</i> in the [Results folder](/Results). The script also generate a line chart. The line chart consists 2 lines: data between 2005-2017 in gray line, and prediction between 2018-2019 in red line. Note that, the data points between 2016-2017 is plotted with the data from the original data set, <b>not the prediction</b>.
+<br><br>
 The passenger traffic between 2018-2019 we predict is the following:
 <table style="width:75%">
 	<tr>
@@ -289,14 +302,106 @@ The passenger traffic between 2018-2019 we predict is the following:
 		<th>Passenger Traffic (Millions)</th>
 	</tr>
 	<tr>
-		<td>Jan, 2018</td>
+		<td>Jan 2018</td>
 		<td>4.13</td>
 	</tr>
 	<tr>
-		<td>Feb, 2018</td>
+		<td>Feb 2018</td>
 		<td>3.78</td>
 	</tr>
+	<tr>
+		<td>Mar 2018</td>
+		<td>4.59</td>
+	</tr>
+	<tr>
+		<td>Apr 2018</td>
+		<td>4.66</td>
+	</tr>
+	<tr>
+		<td>May 2018</td>
+		<td>5.01</td>
+	</tr>
+	<tr>
+		<td>Jun 2018</td>
+		<td>5.30</td>
+	</tr>
+	<tr>
+		<td>Jul 2018</td>
+		<td>5.53</td>
+	</tr>
+	<tr>
+		<td>Aug 2018</td>
+		<td>5.56</td>
+	</tr>
+	<tr>
+		<td>Sep 2018</td>
+		<td>4.85</td>
+	</tr>
+	<tr>
+		<td>Oct 2018</td>
+		<td>5.00</td>
+	</tr>
+	<tr>
+		<td>Nov 2018</td>
+		<td><4.55/td>
+	</tr>
+	<tr>
+		<td>Dec 2018</td>
+		<td>4.71</td>
+	</tr>
+	<tr>
+		<td>Jan 2019</td>
+		<td>4.31</td>
+	</tr>
+	<tr>
+		<td>Feb 2019</td>
+		<td>3.95</td>
+	</tr>
+	<tr>
+		<td>Mar 2019</td>
+		<td>4.80</td>
+	</tr>
+	<tr>
+		<td>Apr 2019</td>
+		<td>4.86</td>
+	</tr>
+	<tr>
+		<td>May 2019</td>
+		<td>5.23</td>
+	</tr>
+	<tr>
+		<td>Jun 2019</td>
+		<td>5.54</td>
+	</tr>
+	<tr>
+		<td>Jul 2019</td>
+		<td>5.78</td>
+	</tr>
+	<tr>
+		<td>Aug 2019</td>
+		<td>5.81</td>
+	</tr>
+	<tr>
+		<td>Sep 2019</td>
+		<td>5.07</td>
+	</tr>
+	<tr>
+		<td>Oct 2019</td>
+		<td>5.22</td>
+	</tr>
+	<tr>
+		<td>Nov 2019</td>
+		<td>4.75</td>
+	</tr>
+	<tr>
+		<td>Dec 2019</td>
+		<td>4.92</td>
+	</tr>
 </table>
+<br><br>
+And it could be visualized as follow:
+<br>
+<img src='Images/sfopred.png'>
 
 ## Reflection
 Coming Soon...
