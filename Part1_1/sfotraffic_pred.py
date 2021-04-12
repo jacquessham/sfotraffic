@@ -29,6 +29,7 @@ pred = pd.DataFrame({'date':X_pred_date, 'pred': yhat})
 pred['year'] = pred['date'].dt.year
 pred = pred[pred['year']>2017]
 
+
 # Plot result
 # To initiate ploty to run offline
 init_notebook_mode(connected=True)
@@ -54,5 +55,8 @@ fig = go.Figure(data=data, layout=layout)
 # Plot chart
 plotly.offline.plot(fig, filename='sfopred.html')
 
+# Reformat Prediction for csv file
+pred['date_str'] = pred['date'].dt.strftime('%b, %Y')
+pred['pred'] = pred['pred'].round(2)
 # Save result in csv
-pred[['date','pred']].to_csv('Results/sfopred.csv', index=False)
+pred[['date_str','pred']].to_csv('Results/sfopred.csv', index=False)
