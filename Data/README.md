@@ -10,11 +10,19 @@ In this folder consists of the original data sets, tranformed data sets, and ETL
 	<li>Air_Traffic_Landings_Statistics_2020.csv</li>
 </ul>
 
-## Original Data Set (For Part 1)
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">page</a>. Since this is the original data set used by Part 1, it does not have a ETL script. <i>Air_Traffic_Passenger_Statistics.csv</i> is used for Part 1.
+## Raw Passenger Traffic Data Set
+The following files are categorized as raw data set as they are in the original format from the source:
+<ul>
+	<li>Air_Traffic_Passenger_Statistics.csv</li>
+	<li>Air_Traffic_Passenger_Statistics_2020.csv</li>
+</ul>
 
-The data set consists of 12 columns,<br>
-the columns indicates the destination/origin with passenger counts the airline carry each month, and the price type and boarding area of the airlines. In the given period, there are 17,959 observations.
+The data sets are open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg">page</a>. <i>Air_Traffic_Passenger_Statistics.csv</i> is used for Part 1 without ETL process but both <i>Air_Traffic_Passenger_Statistics.csv</i> and <i>Air_Traffic_Passenger_Statistics_2020.csv</i> has been transformed for Part 1.1.
+
+The data set consists of 12 columns, the columns indicates the destination/origin with passenger counts the airline carry each month, and the price type and boarding area of the airlines. 
+
+<br><br>
+<i>Air_Traffic_Passenger_Statistics.csv</i> was downloaded in 2018 and contains 17,959 observations between May, 2005 and December, 2017. <i>Air_Traffic_Passenger_Statistics_2020.csv</i> was downloaded in 2021 and contains 22,869 observations between May, 2005 and December 2020.
 
 The columns consists of:
 <ul>
@@ -82,14 +90,21 @@ The boarding_area the flight is embarked. In SFO, each terminal may have more th
 The passenger count, the column may be treated as the response variable.
 
 
-## Data Set for Part 1.1
-Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL">ETL</a>. By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training. The ETL code in the Part 1.1 ETL folder transform <i>Air_Traffic_Passenger_Statistics.csv</i> to <i>sfopax_eda.csv</i> for EDA and <i>sfopax_month.csv</i> for predictive model.
+## Transformed Passenger Traffic Data Set
+The following files are categorized as Transformed Passenger Traffic data set as they have been transformed and cleansed:
+<ul>
+	<li>sfopax_eda.csv</li>
+	<li>sfo2020pax_month.csv</li>
+	<li>sfopax_eda.csv</li>
+	<li>sfo2020pax_month.csv</li>
+</ul>
+Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL">ETL folder</a>. By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training. The ETL code in the ETL folder transform <i>Air_Traffic_Passenger_Statistics.csv</i> to <i>sfopax_eda.csv</i> and <i>sfopax_month.csv</i>.
+<br><br>
+Likewise, the ETL code in the ETL folder transform <i>Air_Traffic_Passenger_Statistics_2020.csv</i> to <i>sfo2020pax_eda.csv</i> and <i>sfo2020pax_month.csv</i>. You may find the ETL code in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL">ETL folder</a>.
 
-## Data Set for Part 2
-The data set used in Part 2 is the same as the data set used in Part 1.1, you may refer the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL">Part 1.1 ETL folder</a>.
 
 ## Cargo Data Set
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Cargo-Statistics/u397-j8nr">page</a>. The data set is used for Part 3. The data has not been used yet.
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Cargo-Statistics/u397-j8nr">page</a>. The data set is intended to be used for Part 3.
 
 ## Air Traffic Landings Data Set
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Landings-Statistics/fpux-q53t">page</a>. The data set is used for future data visualization purpose. The data has not been used yet.
+The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Landings-Statistics/fpux-q53t">page</a>. The data set is intended to be used for future data visualization purpose.
