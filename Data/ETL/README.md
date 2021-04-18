@@ -3,7 +3,7 @@
 The purpose of the ETL script is to transform the original data sets to 2 data sets for EDA and predictive model training as the original data is a transactional data set. 
 
 ## Files
-The file <i>etl_part1_1.py</i> transforms the original data set into <i>sfopax_eda.csv</i> and <i>sfopax_month.csv</i>, which is the data sets for EDA and predictive model training, respectively, in the [Data folder](../).
+The file <i>etl_original.py</i> transforms the original data set into <i>sfopax_eda.csv</i> and <i>sfopax_month.csv</i>, which is the data sets for EDA and predictive model training, respectively, in the [Data folder](../).
 
 ## Transformation
 The transformation is drove by <i>etl_part1_1.py</i> which relies on <i>pandas</i>. The script first load the [original data set](../Air_Traffic_Passenger_Statistics.csv) and rename the column names like in [Part 1](../../Part1), but since operating airlines columns are not utilized, so we have dropped 2 columns related to that. The columns is the same as we have used in Part 1, as follows:

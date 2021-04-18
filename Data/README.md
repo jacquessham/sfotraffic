@@ -83,10 +83,10 @@ The passenger count, the column may be treated as the response variable.
 
 
 ## Data Set for Part 1.1
-Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL_part1_1">Part 1.1 ETL folder</a>. By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training. The ETL code in the Part 1.1 ETL folder transform <i>Air_Traffic_Passenger_Statistics.csv</i> to <i>sfopax_eda.csv</i> for EDA and <i>sfopax_month.csv</i> for predictive model.
+Part 1.1 used the same data set as Part 1 except we have transform the original Part 1 data set to an aggregated version. You may find the ETL code in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL">ETL</a>. By transforming the original data set, the Part 1.1 model training script need not to aggregate the raw data set for model training. The ETL code in the Part 1.1 ETL folder transform <i>Air_Traffic_Passenger_Statistics.csv</i> to <i>sfopax_eda.csv</i> for EDA and <i>sfopax_month.csv</i> for predictive model.
 
 ## Data Set for Part 2
-The data set used in Part 2 is the same as the data set used in Part 1.1, you may refer the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL_part1_1">Part 1.1 ETL folder</a>.
+The data set used in Part 2 is the same as the data set used in Part 1.1, you may refer the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Data/ETL">Part 1.1 ETL folder</a>.
 
 ## Cargo Data Set
 The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a> and the page about this data may be found in this <a href="https://data.sfgov.org/Transportation/Air-Traffic-Cargo-Statistics/u397-j8nr">page</a>. The data set is used for Part 3. The data has not been used yet.
