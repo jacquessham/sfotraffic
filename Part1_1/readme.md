@@ -343,7 +343,7 @@ The passenger traffic between 2018-2019 we predict is the following:
 	</tr>
 	<tr>
 		<td>Nov 2018</td>
-		<td><4.55/td>
+		<td>4.55</td>
 	</tr>
 	<tr>
 		<td>Dec 2018</td>
