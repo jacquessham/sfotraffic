@@ -45,4 +45,6 @@ df.to_csv('../sfo2020pax_eda.csv', index=False)
 
 # Transform data set to monthly data
 df_monthly = df.groupby(['date']).sum().reset_index()
+# Change column names
+df_monthly = df_monthly.rename(columns={'count':'pax_count'})
 df_monthly.to_csv('../sfo2020pax_month.csv', index=False)
