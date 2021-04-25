@@ -405,3 +405,5 @@ And it could be visualized as follow:
 
 ## Reflection
 Coming Soon...
+<br><br><br>
+<img src=pred_compare.png>
