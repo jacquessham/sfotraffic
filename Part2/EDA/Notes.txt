@@ -3,3 +3,4 @@ Notes
 * Moving Average slightly drop between 2008 and 2009
 * Moving Average kinda peak at 2018
 * July 2009 - June 2018 is good period for recovery
+* Can use Malthuisan Model to get the delay growth rate
