@@ -24,11 +24,10 @@ lowest_growthma = df[df.date==df.date.min()]['growth_ma'].tolist()[0]
 # Create graph
 ## Prepare Graph
 data = []
-data.append(go.Bar(x=df['date'], y=(df['growth_month']/lowest_growth)*100,
-              text=(df['growth_month']/lowest_growth)*100,
-              name='Monthly Passenger Traffic',
-              marker_color='rgb(102,178,255)'))
-data.append(go.Scatter(x=df['date'], y=(df['growth_ma']/lowest_growthma)*100,
+data.append(go.Scatter(x=df['date'], y=df['growth_month'],
+              mode='lines', name='Monthly Passenger Traffic',
+              line=dict(color='rgb(102,178,255)')))
+data.append(go.Scatter(x=df['date'], y=df['growth_ma'],
               mode='lines', name='Passenger Traffic Moving Average',
               line=dict(color='rgb(255,178,102)')))
 
@@ -36,8 +35,7 @@ data.append(go.Scatter(x=df['date'], y=(df['growth_ma']/lowest_growthma)*100,
 layout = dict(title={'text':'SFO Month Passenger Traffic Growth Rate between 2007-2020',
                      'x':0.5},
 	          xaxis=dict(title='Date'), 
-	          yaxis=dict(title='Growth Rate Index (Base: Jan, 2017)', 
-	          	         gridcolor='lightgray'),
+	          yaxis=dict(title='Growth Rate', gridcolor='lightgray'),
 	          legend=dict(x=0.6, y=1, orientation='h'),
 	          plot_bgcolor='rgba(0,0,0,0)')
 
