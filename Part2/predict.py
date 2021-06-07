@@ -33,16 +33,26 @@ for year in df_index_range.year.unique():
 		params[pred_year]['base_pax_count'] = pax_dec2020 + (params[pred_year]['base_index']-100)*annualpax_per_index
 		params[pred_year]['last_pax_count'] = pax_dec2020 + (params[pred_year]['last_index']-100)*annualpax_per_index
 		params[pred_year]['monthpax_per_index'] = (params[pred_year]['last_pax_count']-params[pred_year]['base_pax_count'])/(params[pred_year]['last_index']-params[pred_year]['base_index'])
+		# Find volatility range for seasonality
+		df_curryear = df_index_range[df_index_range['year']==year]
+		params[pred_year]['max_prct'] = df_curryear['pax_count'].max()/params[pred_year]['base_pax_count']-1
+		params[pred_year]['min_prct'] = df_curryear['pax_count'].min()/params[pred_year]['base_pax_count']-1
 		pred_year += 1
 
-
-def normalize(row):
+def normalize(params, row):
 	if row['year']==2020: return 100
 	year = row['year']
 	base_index = params[year]['base_index']
 	return row['index']/base_index*100
 
-def predict(row, volatility):
+def predict_raw(params, row):
+	if row['year'] == 2020: return params[2021]['base_pax_count']
+	if row['month'] == 12: 
+		return params[row['year']]['last_pax_count']
+	growth = (row['annual_index']-100)*params[row['year']]['monthpax_per_index']
+	return params[row['year']]['base_pax_count'] + growth
+
+def predict(params, row, volatility):
 	if row['year'] == 2020: return params[2021]['base_pax_count']
 	if row['month'] == 12: 
 		return params[row['year']]['last_pax_count']
@@ -55,6 +65,9 @@ df_pred = pd.DataFrame(df_index_range['index'])
 df_pred['date'] = pd.date_range(start='2020-12-31', periods=12*4+1, freq='M')
 df_pred['year'] = df_pred['date'].dt.year
 df_pred['month'] = df_pred['date'].dt.month
-df_pred['annual_index'] = df_pred.apply(lambda row: normalize(row),axis=1)
-df_pred['pax_count'] = df_pred.apply(lambda row: predict(row,0.2),axis=1)
+df_pred['annual_index'] = df_pred.apply(lambda row: normalize(params,row),axis=1)
+df_pred['raw_pax_count'] = df_pred.apply(lambda row: predict_raw(params,row),axis=1)
+for volatility in [num/100 for num in range(100,0,-5)]:
+	curr_colname = 'pax_count_'+str(volatility)
+	df_pred[curr_colname] = df_pred.apply(lambda row: predict(params,row,volatility),axis=1)
 df_pred.to_csv("prediction.csv",index=False)

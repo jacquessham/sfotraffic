@@ -19,7 +19,6 @@ df_temp = df[df.date==df.date.min()]
 lowest_pax = df[df.date==df.date.min()]['pax_count'].tolist()[0]
 lowest_paxma = df[df.date==df.date.min()]['pax_count_ma'].tolist()[0]
 
-
 # Create graph
 ## Prepare Graph
 data = []
