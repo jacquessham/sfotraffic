@@ -22,7 +22,10 @@ In this part, the folder contains the following files:
 Coming Soon...
 
 ## EDA
-Coming Soon...
+There are more data available comparing the data set used in Part 1/Part 1.1 because the data set used in this part is downloaded in 3 years after the Part 1 is conducted. You may find the passenger traffic insight between 2005 and 2020 in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part2/EDA">EDA folder</a> before learning the prediction model.
 
 ## Prediction
 Coming Soon...
+
+## Next Step
+You may find the cargo tonnage to learn more about air cargo traffic during the pandemic and the prediction in [Part 3 folder](../Part3). Or you may go back to the [Main Page](../) for the other parts of the folder.
