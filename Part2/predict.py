@@ -70,4 +70,4 @@ df_pred['raw_pax_count'] = df_pred.apply(lambda row: predict_raw(params,row),axi
 for volatility in [num/100 for num in range(100,0,-5)]:
 	curr_colname = 'pax_count_'+str(volatility)
 	df_pred[curr_colname] = df_pred.apply(lambda row: predict(params,row,volatility),axis=1)
-df_pred.to_csv("prediction.csv",index=False)
+df_pred.to_csv('Results/prediction.csv',index=False)
