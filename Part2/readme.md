@@ -42,6 +42,12 @@ Our goal is to utilize the data set to predict the passenger traffic pattern unt
 Our assumption of the prediction is that the passenger traffic dropped in 2020 is caused by an extreme demand shock in air traffic due to the restriction on air traffic that is not caused by economic activities. According to the Solow Model learned in Econ 101, we believe the economy is behind the steady state as the Model suggested; it means the economic growth is not in pace with the long-term growth due to the shut down of economic activities, once the economic activities are back to normal, the economic growth will be bounding back to the original pace. Therefore, we believe once air travel is back to normal, the passenger traffic will be bounding back to the 2019 level and continue the long-term growth. 
 <br>
 The flaw of using GMA is that it heavily rely on previous periods for prediction, so it may not be helpful for our goal. Looking at the result above, the concern is valid: We can see the passenger traffic jumps up dramatically and the trend between 2021-2024 is dropping that the result is against our assumption. 
+<br>
+We believe the passenger traffic will spend about 4 years to recover similar to the pace between 2009-2013 as this is the only recover pace we found in EDA, we will use this pattern to predict the trend of passenger traffic between 2021-2024. We can take the Janurary, 2009 as base index to obtain the index of the next 4 years, like below:
+<img src=Images/recover_path.png>
+<br>
+Having the trend between 2009-2013 convert to index, we can use this trend index to predict the passenger traffic between 2021-2024. For the prediction, we will set Janurary, 2021 as the base month and December, 2024 as the peak. If we apply this method, the prediction will looks like this:
+<img src=predict_raw.png>
 
 ## Next Step
 You may find the cargo tonnage to learn more about air cargo traffic during the pandemic and the prediction in [Part 3 folder](../Part3). Or you may go back to the [Main Page](../) for the other parts of the folder.
