@@ -49,3 +49,6 @@ layout = dict(title={'text':'SFO Month Passenger Traffic Prediction (Facebook Pr
 # Plot and fix layout
 fig = go.Figure(data=data, layout=layout)
 plotly.offline.plot(fig, filename='prophet_pred_line.html')
+
+# Export Prediction
+pred[['ds','y']].to_csv('Results/prediction_step1.csv', index=False)

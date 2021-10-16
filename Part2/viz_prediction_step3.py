@@ -8,13 +8,11 @@ from plotly.offline import *
 init_notebook_mode(connected=True)
 # Use monthly data
 df = pd.read_csv('../Data/sfo2020pax_month.csv')
-df_pred = pd.read_csv('Results/prediction_draft.csv')
+# Read prediction data
+df_pred = pd.read_csv('Results/prediction_step3.csv')
 df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
 df_pred['date'] = pd.to_datetime(df_pred['date'], format='%Y-%m-%d')
-
-# Calculate moving average
-df['pax_count_ma'] = df.pax_count.rolling(12).mean()
-
+# Filter out data prior to 2007
 df = df[df.date>'2007-01-01']
 
 # Create graph
@@ -23,7 +21,7 @@ data = []
 data.append(go.Scatter(x=df['date'], y=df['pax_count'],
               mode='lines+markers', name='Monthly Passenger Traffic',
               line=dict(color='rgb(102,178,255)')))
-data.append(go.Scatter(x=df_pred['date'],y=df_pred['pax_count'],
+data.append(go.Scatter(x=df_pred['date'],y=df_pred['prediction'],
 			  mode='lines+markers', name='Predicted Passenger Traffic',
               	  line=dict(color='red')))
 
@@ -37,4 +35,4 @@ layout = dict(title={'text':'SFO Month Passenger Traffic Prediction',
 
 # Plot and fix layout
 fig = go.Figure(data=data, layout=layout)
-plotly.offline.plot(fig, filename='pred_line.html')
+plotly.offline.plot(fig, filename='pred_step3_viz.html')

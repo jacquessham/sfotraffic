@@ -47,7 +47,12 @@ We believe the passenger traffic will spend about 4 years to recover similar to 
 <img src=Images/recover_path.png>
 <br>
 Having the trend between 2009-2013 convert to index, we can use this trend index to predict the passenger traffic between 2021-2024. For the prediction, we will set Janurary, 2021 as the base month and December, 2024 as the peak. If we apply this method, the prediction will looks like this:
-<img src=predict_raw.png>
+<img src=Images/raw_prediction.png>
+<br>
+Coming Soon...
+<br><br>
+<img src=Images/prediction_step3.png>
+
 
 ## Next Step
 You may find the cargo tonnage to learn more about air cargo traffic during the pandemic and the prediction in [Part 3 folder](../Part3). Or you may go back to the [Main Page](../) for the other parts of the folder.
