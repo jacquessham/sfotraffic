@@ -74,7 +74,7 @@ df_pred['month'] = df_pred['date'].dt.month
 ## Domestic
 df_pred['domestic_raw_prediction'] = domestic_pax_dec2020+(df_pred['domestic_maindex']-100)*domestic_pax_per_index
 ## International
-df_pred['intl_raw_prediction'] = (df_pred['intl_maindex']-100)*intl_pax_per_index
+df_pred['intl_raw_prediction'] = intl_pax_dec2020+(df_pred['intl_maindex']-100)*intl_pax_per_index
 # Calculate the final prediction by adjusting with seasonality
 ## Domestic
 df_pred['domestic_prediction'] = df_pred['domestic_raw_prediction']*(1+df_pred['domestic_diffindex']/100)
