@@ -19,10 +19,10 @@ df = df[df.date>'2007-01-01']
 ## Prepare Graph
 data = []
 data.append(go.Scatter(x=df['date'], y=df['pax_count'],
-              mode='lines+markers', name='Monthly Passenger Traffic',
+              mode='lines', name='Monthly Passenger Traffic',
               line=dict(color='rgb(102,178,255)')))
 data.append(go.Scatter(x=df_pred['date'],y=df_pred['pax_count'],
-			  mode='lines+markers', name='Predicted Passenger Traffic',
+			  mode='lines', name='Predicted Passenger Traffic',
               	  line=dict(color='red')))
 
 ## Prepare layout
