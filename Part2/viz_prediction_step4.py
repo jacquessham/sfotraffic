@@ -6,34 +6,37 @@ from plotly.offline import *
 
 # To initiate ploty to run offline
 init_notebook_mode(connected=True)
-# Use monthly data
-df = pd.read_csv('../Data/sfo2020pax_month.csv')
+# Prepare training data
+df = pd.read_csv('../Data/sfo2020pax_month_type.csv')
+df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+df_domestic = df[df['geo_type']=='Domestic']
+df_intl = df[df['geo_type']=='International']
 # Read prediction data
 df_pred = pd.read_csv('Results/prediction_step4.csv')
-df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
 df_pred['date'] = pd.to_datetime(df_pred['date'], format='%Y-%m-%d')
-# Filter out data prior to 2007
-df = df[df.date>'2007-01-01']
 
 # Create graph
 ## Prepare Graph
 data = []
-data.append(go.Scatter(x=df['date'], y=df['pax_count'],
-              mode='lines+markers', name='Monthly Passenger Traffic',
-              line=dict(color='rgb(102,178,255)')))
+data.append(go.Scatter(x=df_domestic['date'], y=df_domestic['pax_count'],
+              mode='lines', name='Domestic Passenger Traffic',
+              line=dict(color='rgb(0,128,255)')))
+data.append(go.Scatter(x=df_intl['date'], y=df_intl['pax_count'],
+              mode='lines', name='International Passenger Traffic',
+              line=dict(color='rgb(160,160,160)')))
 data.append(go.Scatter(x=df_pred['date'],y=df_pred['domestic_prediction'],
-			  mode='lines+markers', name='Predicted Domestic Passenger Traffic',
-              	  line=dict(color='red')))
+			  mode='lines', name='Predicted Domestic Passenger Traffic',
+              line=dict(color='pink')))
 data.append(go.Scatter(x=df_pred['date'],y=df_pred['intl_prediction'],
-			  mode='lines+markers', name='Predicted International Passenger Traffic',
-              	  line=dict(color='pink')))
+			  mode='lines', name='Predicted International Passenger Traffic',
+              line=dict(color='red')))
 
 ## Prepare layout
 layout = dict(title={'text':'SFO Month Passenger Traffic Prediction',
                      'x':0.5},
 	          xaxis=dict(title='Date'), 
 	          yaxis=dict(title='Passenger', gridcolor='lightgray'),
-	          legend=dict(x=0.6, y=1, orientation='h'),
+	          legend=dict(x=0.1, y=1, orientation='h'),
 	          plot_bgcolor='rgba(0,0,0,0)')
 
 # Plot and fix layout

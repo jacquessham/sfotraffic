@@ -13,13 +13,17 @@ We will first make prediction using traditional time-series statistical learning
 ## Files
 In this part, the folder contains the following files:
 <ul>
-	<li>prophet_predict.py</li>
-	<li>predict_draft.py</li>
-	<li>predict.py</li>
-	<li>vis_pred.py</li>
-	<li>draft_vis_pred.py</li>
-	<li>multi_vis_pred.py</li>
-	<li>multi_vis_pred_v2.py</li>
+	<li>prediction_step1.py</li>
+	<li>prediction_step2.py</li>
+	<li>prediction_step3.py</li>
+	<li>prediction_step4.py</li>
+	<li>prediction_step5.py</li>
+	<li>viz_prediction_step2.py</li>
+	<li>viz_prediction_step3.py</li>
+	<li>viz_prediction_step4.py</li>
+	<li>viz_prediction_step5.py</li>
+	<li>viz_prediction_step5_agg.py</li>
+	<li>recoverypath_type.py</li>
 </ul>
 
 ## Data Cleansing
