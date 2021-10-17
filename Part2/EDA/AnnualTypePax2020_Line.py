@@ -8,22 +8,12 @@ from plotly.offline import *
 # To initiate ploty to run offline
 init_notebook_mode(connected=True)
 # Use monthly data
-df = pd.read_csv('../../Data/Air_Traffic_Passenger_Statistics_2020.csv')
-df = df.drop(['Operating Airline','Operating Airline IATA Code'],axis=1)
-df = df.rename(columns={'Activity Period':'date',
-                        'Published Airline':'pub_airlines',
-                        'Published Airline IATA Code':'pub_code',
-                        'GEO Summary':'geo_summ', 'GEO Region': 'geo_region',
-                        'Activity Type Code':'type',
-                        'Price Category Code':'price', 'Terminal': 'terminal',
-                        'Boarding Area': 'boarding_area',
-                        'Passenger Count': 'pax_count'})
+df = pd.read_csv('../../Data/sfo2020pax_month_type.csv')
 ## Convert date column to datetime type
-df['date'] = pd.to_datetime(df['date'], format='%Y%m') + MonthEnd(1)
-
-df = df.groupby(['date','geo_summ']).sum().reset_index()
-df_domestic = df[df['geo_summ']=='Domestic']
-df_intl = df[df['geo_summ']=='International']
+df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+df['year'] = df['date'].dt.year
+df_domestic = df[(df['geo_type']=='Domestic')]
+df_intl = df[(df['geo_type']=='International')]
 
 
 # Create graph
