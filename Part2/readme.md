@@ -69,6 +69,7 @@ Coming Soon...
 
 ### Step 4: Scaling the Previous Domestic and International Passenger Growth Path with Moving Average
 Coming Soon...
+<img src=Images/recovery_path_type.png>
 <img src=Images/prediction_step4.png>
 
 ### Step 5: Modified Step 4

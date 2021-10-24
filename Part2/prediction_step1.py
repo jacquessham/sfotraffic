@@ -31,19 +31,19 @@ pred = pred[pred['ds']>='2020-12-31']
 
 # Plot Line chart
 data = []
-data.append(go.Scatter(x=X_train['ds'], y=X_train['y'],
-              mode='lines+markers', name='Historical Monthly Passenger Traffic',
+data.append(go.Scatter(x=X_train['ds'], y=X_train['y']/1000000,
+              mode='lines', name='Historical Monthly Passenger Traffic',
               line=dict(color='rgb(102,178,255)')))
-data.append(go.Scatter(x=pred['ds'],y=pred['y'],
-			  mode='lines+markers', name='Predicted Passenger Traffic',
+data.append(go.Scatter(x=pred['ds'],y=pred['y']/1000000,
+			  mode='lines', name='Predicted Passenger Traffic',
               	  line=dict(color='red')))
 
 ## Prepare layout
 layout = dict(title={'text':'SFO Month Passenger Traffic Prediction (Facebook Prophet)',
                      'x':0.5},
 	          xaxis=dict(title='Date'), 
-	          yaxis=dict(title='Passenger', gridcolor='lightgray'),
-	          legend=dict(x=0.6, y=1, orientation='h'),
+	          yaxis=dict(title='Passenger (M)', gridcolor='lightgray'),
+	          legend=dict(x=0.75, y=1),
 	          plot_bgcolor='rgba(0,0,0,0)')
 
 # Plot and fix layout
