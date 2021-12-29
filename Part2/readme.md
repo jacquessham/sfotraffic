@@ -54,17 +54,38 @@ As we can see that the passenger traffic bounds significantly in the beginning o
 
 ### Step 2: Scaling the Previous Growth Path
 We believe the passenger traffic will spend about 4 years to recover similar to the pace between 2009-2013 as this is the only recover pace we found in EDA. Then, we use <i>recoverypath_type.py</i> to visualize the standardized growth path during these 4 years as we took the Janurary, 2009 as base index to obtain the index of the next 4 years, like below:
-<img src=Images/recover_path.png>
+<img src=Images/recovery_path.png>
 <br>
-Having the trend between 2009-2013 convert to index, we can use this trend index as the trend pattern and scale the growth path to predict the passenger traffic between 2021-2024. In this approach, we will take the growth path between 2009-2013 to scale up the magitude of the growth rate in order to grow from the base month of Janurary, 2021 as the base month and December, 2024 as recovered month. (More detail will be coming soon...) If we apply this method, the prediction will looks like this:
+Having the trend between 2009-2013 convert to index, we can assume the recovery path is similar to this trend and use this trend index as the trend pattern and scale the growth path to predict the passenger traffic between 2021-2024. It means the passenger traffic will recover to December, 2020 level in December, 2024. In this approach, we will take the growth path between 2009-2013 to scale up the magitude of the growth rate in order to grow from the base month of Janurary, 2021 as the base month and December, 2024 as recovered month.
+<br>
+The formula is the below:<br>
+tr_d = Passenger Traffic in month/year d<br>
+index_i,j = Passenger Traffic in period i relative to base period of month/year j<br>
+index_i,dec20 = index_i,dec09, where 0 =< i =< 47<br>
+g_bar = (tr_dec24 - tr_dec20)/(index47,dec09 - index0,dec09), where tr_dec24 = tr_dec19 and index_0,dec09 = 100<br>
+tr_d = tr_dec20 + g_bar(index_i,dec20-100), where d between dec,20 and dec,24<br>
+<br>
+If we apply this method, the prediction will looks like this:
 <img src=Images/raw_prediction.png>
 <br>
-Coming Soon...
+We can see the trend of the recovery path between December,2020 and December,2024 looks fine but the passenger traffic in each month fluctuate with extreme volatility. At the same time, we have multiple months of prediction drop below 0 which is extremly not realistic. We believe the trend capture is fine but we have to smoothen the seasonalilty flucatuation and avoid the predict any number below 0.
 <br><br>
 
-
 ### Step 3: Scaling the Previous Growth Path with Moving Average
-Coming Soon...
+Our goal of the next step is to improve the model created in the last step and to smoothen the seasonality flucatuation to have the prediction more realistic. One of the useful way to achieve that is to capture the trend using moving average index and seasonality using the difference between actual passenger traffic index and moving average index. The flaw of the model created in the last step comes from the fact that we did not differentiate the calculation of trend and seasonality. In this step, we are going to separate the calculation of trend and seasonality using moving average. The formula is the following:
+<br>
+The formula is the below:<br>
+tr_d = Passenger Traffic in month/year d<br>
+tr_d' = Passenger Traffic 12-months Moving Average in month/year d<br>
+index_i,j = Passenger Traffic in period i relative to base period of month/year j<br>
+index_i,j' = Passenger Traffic 12-months Moving Average in period i relative to base period of month/year j<br>
+p_i,j = index_i,j - index_i,j'<br>
+index_i,dec20 = index_i,dec09, where 0 =< i =< 47<br>
+g_bar = (tr_dec24 - tr_dec20)/(index47,dec09 - index0,dec09), where tr_dec24 = tr_dec19 and index_0,dec09 = 100<br>
+tr_d' = tr_dec20 + g_bar(index_i,dec20'-100), where d between dec,20 and dec,24<br>
+tr_d = tr_dec20' \* (1 + p_i,j/100)<br>
+<br>
+If we apply this method, the prediction will looks like this:
 <img src=Images/prediction_step3.png>
 
 ### Step 4: Scaling the Previous Domestic and International Passenger Growth Path with Moving Average
