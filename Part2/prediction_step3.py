@@ -23,7 +23,7 @@ df['diffindex'] = df['paxindex'] - df['maindex']
 
 # Find the magitude of each unit of index
 pax_recovered = df[df['date']=='2019-12-31']['pax_count'].tolist()[0]
-index_recovered = df[df['date']=='2012-12-31']['paxindex'].tolist()[0]
+index_recovered = df[df['date']=='2012-12-31']['maindex'].tolist()[0]
 pax_dec2020 = df[df['date']=='2020-12-31']['pax_count'].tolist()[0]
 pax_per_index = (pax_recovered-pax_dec2020)/(index_recovered-100)
 
