@@ -51,12 +51,12 @@ intl_pax_per_index = (intl_pax_recovered-intl_pax_dec2020)/(intl_index_recovered
 # Find the magitude of each unit of index
 ## Domestic
 domestic_pax_recovered = df_domestic[df_domestic['date']=='2019-12-31']['pax_count'].tolist()[0]
-domestic_index_recovered = df_domestic[df_domestic['date']=='2012-12-31']['paxindex'].tolist()[0]
+domestic_index_recovered = df_domestic[df_domestic['date']=='2012-12-31']['maindex'].tolist()[0]
 domestic_pax_dec2020 = df_domestic[df_domestic['date']=='2020-12-31']['pax_count'].tolist()[0]
 domestic_pax_per_index = (domestic_pax_recovered-domestic_pax_dec2020)/(domestic_index_recovered-100)
 ## International
 intl_pax_recovered = df_intl[df_intl['date']=='2019-12-31']['pax_count'].tolist()[0]
-intl_index_recovered = df_intl[df_intl['date']=='2012-12-31']['paxindex'].tolist()[0]
+intl_index_recovered = df_intl[df_intl['date']=='2012-12-31']['maindex'].tolist()[0]
 intl_pax_dec2020 = df_intl[df_intl['date']=='2020-12-31']['pax_count'].tolist()[0]
 intl_pax_per_index = (intl_pax_recovered-intl_pax_dec2020)/(intl_index_recovered-100)
 
