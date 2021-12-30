@@ -87,19 +87,43 @@ tr_d = tr_dec20' \* (1 + p_i,j/100)<br>
 <br>
 If we apply this method, the prediction will looks like this:
 <img src=Images/prediction_step3.png>
+<br><br>
+With this approach, we can see the seasonality flucation is moderate and never go below 0. So, this model is more useful to predict the passenger traffic. 
 
 ### Step 4: Scaling the Previous Domestic and International Passenger Growth Path with Moving Average
-Coming Soon...
+In the mid-2021, we see that domestic travel is starting to recover in a moderate rate, but, in contrast, international travel is still in halt. Therefore, it may be useful to separate the recovery path between domestic traffic and international traffic. If we do so, the recovery path look something like below:
 <img src=Images/recovery_path_type.png>
+<br>
+We can see the passenger traffic for domestic travel recover about 5-10% faster during the recovery period relative to international travel. We can use the same algorithm in step 3 to develop two different models for domestic and international travels. The formula for both models are the same, but for the seek of clarity formula is the following:<br>
+tr_d,type = Passenger Traffic of either Domestic or International Travel in month/year d, where type = dos/intl<br>
+tr_d,type' = Passenger Traffic 12-months Moving Average of either Domestic or International Travel in month/year d, where type = dos/intl<br>
+index_i,j,type = Passenger Traffic of either Domestic or International Travel in period i relative to base period of month/year j, where type = dos/intl<br>
+index_i,j,type' = Passenger Traffic 12-months Moving Average of either Domestic or International Travel in period i relative to base period of month/year j, where type = dos/intl<br>
+p_i,j,type = index_i,j,type - index_i,j,type', where type = dos/intl<br>
+index_i,dec20,type = index_i,dec09,type, where 0 =< i =< 47, type = dos/intl<br>
+g_bar,type = (tr_dec24,type - tr_dec20,type)/(index47,dec09,type - index0,dec09,type), where tr_dec24,type = tr_dec19,type and index_0,dec09,type = 100, type = dos/intl<br>
+tr_d,type' = tr_dec20,type + g_bar(index_i,dec20,type'-100), where d between dec,20 and dec,24, type = dos/intl<br>
+tr_d = tr_dec20,type' \* (1 + p_i,j,type/100), where type = dos/intl<br>
+<br>
+After the calculation, the result looks something like:
 <img src=Images/prediction_step4.png>
+<br>
+We can see the flaw of this model is that the prediction of international passenger traffic goes below 0 for about 12-15 months while the domestic passenger traffic prediction is fine. Therefore, we need to address this problem in the next step.
 
 ### Step 5: Modified Step 4
+The goal of this step is to fix the flaw of the model trained in step 4 to prevent any prediction go below 0. The reason why the international passenger traffic prediction drop below 0 because the base number in period 0, or Decemeber, 2020, was too low and we deduct with a large magititude when the index drop below 100 (Which is the index of period 0). Let's take a step back to review the situtation of international travel: As mentioned, the international travel is in halt; the passengers who are travelling internationally are essential and unavoidable. Therefore, there is no way the passenger traffic drop too much in trend but only seasonal flucation in 2021 until the borders are reopened. The data captured during the time with no irregular travel restriction, unlike during the pandemic, so the pattern in the dataset may not be accuate and we need to come up with some adjustment to reflect the situation unique in the pandemic. We can see the time that the index drop below 100 are mostly in the beginning of the passenger traffic recovery path. In reality, we do not see the borders may open up in the first two years, 2021-2022 of the recovery path due to new virus variants and vaccines rollout schedule in various country. So, we can add an additional assumption that the international travel cannot drop significantly because the international travels occur in the recovery period are essential and unavoidable (Aviodable business trips and leisure travels have been excluded in the statistics, so there is not any factor to international passenger traffic drop in trend). We can adjust the calculation of international travel to eliminate the trend effect when index drop below 100. The formula is the following:<br>
 Coming Soon...
+<br><br>
+After the calculation, the result looks something like:
 <img src=Images/prediction_step5.png>
+<br>
+If we combine the prediction between domestic and international passenger traffic, the results become:
 <img src=Images/prediction_step5_agg.png>
+<br>
+After we modified the model to adjust the new assumption for international passenger traffic prediction, we can see the passenger traffic is very flat between 2021 and 2023 and jumps significantly in 2024. The result for international passenger traffic prediction is not satisfing becuase we are expecting the growth should begin in 2023 and recovery smoothly rather than all happened in one year in 2024. However, we do not know whether international travel is still restricted in 2022 and 2023 and we cannot say the result is absolutely as the reality might be it takes a year to have travellers be confident to travel internationally. Perhaps it is not a best model to forecast the combined passenger traffic between 2021 and 2024 but it could be a good reference to view when the international passenger traffic to pick up in the recovery period.
 
 ## Conclusion
-Coming Soon...
+I would say we have two satisfying models to predict the passenger traffic between 2021 and 2024 from step 3 and step 5. However, we have added additional assumption to prevent predict drop below 0 that add some inconsistency to Model 5. I am more confident to use Model 3 to make prediction on the SFO passenger traffic count between 2021 and 2024. Another important note, it is best not to switch back to the model trained in Part 1.1 to predict the passenger traffic in 2025 immediately because the prediction in 2025 relies on data in 2024 which is still a recovery period. The best way to do so is to predict 2025 passenger traffic using the same model in Model 3 but grab an extra year of growth pattern (Trend and seasonality between 2009-2014) and switch back to the Model trained in Part 1.1. The reason to include an additional year pattern because the Part 1.1 model prediction relies on trend and seasonality for the previous 12 months.
 
 
 ## Next Step
