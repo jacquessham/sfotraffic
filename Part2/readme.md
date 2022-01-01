@@ -1,18 +1,26 @@
 # Part 2 - Predict Passenger Traffic in SFO after the 2020-2021 Pandemic
 Part 2 is the effort to follow up the disruption of 2020-2021 Pandemic to predict the growth pattern of the passenger traffic once the pandemic is over using the latest data available. In this part, I will achieve the goals using Python.
 
-## About the Data Set
-The data set is an open source data set obtained from <a href="https://datasf.org/opendata/">Open SF</a>. It consists of 12 columns with 22,869 observations. For the convenience, the data set is cleansed and transformed for this part in the ETL process with <i>etl_2020.py</i>. The ETL process returns 2 csv files, <i>sfo2020pax_eda.csv</i> for EDA and <i>sfo2020pax_month.csv</i> for model training. You may find more detail about the original data set, transformed data sets, and the ETL scripts in the [Data Folder](../Data). The data set is a time series data, and therefore, there are constraints to what we can do as some approches may violate some assumptions on certain algorithms, such as linear regression.
+## About the dataset
+The dataset is an open source dataset obtained from <a href="https://datasf.org/opendata/">Open SF</a>. It consists of 12 columns with 22,869 observations. For the convenience, the dataset is cleansed and transformed for this part in the ETL process with <i>etl_2020.py</i>. The ETL process returns 2 csv files, <i>sfo2020pax_eda.csv</i> for EDA and <i>sfo2020pax_month.csv</i> for model training. You may find more detail about the original dataset, transformed datasets, and the ETL scripts in the [Data Folder](../Data). The dataset is a time series data, and therefore, there are constraints to what we can do as some approches may violate some assumptions on certain algorithms, such as linear regression.
 
 ## Assumption
 Our assumption of the prediction is that the passenger traffic dropped in 2020 is caused by an extreme demand shock in air traffic due to the restriction on air traffic that is not caused by economic activities. According to the Solow Model learned in Econ 101, we believe the economy is behind the steady state as the Model suggested; it means the economic growth is not in pace with the long-term growth due to the shut down of economic activities, once the economic activities are back to normal, the economic growth will be bounding back to the original pace. Therefore, we believe once air travel is back to normal, the passenger traffic will be bounding back to the 2019 level and continue the long-term growth. 
 
 ## Goal
-The goal of this part of the project is to utilize the data set to predict the passenger traffic pattern until the passenger traffic level is return to pre-pandemic level (2019) under the assumption backed by the economics theories.
+The goal of this part of the project is to utilize the dataset to predict the passenger traffic pattern until the passenger traffic level is return to pre-pandemic level (2019) under the assumption backed by the economics theories.
 
 
 ## Plan and Approach
-We will first make prediction using traditional time-series statistical learning. The disruption of the passenger traffic comes from an extreme economic shock due to the outbreak of pandemic and believe to be rebounded to pre-pandemic level after the disruption has ended. Traditional time-series models may not make useful prediction as the disruption has been happening long enough that using autoregressive integrate moving average models or any approach heavily rely on 2018-2020 data will not return prediction with rebound momentum. If the prediction is not useful for our goal, we may find different approach to make the prediction to our goal.
+We will first make prediction using traditional time-series statistical learning. The disruption of the passenger traffic comes from an extreme economic shock due to the outbreak of pandemic and believe to be rebounded to pre-pandemic level after the disruption has ended. 
+<br>
+Our predictive model has to satisfy the following requirement:
+<ul>
+	<li>Do not violate the time-series-related assumption</li>
+	<li>The passenger traffic rebound to pre-pandemic level once air travel is back to normal as passenger traffic return to its steady state suggested by the Slow Model</li>
+</ul>
+<br>
+Traditional time-series models may not make useful prediction as the disruption has been happening long enough that using autoregressive integrate moving average models or any approach heavily rely on 2018-2020 data will not return prediction with rebound momentum. If the prediction is not useful for our goal, we may find different approach to make the prediction to our goal.
 
 ## Files
 In this part, the folder contains the following files:
@@ -31,32 +39,39 @@ In this part, the folder contains the following files:
 </ul>
 
 ## Data Cleansing
-Coming Soon...
+The data cleansing part is identical to the data cleansing done in Part 1.1. If you are interested what has done to improve the data quality, you may find more details in the [Data Folder](../Data) and [Part 1.1 ETL Folder](../Data/ETL_part1_1). 
+
 
 ## EDA
-There are more data available comparing the data set used in Part 1/Part 1.1 because the data set used in this part is downloaded in 3 years after the Part 1 is conducted. You may find the passenger traffic insight between 2005 and 2020 in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part2/EDA">EDA folder</a> before learning the prediction model.
+There are more data available comparing the dataset used in Part 1/Part 1.1 because the dataset used in this part is downloaded in 3 years after the Part 1 is conducted. You may find the passenger traffic insight between 2005 and 2020 in the <a href="https://github.com/jacquessham/sfotraffic/tree/master/Part2/EDA">EDA folder</a> before learning the prediction model. The dataset we are using consists of observation between 2005 and 2020. To answer our curious of how the passenger traffic in SFO dropped significantly visually, below is the line chart: 
 <br><br>
 <img src=EDA/Images/monthpax_line.png>
 <br>
-Passenger Traffic in SFO has experienced a steadily growth since 2005 until 2019, a sudden economic shock occur in Q1 2020 due to the outbreak of the coronavirus.
-
-## Model Training and Prediction (Under Construction)
-The rumor of an outbreak of coronavirus in a certain Asian country started in Q4 2019 and had developed to a global scale outbreak in Q1 2020. A couple months later, global air travel came to an halt in March, 2020 when effectively all international travels are banned among countries. All counties in the San Francisco Bay Area locked down since mid-March 2020 and passenger traffic has been plunged to the level never seen in the data set since then.
+Passenger Traffic in SFO has experienced a steadily growth since 2005 until 2019, a sudden economic shock occur in Q1 2020 due to the outbreak of the coronavirus. We can see that the passenger traffic halted in the beginning of 2020 and maintain in a fraction of pre-pandemic level. It means it is hard for us to predict a rebound with traditional time-series statistical learning since we have insufficient amount of data to recover in an extreme rapid pace from an extreme low level to the pre-pandemic level.
 <br>
-Our goal is to utilize the data set to predict the passenger traffic pattern until the passenger traffic level is return to pre-pandemic level (2019). Let's assume January, 2021 is the first month the air traffic resume in order to make it simple since our data ends in December, 2020.
+We know that there is a great economic recession in 2008. If we focus on that period, we can see the passenger traffic moving average dropped betwee late 2008 and late 2009. Then, the moving average rebound in 2010 and grow until it leveled out in 2013. Since then, we see the moving average flatted out in 2013 and 2019 for a short period time but never ever dropped again. So, we can use the rebound period between 2009-2013, or 4 years in total, as reference to help us to make prediction of rebound in passenger traffic.
+
+## Model Training and Prediction
+The rumor of an outbreak of coronavirus in a certain Asian country started in Q4 2019 and had developed to a global scale outbreak in Q1 2020. A couple months later, global air travel came to an halt in March, 2020 when effectively all international travels are banned among countries. All counties in the San Francisco Bay Area locked down since mid-March 2020 and passenger traffic has been plunged to the level never seen in the dataset since then.
+<br>
+Our goal is to utilize the dataset to predict the passenger traffic pattern until the passenger traffic level is return to pre-pandemic level (2019). Let's assume January, 2021 is the first month the air traffic resume in order to make it simple since our data ends in December, 2020.
 <br><br>
 ### Step 1: Traditional Time-series Approach
-The first approach is to use traditional time-series statistical learning to predict the rebounded passenger traffic, to do this, we can use Generalized Additive Model (GMA, Here we are using Facebook Prophet) to predict. As we have mentioned in the EDA phase, we observe the recovering period takes about 4 years: So, we can use the existing data to predict the traffic during 2021-2024. In this phase, we will be using <i>prediction_step1.py</i> to predict and visualize the result.
+The first approach is to use traditional time-series statistical learning to predict the rebounded passenger traffic for our benchmark model. To do this, we can use Generalized Additive Model (GMA, Here we are using Facebook Prophet) to predict. As we have mentioned in the EDA phase, we observe the recovering period takes about 4 years: So, we can use the existing data to predict the traffic during 2021-2024. In this phase, we will be using <i>prediction_step1.py</i> to predict and visualize the result. Below is the result:
 <br>
 <img src=Images/predict_prophet.png>
 <br>
 As we can see that the passenger traffic bounds significantly in the beginning of 2021 but follow a downward-sloping trend, it is not a useful model because our goal is to find the growth path to recover to the pre-pandemic level; this model is showing us that it violates our assumption the trend is not going back to the pre-pandemic level. The flaw of using GMA is that it heavily rely on previous periods for prediction, so it may not be helpful for our goal. Looking at the result above, the concern is valid: We can see the passenger traffic jumps up dramatically and the trend between 2021-2024 is dropping that the result is against our assumption. 
 
-### Step 2: Scaling the Previous Growth Path
-We believe the passenger traffic will spend about 4 years to recover similar to the pace between 2009-2013 as this is the only recover pace we found in EDA. Then, we use <i>recoverypath_type.py</i> to visualize the standardized growth path during these 4 years as we took the Janurary, 2009 as base index to obtain the index of the next 4 years, like below:
+### Step 2: Scaling the Previous Recovery Trench
+After training the model with GMA algorithm, we can conclude the traditional time-series statistical learning methods are not useful to build a predictive model to serve our goal because the prediction relies heavily with last period data that return a result of sudden jumps in passenger traffic in 2021 and drop sustainably which violates our assumption that passenger traffic would rebound to pre-pandemic level. 
+<br>
+Besides GMA algorithm, we may look at other algorithms and see whether it can help us. Linear regression will not be suitable in our exercise, because the dataset's autocorrelation characteristic violates one of the linear regression assumption. In the case of decision tree, random forest, gradient boosting are not suitable as well because we do not have data that allow us to train a model to have a rapid recovery from 2020 level back to 2019 level that satisfy our promise from the Solow Model.
+<br>
+We believe the passenger traffic will spend about 4 years to recover similar to the pace between 2009-2013 as this is the only recover pace we found in EDA. Then, we use <i>viz_recoverypath_type.py</i> to visualize the standardized growth path during these 4 years as we took the Janurary, 2009 as base index to obtain the index of the next 4 years, like below:
 <img src=Images/recovery_path.png>
 <br>
-Having the trend between 2009-2013 convert to index, we can assume the recovery path is similar to this trend and use this trend index as the trend pattern and scale the growth path to predict the passenger traffic between 2021-2024. It means the passenger traffic will recover to December, 2020 level in December, 2024. In this approach, we will take the growth path between 2009-2013 to scale up the magitude of the growth rate in order to grow from the base month of Janurary, 2021 as the base month and December, 2024 as recovered month.
+Having the trend between 2009-2013 convert to index, we can assume the recovery path is similar to this trend and use this trend index as the trend pattern and scale the growth path to predict the passenger traffic between 2021-2024. It means the passenger traffic will recover to December, 2020 level in December, 2024. We can capture this trend and scale up the magnitude of the growth rate to make the prediction. Using this approach, we will take the recovery path between 2009-2013 to scale up the magnitude of the growth rate in order to grow from the base month of Janurary, 2021 as the base month and December, 2024 as recovered month.
 <br>
 The formula is the below:<br>
 tr_d = Passenger Traffic in month/year d<br>
@@ -65,14 +80,14 @@ index_i,dec20 = index_i,dec09, where 0 =< i =< 47<br>
 g_bar = (tr_dec24 - tr_dec20)/(index47,dec09 - index0,dec09), where tr_dec24 = tr_dec19 and index_0,dec09 = 100<br>
 tr_d = tr_dec20 + g_bar(index_i,dec20-100), where d between dec,20 and dec,24<br>
 <br>
-If we apply this method, the prediction will looks like this:
+In this phase, we will be using <i>prediction_step2.py</i> to predict and <i>viz_prediction_step2.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/raw_prediction.png>
 <br>
 We can see the trend of the recovery path between December,2020 and December,2024 looks fine but the passenger traffic in each month fluctuate with extreme volatility. At the same time, we have multiple months of prediction drop below 0 which is extremly not realistic. We believe the trend capture is fine but we have to smoothen the seasonalilty flucatuation and avoid the predict any number below 0.
 <br><br>
 
-### Step 3: Scaling the Previous Growth Path with Moving Average
-Our goal of the next step is to improve the model created in the last step and to smoothen the seasonality flucatuation to have the prediction more realistic. One of the useful way to achieve that is to capture the trend using moving average index and seasonality using the difference between actual passenger traffic index and moving average index. The flaw of the model created in the last step comes from the fact that we did not differentiate the calculation of trend and seasonality. In this step, we are going to separate the calculation of trend and seasonality using moving average. The formula is the following:
+### Step 3: Scaling the Previous Recovery Trend with Moving Average
+Our goal of this step is to improve the model created in the last step and to smoothen the seasonality flucatuation to make the prediction more realistic. One of the useful ways to achieve that is to capture the trend using moving average index and seasonality using the difference between actual passenger traffic index and moving average index. The flaw of the model created in the last step comes from the fact that we did not differentiate the calculation of trend and seasonality. In this step, we are going to separate the calculation of trend and seasonality using moving average. We will first predict the trend with moving average and scale up the magnitude first to predict the trend. Then, we will find the difference between actual passenger traffic and moving average in percentage between 2009-2013 in order to obtain the seasonality fluculation. At last, we will finalize our prediction by combining the predicted trend and predicted seasonality fluculation. In order words, the finalized prediction is a trend prediction mulitple by one plus seasonality flucation in percentage. The formula is the following:
 <br>
 The formula is the below:<br>
 tr_d = Passenger Traffic in month/year d<br>
@@ -85,12 +100,12 @@ g_bar = (tr_dec24 - tr_dec20)/(index47,dec09 - index0,dec09), where tr_dec24 = t
 tr_d' = tr_dec20 + g_bar(index_i,dec20'-100), where d between dec,20 and dec,24<br>
 tr_d = tr_dec20' \* (1 + p_i,j/100)<br>
 <br>
-If we apply this method, the prediction will looks like this:
+In this phase, we will be using <i>prediction_step3.py</i> to predict and <i>viz_prediction_step3.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/prediction_step3.png>
 <br><br>
-With this approach, we can see the seasonality flucation is moderate and never go below 0. So, this model is more useful to predict the passenger traffic. 
+With this approach, we can see the seasonality flucation is moderate and never go below 0. Although we can see there is some rapid growth in 2024, this model satisfy our assumptions and is more useful to predict the passenger traffic. 
 
-### Step 4: Scaling the Previous Domestic and International Passenger Growth Path with Moving Average
+### Step 4: Scaling the Previous Domestic and International Passenger Recovery Trend with Moving Average
 In the mid-2021, we see that domestic travel is starting to recover in a moderate rate, but, in contrast, international travel is still in halt. Therefore, it may be useful to separate the recovery path between domestic traffic and international traffic. If we do so, the recovery path look something like below:
 <img src=Images/recovery_path_type.png>
 <br>
@@ -105,7 +120,7 @@ g_bar,type = (tr_dec24,type - tr_dec20,type)/(index47,dec09,type - index0,dec09,
 tr_d,type' = tr_dec20,type + g_bar(index_i,dec20,type'-100), where d between dec,20 and dec,24, type = dos/intl<br>
 tr_d = tr_dec20,type' \* (1 + p_i,j,type/100), where type = dos/intl<br>
 <br>
-After the calculation, the result looks something like:
+In this phase, we will be using <i>prediction_step4.py</i> to predict and <i>viz_prediction_step4.py</i> to visualize the result. After the calculation, the result looks something like:
 <img src=Images/prediction_step4.png>
 <br>
 We can see the flaw of this model is that the prediction of international passenger traffic goes below 0 for about 12-15 months while the domestic passenger traffic prediction is fine. Therefore, we need to address this problem in the next step.
@@ -114,7 +129,7 @@ We can see the flaw of this model is that the prediction of international passen
 The goal of this step is to fix the flaw of the model trained in step 4 to prevent any prediction go below 0. The reason why the international passenger traffic prediction drop below 0 because the base number in period 0, or Decemeber, 2020, was too low and we deduct with a large magititude when the index drop below 100 (Which is the index of period 0). Let's take a step back to review the situtation of international travel: As mentioned, the international travel is in halt; the passengers who are travelling internationally are essential and unavoidable. Therefore, there is no way the passenger traffic drop too much in trend but only seasonal flucation in 2021 until the borders are reopened. The data captured during the time with no irregular travel restriction, unlike during the pandemic, so the pattern in the dataset may not be accuate and we need to come up with some adjustment to reflect the situation unique in the pandemic. We can see the time that the index drop below 100 are mostly in the beginning of the passenger traffic recovery path. In reality, we do not see the borders may open up in the first two years, 2021-2022 of the recovery path due to new virus variants and vaccines rollout schedule in various country. So, we can add an additional assumption that the international travel cannot drop significantly because the international travels occur in the recovery period are essential and unavoidable (Aviodable business trips and leisure travels have been excluded in the statistics, so there is not any factor to international passenger traffic drop in trend). We can adjust the calculation of international travel to eliminate the trend effect when index drop below 100. The formula is the following:<br>
 Coming Soon...
 <br><br>
-After the calculation, the result looks something like:
+In this phase, we will be using <i>prediction_step5.py</i> to predict and <i>viz_prediction_step5.py</i> to visualize the result. After the calculation, the result looks something like:
 <img src=Images/prediction_step5.png>
 <br>
 If we combine the prediction between domestic and international passenger traffic, the results become:
@@ -124,7 +139,6 @@ After we modified the model to adjust the new assumption for international passe
 
 ## Conclusion
 I would say we have two satisfying models to predict the passenger traffic between 2021 and 2024 from step 3 and step 5. However, we have added additional assumption to prevent predict drop below 0 that add some inconsistency to Model 5. I am more confident to use Model 3 to make prediction on the SFO passenger traffic count between 2021 and 2024. Another important note, it is best not to switch back to the model trained in Part 1.1 to predict the passenger traffic in 2025 immediately because the prediction in 2025 relies on data in 2024 which is still a recovery period. The best way to do so is to predict 2025 passenger traffic using the same model in Model 3 but grab an extra year of growth pattern (Trend and seasonality between 2009-2014) and switch back to the Model trained in Part 1.1. The reason to include an additional year pattern because the Part 1.1 model prediction relies on trend and seasonality for the previous 12 months.
-
 
 ## Next Step
 You may find the cargo tonnage to learn more about air cargo traffic during the pandemic and the prediction in [Part 3 folder](../Part3). Or you may go back to the [Main Page](../) for the other parts of the folder.
