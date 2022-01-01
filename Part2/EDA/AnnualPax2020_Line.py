@@ -27,7 +27,7 @@ data.append(go.Scatter(x=df['date'], y=df['pax_count_ma'],
               line=dict(color='rgb(255,178,102)')))
 
 ## Prepare layout
-layout = dict(title={'text':'SFO Month Passenger Traffic between 2007-2020',
+layout = dict(title={'text':'SFO Monthly Passenger Traffic between 2007-2020',
                      'x':0.5},
 	          xaxis=dict(title='Date'), 
 	          yaxis=dict(title='Passenger (M)', gridcolor='lightgray'),
