@@ -74,11 +74,7 @@ We believe the passenger traffic will spend about 4 years to recover similar to 
 Scaling the previous recovery trend means we need map the recovery trend to the prediction periods and up-scale the growth rate.  We will first convert passenger traffic to index with base period of December, 2008 to capture the trend between 2009-2013. Then, we will find the growth rate by finding the difference pre-pandemic level (December, 2019) and pandemic level (December, 2020) divided by the index difference between the beginning and ending recovery trend (December, 2008 and December, 2013). By doing that, we will scale up the magnitude the growth rate relative to the trend between 2009-2013 to increase the momentum to jump back to the steady state. Since we have map the recovery trend to the prediction periods, each month in the prediction periods has the identical passenger traffic index as the recovery trend between 2009-2013 (For example, Jan 2021 index is same as Jan 2009...etc). We will deduct 100 by the index of each month for the additive index above the base month (December, 2020) and multiple by the growth rate to obtain the monthly passenger traffic addition to base month. At last, we will finalize the prediction by adding the base month passenger traffic with the monthly passenger traffic addition to base month. In other words, we will multiple the difference between the monthly passenger traffic index and 100 and multiplying the manitude of growth rate and add the base month passenger traffic while December, 2020 is the base month.
 <br>
 The formula is the below:<br>
-tr_d = Passenger Traffic in month/year d<br>
-index_i,j = Passenger Traffic in period i relative to base period of month/year j<br>
-index_i,dec20 = index_i,dec09, where 0 =< i =< 47<br>
-g_bar = (tr_dec24 - tr_dec20)/(index47,dec09 - index0,dec09), where tr_dec24 = tr_dec19 and index_0,dec09 = 100<br>
-tr_d = tr_dec20 + g_bar(index_i,dec20-100), where d between dec,20 and dec,24<br>
+<img src=Images/part2_formula.png>
 <br>
 In this phase, we will be using <i>prediction_step2.py</i> to predict and <i>viz_prediction_step2.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/raw_prediction.png>
@@ -88,17 +84,9 @@ We can see the trend of the recovery path between December,2020 and December,202
 
 ### Step 3: Scaling the Previous Recovery Trend with Moving Average
 Our goal of this step is to improve the model created in the last step and to smoothen the seasonality fluctuation to make the prediction more realistic. The flaw of the model created in the last step comes from the fact that we did not differentiate the calculation of trend and seasonality. One of the useful ways to achieve that is to capture the trend using moving average index and seasonality using the difference between actual passenger traffic index and moving average index. In this step, we are going to separate the calculation of trend and seasonality using moving average. We will first predict the trend with moving average and scale up the magnitude first to predict the trend like we did in the last step. Then, we will add the seasonality fluctuation by finding the difference between actual passenger traffic and moving average in percentage between 2009-2013. At last, we will finalize our prediction by combining the predicted trend and predicted seasonality fluculation. In order words, the finalized prediction is a trend prediction mulitple by one plus seasonality flucation in percentage. The formula is the following:
-<br>
+<br><br>
 The formula is the below:<br>
-tr_d = Passenger Traffic in month/year d<br>
-tr_d' = Passenger Traffic 12-months Moving Average in month/year d<br>
-index_i,j = Passenger Traffic in period i relative to base period of month/year j<br>
-index_i,j' = Passenger Traffic 12-months Moving Average in period i relative to base period of month/year j<br>
-p_i,j = index_i,j - index_i,j'<br>
-index_i,dec20 = index_i,dec09, where 0 =< i =< 47<br>
-g_bar = (tr_dec24 - tr_dec20)/(index47,dec09 - index0,dec09), where tr_dec24 = tr_dec19 and index_0,dec09 = 100<br>
-tr_d' = tr_dec20 + g_bar(index_i,dec20'-100), where d between dec,20 and dec,24<br>
-tr_d = tr_dec20' \* (1 + p_i,j/100)<br>
+<img src=Images/part3_formula.png>
 <br>
 In this phase, we will be using <i>prediction_step3.py</i> to predict and <i>viz_prediction_step3.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/prediction_step3.png>
@@ -110,15 +98,7 @@ In the mid-2021, we see that domestic travel is starting to recover in a moderat
 <img src=Images/recovery_path_type.png>
 <br>
 We can see the passenger traffic for domestic travel recover about 5-10% faster during the recovery period relative to international travel. We can use the same algorithm in step 3 to develop two different models for domestic and international travels. The formula for both models are the same, but for the seek of clarity formula is the following:<br>
-tr_d,type = Passenger Traffic of either Domestic or International Travel in month/year d, where type = dos/intl<br>
-tr_d,type' = Passenger Traffic 12-months Moving Average of either Domestic or International Travel in month/year d, where type = dos/intl<br>
-index_i,j,type = Passenger Traffic of either Domestic or International Travel in period i relative to base period of month/year j, where type = dos/intl<br>
-index_i,j,type' = Passenger Traffic 12-months Moving Average of either Domestic or International Travel in period i relative to base period of month/year j, where type = dos/intl<br>
-p_i,j,type = index_i,j,type - index_i,j,type', where type = dos/intl<br>
-index_i,dec20,type = index_i,dec09,type, where 0 =< i =< 47, type = dos/intl<br>
-g_bar,type = (tr_dec24,type - tr_dec20,type)/(index47,dec09,type - index0,dec09,type), where tr_dec24,type = tr_dec19,type and index_0,dec09,type = 100, type = dos/intl<br>
-tr_d,type' = tr_dec20,type + g_bar(index_i,dec20,type'-100), where d between dec,20 and dec,24, type = dos/intl<br>
-tr_d = tr_dec20,type' \* (1 + p_i,j,type/100), where type = dos/intl<br>
+<img src=Images/part4_formula.png>
 <br>
 In this phase, we will be using <i>prediction_step4.py</i> to predict and <i>viz_prediction_step4.py</i> to visualize the result. After the calculation, the result looks something like:
 <img src=Images/prediction_step4.png>
@@ -127,7 +107,7 @@ We can see the flaw of this model is that the prediction of international passen
 
 ### Step 5: Modified Step 4
 The goal of this step is to fix the flaw of the model trained in step 4 to prevent any prediction go below 0. The reason why the international passenger traffic prediction drop below 0 because the base number in period 0, or Decemeber, 2020, was too low and we deduct with a large magititude when the index drop below 100 (Which is the index of period 0). Let's take a step back to review the situtation of international travel: As mentioned, the international travel is in halt; the passengers who are travelling internationally are essential and unavoidable. Therefore, there is no way the passenger traffic drop too much in trend but only seasonal flucation in 2021 until the borders are reopened. The data captured during the time with no irregular travel restriction, unlike during the pandemic, so the pattern in the dataset may not be accuate and we need to come up with some adjustment to reflect the situation unique in the pandemic. We can see the time that the index drop below 100 are mostly in the beginning of the passenger traffic recovery path. In reality, we do not see the borders may open up in the first two years, 2021-2022 of the recovery path due to new virus variants and vaccines rollout schedule in various country. So, we can add an additional assumption that the international travel cannot drop significantly because the international travels occur in the recovery period are essential and unavoidable (Aviodable business trips and leisure travels have been excluded in the statistics, so there is not any factor to international passenger traffic drop in trend). We can adjust the calculation of international travel to eliminate the trend effect when index drop below 100. The formula is the following:<br>
-Coming Soon...
+<img src=Images/part5_formula.png>
 <br><br>
 In this phase, we will be using <i>prediction_step5.py</i> to predict and <i>viz_prediction_step5.py</i> to visualize the result. After the calculation, the result looks something like:
 <img src=Images/prediction_step5.png>
