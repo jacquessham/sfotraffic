@@ -95,7 +95,7 @@ We will first predict the trend with moving average and scale up the magnitude f
 The formula is the below:<br>
 <img src=Images/part3_formula.png>
 <br><br>
-If we visualize the formula: First, we will capture the trend by calculating the moving average and use this to make the trend prediction. The moving average will be mapped to the prediction periods. After that, we will up-scale the trend like in Part 2 and this is our trend prediction.
+If we visualize the formula: First, we will capture the trend by calculating the moving average and use this to make the trend prediction. The moving average will be mapped to the prediction periods. After that, we will up-scale the trend like in Part 2 and this is our trend prediction.<br>
 <img scr=Images/explain_formula3a.png>
 <br>
 Then, you will calculate the difference in index-point between the actual index and the moving average index in each month. You will use this difference to predict the seasonality effect to finalize the actual prediction of each month.<br>
