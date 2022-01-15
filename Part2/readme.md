@@ -88,12 +88,22 @@ In this phase, we will be using <i>prediction_step2.py</i> to predict the number
 We can see the trend of the recovery path between December,2020 and December,2024 looks fine but the passenger traffic in each month fluctuates with extreme volatility. At the same time, we have multiple months of prediction drop below 0 which is extremly not realistic. We believe the trend capture is fine but we have to smoothen the seasonalilty fluctuation and avoid predicting any number below 0.
 
 ### Step 3: Moving Average Trend Up-Scaling
-Our goal of this step is to improve the model created in the last step and to smoothen the seasonality fluctuation to make the prediction more realistic. The flaw of the model created in the last step comes from the fact that we did not differentiate the calculation of trend and seasonality. One of the useful ways to achieve that is to capture the trend using moving average index and seasonality using the difference between actual passenger traffic index and moving average index. In this step, we are going to separate the calculation of trend and seasonality using moving average. We will first predict the trend with moving average and scale up the magnitude first to predict the trend like we did in the last step. Then, we will add the seasonality fluctuation by finding the difference between actual passenger traffic and moving average in percentage between 2009-2013. At last, we will finalize our prediction by combining the predicted trend and predicted seasonality fluculation. In order words, the finalized prediction is a trend prediction mulitple by one plus seasonality flucation in percentage. The formula is the following:
+Our goal of this step is to improve the model created in the last step and to smoothen the seasonality fluctuation to make the prediction more realistic. The flaw of the model created in the last step comes from the fact that we did not differentiate the calculation of trend and seasonality. One of the useful ways to achieve that is to capture the trend using moving average index and seasonality using the difference between actual passenger traffic index and moving average index. In this phase, we are going to separate the calculation of trend and seasonality using moving average. 
+<br><br>
+We will first predict the trend with moving average and scale up the magnitude first to predict the trend like we did in the last step. Then, we will add the seasonality fluctuation by finding the difference between actual passenger traffic and moving average in percentage between 2009-2013. At last, we will finalize our prediction by combining the predicted trend and predicted seasonality fluculation. In order words, the finalized prediction is a trend prediction mulitple by one plus seasonality flucation in percentage. The formula is the following:
 <br><br>
 The formula is the below:<br>
 <img src=Images/part3_formula.png>
+<br><br>
+If we visualize the formula: First, we will capture the trend by calculating the moving average and use this to make the trend prediction. The moving average will be mapped to the prediction periods. After that, we will up-scale the trend like in Part 2 and this is our trend prediction.
+<img scr=Images/explain_formula3a.png>
 <br>
-In this phase, we will be using <i>prediction_step3.py</i> to predict and <i>viz_prediction_step3.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
+Then, you will calculate the difference in index-point between the actual index and the moving average index in each month. You will use this difference to predict the seasonality effect to finalize the actual prediction of each month.<br>
+<img src=Images/explain_formula3b.png>
+<br>
+For example, we know the February of 1st year actual index is 79.64 and the moving average index is 99.30. Then, we will calculate the difference, which is -19.66, to calculate the seasonality effect of the prediction. We will finalize the prediction by taking a 19.66% discount of what we calculated from trend prediction. Let's pretend the monthly passenger traffic of the base month is 1,000,000 and the grow magnitude is 200,000 per index point. The trend prediction would be 1,000,000+200,000(99.30-100)=860,000. Since the seasonal prediction would be a 19.66% discount, the finalized prediction for February of 1st year is 860,000(1-0.1966)=690,924.
+<br><br>
+In order to make the prediction, we will be using <i>prediction_step3.py</i> to predict and <i>viz_prediction_step3.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/prediction_step3.png>
 <br><br>
 With this approach, we can see the seasonality fluctuation is moderate and never go below 0. Although we can see there is some rapid growth in 2024, this model satisfies our assumptions and is more useful to predict the passenger traffic.
