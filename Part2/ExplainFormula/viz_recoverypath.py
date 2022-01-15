@@ -7,7 +7,7 @@ from plotly.offline import *
 # To initiate ploty to run offline
 init_notebook_mode(connected=True)
 # Use monthly data
-df = pd.read_csv('../Data/sfo2020pax_month.csv')
+df = pd.read_csv('../../Data/sfo2020pax_month.csv')
 df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
 index_base = df[df['date']=='2008-12-31']['pax_count'].tolist()[0]
 df['index'] = df['pax_count']/index_base*100
