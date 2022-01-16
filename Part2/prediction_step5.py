@@ -77,7 +77,7 @@ df_pred['domestic_raw_prediction'] = domestic_pax_dec2020+(df_pred['domestic_mai
 df_pred['intl_raw_prediction'] = intl_pax_dec2020
 for i in range(1,len(df_pred)):
 	if df_pred['intl_maindex'].iloc[i] < 100:
-		df_pred['intl_raw_prediction'].iloc[i] = intl_pax_dec2020*df_pred['intl_maindex'].iloc[i]/100
+		df_pred['intl_raw_prediction'].iloc[i] = intl_pax_dec2020
 	else:
 		df_pred['intl_raw_prediction'].iloc[i] = intl_pax_dec2020+(df_pred['intl_maindex'].iloc[i]-100)*intl_pax_per_index
 # Calculate the final prediction by adjusting with seasonality
