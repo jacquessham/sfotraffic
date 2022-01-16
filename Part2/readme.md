@@ -23,7 +23,7 @@ Our predictive model has to satisfy the following requirement:
 Traditional time-series models may not make useful prediction as the disruption has been happening long enough that using autoregressive integrate moving average models or any approach heavily rely on 2018-2020 data will not return prediction with rebound momentum. If the prediction is not useful for our goal, we may find different approach to make the prediction to our goal.
 
 ## Files
-In this part, the folder contains the following files:
+In this part, the folder contains the following scripts:
 <ul>
 	<li>prediction_step1.py</li>
 	<li>prediction_step2.py</li>
@@ -37,6 +37,15 @@ In this part, the folder contains the following files:
 	<li>viz_prediction_step5_agg.py</li>
 	<li>recoverypath_type.py</li>
 </ul>
+
+You may also find the helping scripts in the [ExplainFormula](/ExplainFormula) folder:
+<ul>
+	<li>recoverypath.py</li>
+	<li>recoverypath_type.py</li>
+	<li>viz_ma_recoverypath.py</li>
+	<li>viz_explainformula2.py</li>
+</ul>
+
 
 ## Data Cleansing
 The data cleansing part is identical to the data cleansing done in Part 1.1. If you are interested what has done to improve the data quality, you may find more details in the [Data Folder](../Data) and [Part 1.1 ETL Folder](../Data/ETL_part1_1). 
@@ -55,7 +64,7 @@ We know that there is a great economic recession in 2008. If we focus on that pe
 The rumor of an outbreak of coronavirus in a certain Asian country started in Q4 2019 and had developed to a global scale outbreak in Q1 2020. A couple months later, global air travel came to an halt in March, 2020 when effectively all international travels are banned among countries. All counties in the San Francisco Bay Area locked down since mid-March 2020 and passenger traffic has been plunged to the level never seen in the dataset since then.
 <br>
 Our goal is to utilize the dataset to predict the passenger traffic pattern until the passenger traffic level is return to pre-pandemic level (2019). Let's assume January, 2021 is the first month the air traffic resume in order to make it simple since our data ends in December, 2020.
-<br><br>
+
 ### Step 1: Traditional Time-series Approach
 The first approach is to use traditional time-series statistical learning to predict the rebounded passenger traffic for our benchmark model. To do this, we can use <a href="https://en.wikipedia.org/wiki/Generalized_additive_model">Generalized Additive Model</a> (GMA, Here we are using Facebook Prophet) to predict. This is simple statiscts additive model to predict based on smooth functions of predictor variables. As we have mentioned in the EDA phase, we observe the recovering period takes about 4 years: So, we can use the existing data to predict the traffic during 2021-2024. In this phase, we will be using <i>prediction_step1.py</i> to predict and visualize the result. Below is the result:
 <br>
@@ -63,26 +72,25 @@ The first approach is to use traditional time-series statistical learning to pre
 <br>
 As we can see that the passenger traffic bounds significantly in the beginning of 2021 but follow a downward-sloping trend, it is not a useful model because our goal is to find the growth path to recover to the pre-pandemic level, not a sustainably shrink; this model is showing us that it violates our assumption the trend is not going back to the pre-pandemic level. The passenger traffic jumps up dramatically and the trend between 2021-2024 is dropping that the result is against our assumption. The flaw of using GMA is that it heavily rely on previous periods for prediction (2021 prediction relies on 2020 data), so it may not be helpful for our goal because the prediction relied on an abnormal economic state. Since other time-series algorithms, such as Holt-Winters and Box-Jenkins methods, also relies on last period observations to make prediction, so it will behave similarly tothe GMA model and we shall not build a predictive model with those algorithms. 
 
-### Simple Previous Trend Up-Scaling
+### Step 2: Simple Previous Trend Up-Scaling
 After training the model with GMA algorithm, we can conclude the traditional time-series statistical learning methods are not useful to build a predictive model to serve our goal because the prediction relies heavily with last period data that return a result of sudden jumps in passenger traffic in 2021 and drop sustainably which violates our assumption that passenger traffic would rebound to pre-pandemic level. 
 <br><br>
 Besides GMA algorithm, we may look at other algorithms and see whether it can help us. Linear regression will not be suitable in our exercise, because the dataset's autocorrelation characteristic violates one of the linear regression assumption. In the case of decision tree, random forest, gradient boosting are not suitable as well because we do not have the data that allow us to train a model to have a rapid recovery from 2020 level back to 2019 level that satisfies our promise from the Solow Model.
 <br><br>
-We believe the passenger traffic will spend about 4 years to recover similar to the pace between 2009-2013 as this is the recover pace reference we found in EDA. It means the passenger traffic will recover to pre-pandmic level in December, 2024 starting in December, 2020 (The recovery period is between 2021-2024). Then, we use <i>viz_recoverypath_type.py</i> to visualize the standardized growth path during these 4 years as we took the Janurary, 2009 as base index to obtain the index of the next 4 years, like below:
+We believe the passenger traffic will spend about 4 years to recover similar to the pace between 2009-2013 as this is the recover pace reference we found in EDA. It means the passenger traffic will recover to pre-pandmic level in December, 2024 starting in December, 2020 (The recovery period is between 2021-2024). Then, we use <i>viz_recoverypath.py</i> (In the <i>ExplainFormula</i> folder) to visualize the standardized growth path during these 4 years as we took the Janurary, 2009 as base index to obtain the index of the next 4 years, like below:
 <img src=Images/recovery_path.png>
 <br>
-Scaling the previous recovery trend means we would map the recovery trend (Trend between 2009-2013) to the prediction periods and up-scale the growth magnitude.  We will first convert passenger traffic to index with base period of December, 2008 to capture the trend between 2009-2013 and map the trend between 2021-2024. Then, we will find the growth rate by finding the difference pre-pandemic level (December, 2019) and pandemic level (December, 2020) divided by the index difference between the beginning and ending recovery trend (December, 2008 and December, 2013). By doing that, we will know how much to scale up the magnitude the growth rate per index-point to jump back to the steady state within 4 years. 
+Scaling up the previous recovery trend means we would map the recovery trend (Trend between 2009-2013) to the prediction periods and up-scale the growth magnitude.  We will first convert passenger traffic to index with base period of December, 2008 to capture the trend between 2009-2013 and map the trend between 2021-2024. Then, we will find the up-scaled growth rate by finding the difference pre-pandemic level (December, 2019) and pandemic level (December, 2020) divided by the index difference between the beginning and ending recovery trend (December, 2008 and December, 2013). By doing that, we will know the up-scaled magnitude per index-point to jump back to the steady state within 4 years. 
 <br><br>
+To visualize, here is next step to map the recovery trend over to the period between 2021-2024:<br>
 <img src=Images/explain_formula2.png>
 <br>
-In the above image, we have mapped the 2009-2013 trend to 2021-2024, the next step is to scale up the trend to have Dec, 2024 hit the passenger traffic level back to 2019.
-<br><br>
-Now we have mapped the recovery trend to the prediction periods, each month in the prediction periods has the identical passenger traffic index as the recovery trend between 2009-2013 (For example, Jan 2021 index is same as Jan 2009...etc). The next step is to use December, 2020 as base month and add the predicted increase passenger traffic on top of the number in the base month according to the passenger traffic index. We will deduct the index of each month by 100 and multiple by the growth rate to obtain the predicted monthly passenger traffic addition to base month. At last, we will finalize the prediction by adding the base month passenger traffic with the monthly passenger traffic addition to base month. In other words, we will multiple the difference between the monthly passenger traffic index and multiplying the manitude of growth rate and add the base month passenger traffic of the base month.
+Now we have mapped the recovery trend to the prediction periods, the next step is to scale up the trend to have December, 2024 hit the passenger traffic level back to 2019. Each entry in the prediction periods has the identical passenger traffic index as the recovery trend between 2009-2013 (For example, Jan 2021 index is same as Jan 2009...etc). Now we will use December, 2020 as base month and add the predicted increase passenger traffic on top of the number in the base month according to the passenger traffic index. We will deduct the index of each month by 100 and multiple by the growth rate to obtain the predicted monthly passenger traffic addition to base month. At last, we will finalize the prediction by adding the base month passenger traffic with the monthly passenger traffic addition to base month. In other words, we will multiple the difference between the monthly passenger traffic index and multiplying the manitude of growth rate and add the base month passenger traffic of the base month.
 <br><br>
 The formula is the below:<br>
 <img src=Images/part2_formula.png>
 <br>
-In this phase, we will be using <i>prediction_step2.py</i> to predict the numbers and <i>viz_prediction_step2.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
+In this phase, we will be using <i>prediction_step2.py</i> to make the predictions and <i>viz_prediction_step2.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/raw_prediction.png>
 <br>
 We can see the trend of the recovery path between December,2020 and December,2024 looks fine but the passenger traffic in each month fluctuates with extreme volatility. At the same time, we have multiple months of prediction drop below 0 which is extremly not realistic. We believe the trend capture is fine but we have to smoothen the seasonalilty fluctuation and avoid predicting any number below 0.
@@ -95,7 +103,7 @@ We will first predict the trend with moving average and scale up the magnitude f
 The formula is the below:<br>
 <img src=Images/part3_formula.png>
 <br><br>
-If we visualize the formula: First, we will capture the trend by calculating the moving average and use this to make the trend prediction. The moving average will be mapped to the prediction periods. After that, we will up-scale the trend like in Part 2 and this is our trend prediction.<br>
+If we visualize the formula, it would look like this: First, we will capture the trend by calculating the moving average and use this to make the trend prediction. The moving average will be mapped to the prediction periods. After that, we will up-scale the trend like in Part 2 and this is our trend prediction.<br>
 <img src=Images/explain_formula3a.png>
 <br>
 Then, you will calculate the difference in index-point between the actual index and the moving average index in each month. You will use this difference to predict the seasonality effect to finalize the actual prediction of each month.<br>
@@ -106,16 +114,16 @@ For example, we know the February of 1st year actual index is 79.64 and the movi
 In order to make the prediction, we will be using <i>prediction_step3.py</i> to predict and <i>viz_prediction_step3.py</i> to visualize the result. If we apply this method, the prediction will looks like this:
 <img src=Images/prediction_step3.png>
 <br><br>
-With this approach, we can see the seasonality fluctuation is moderate and never go below 0. Although we can see there is some rapid growth in 2024, this model satisfies our assumptions and is more useful to predict the passenger traffic.
+With this approach, we can see the seasonality fluctuation is moderate and never go below 0. Although we can see there is some rapid growth in 2024, this model satisfies our assumptions and is more useful to predict the passenger traffic than the previous one.
 
 ### Step 4: Scaling the Previous Domestic and International Passenger Recovery Trend with Moving Average
-In the mid-2021, we see that domestic travel is starting to recover in a moderate rate, but, in contrast, international travel is still in halt. Therefore, it may be useful to separate the recovery path between domestic traffic and international traffic. If we do so, the recovery path look something like below:
+In the mid-2021, we see that domestic travel is starting to recover in a moderate rate, but, in contrast, international travel is still in halt. Therefore, it may be useful to separate the recovery path between domestic traffic and international traffic. If we do so, we can use <i>viz_recoverypath_type.py</i>  (In the <i>ExplainFormula</i> folder) to visualize the recovery path:
 <img src=Images/recovery_path_type.png>
 <br>
-We can see the passenger traffic for domestic travel recover about 5-10% faster during the recovery period relative to international travel. We can use the same algorithm in step 3 to develop two different models for domestic and international travels. The formula for both models are the same, but for the seek of clarity formula is the following:<br>
+We can see the passenger traffic for domestic travel recover about 5-10% faster during the recovery period relative to international travel that means international travel has a lag in the recovery period. We can use the same algorithm in step 3 to develop two different models for domestic and international travels. The formula for both models are the same, but for the seek of clarity, the formula is the following:<br>
 <img src=Images/part4_formula.png>
 <br>
-In this phase, we will be using <i>prediction_step4.py</i> to predict and <i>viz_prediction_step4.py</i> to visualize the result. After the calculation, the result looks something like:
+The formula is the same except we segemented the trend and seasonality effect for domestic travel and international travel. In this phase, we will be using <i>prediction_step4.py</i> to predict and <i>viz_prediction_step4.py</i> to visualize the result. After the calculation, the result looks something like:
 <img src=Images/prediction_step4.png>
 <br>
 We can see the flaw of this model is that the prediction of international passenger traffic goes below 0 for about 12-15 months while the domestic passenger traffic prediction is fine. Therefore, we need to address this problem in the next step.
