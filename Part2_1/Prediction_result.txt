@@ -1,0 +1,2 @@
+The R2 Score of the prediction with real world data is: -2.0028
+The MSE of the prediction with real world data is: 2.5231 million passengers

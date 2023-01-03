@@ -5,6 +5,11 @@ The goal of Part 2.1 is to compare the result of the prediction made in Part 2 w
 Coming soon...
 
 ## The Result
-The R-square score is .
+The R-square score is <b>-2.0028</b>.
 <br><br>
+<img src=result_part2.png>
+<br><br>
+Coming soon...
+
+## Reflection
 Coming soon...
