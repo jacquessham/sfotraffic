@@ -9,10 +9,14 @@ The data set is an open source data set obtained from <a href="https://datasf.or
 Part 1 was the original work conducted in 2019. The primary goal of this project was to make prediction of passenger traffic between 2018-2019 with 2005-2017 data. Besides that, I have also compared the prediction accuracy between the packages available in R and Facebook Prophet (Which is the newly released time-series statistical-learning package in 2019). You may find more detail in the [Part 1 folder](/Part1).
 
 ## Part 1.1
-Part 1.1 follows up the Part 1 with updated code in Python. The primary goal is the same to make prediction of passenger traffic between 2018-2019 with 2005-2017 data but using Python only. The EDA is also redone with Python packages instead of ggplot in R. You may find more details in the [Part 1.1 folder](/Part1_1). 
+Part 1.1 follows up the Part 1 with updated code in Python. The primary goal is the same to make prediction of passenger traffic between 2018-2019 with 2005-2017 data but using Python only. The EDA is also redone with Python packages instead of ggplot in R. You may find more details in the [Part 1.1 folder](/Part1_1).
+<br><br>
+I have also used the real world data between 2018-2019 to verify the accuracy of the predictive model built in Part 1.1. The accuracy rate is <b>0.8502</b>. You may find more details in the [Part 1.2 folder](/Part1_2).
 
 ## Part 2
 Part 2 is the effort to follow up the disruption of 2020-2021 Pandemic to predict the growth pattern of the passenger traffic once the pandemic is over. You may find more details in the [Part 2 folder](/Part2) to find how does the path of recovering path looks like.
+<br><br>
+I am going to use the real world data between 2021-Jun,2022 to verify they accuracy of the predictive model built in Part 2. You may find more details in in the [Part 2.1 folder](/Part2_1)
 
 ## Part 3
-In Part 3, we would expand our scope to cargo operation in SFO and predict the cargo traffic. Coming Soon...
+In Part 3, we would expand our scope to cargo operation in SFO and predict the cargo traffic. You may find more details in the [Part 3 folder](/Part3). Coming Soon...
