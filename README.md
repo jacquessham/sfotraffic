@@ -12,11 +12,15 @@ Part 1 was the original work conducted in 2019. The primary goal of this project
 Part 1.1 follows up the Part 1 with updated code in Python. The primary goal is the same to make prediction of passenger traffic between 2018-2019 with 2005-2017 data but using Python only. The EDA is also redone with Python packages instead of ggplot in R. You may find more details in the [Part 1.1 folder](/Part1_1).
 <br><br>
 I have also used the real world data between 2018-2019 to verify the accuracy of the predictive model built in Part 1.1. The accuracy rate is <b>0.8502</b>. You may find more details in the [Part 1.2 folder](/Part1_2).
+<br><br>
+In the [Part 1.3 folder](/Part1_3), we will build the production predictive model which takes fresh downloaded data and make prediction. Note that this model will not take the 2020-2022 pandemic into account, the refined model can be found in the [Part 2.2 folder](/Part2_2).
 
 ## Part 2
-Part 2 is the effort to follow up the disruption of 2020-2021 Pandemic to predict the growth pattern of the passenger traffic once the pandemic is over. You may find more details in the [Part 2 folder](/Part2) to find how does the path of recovering path looks like.
+Part 2 is the effort to follow up the disruption of 2020-2022 Pandemic to predict the growth pattern of the passenger traffic once the pandemic is over. You may find more details in the [Part 2 folder](/Part2) to find how does the path of recovering path looks like.
 <br><br>
-I am going to use the real world data between 2021-Jun,2022 to verify they accuracy of the predictive model built in Part 2. You may find more details in in the [Part 2.1 folder](/Part2_1)
+I am going to use the real world data between 2021 and Jun,2022 to verify they accuracy of the predictive model built in Part 2. You may find more details in in the [Part 2.1 folder](/Part2_1).
+<br><br>
+In the [Part 2.2 folder](/Part2_2), we will revisit the model in Part 2.1 and build the production predictive model which takes fresh downloaded data and make prediction. Coming soon...
 
 ## Part 3
 In Part 3, we would expand our scope to cargo operation in SFO and predict the cargo traffic. You may find more details in the [Part 3 folder](/Part3). Coming Soon...

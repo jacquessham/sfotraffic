@@ -1,5 +1,5 @@
 # Part 2 - Predict Passenger Traffic in SFO after the 2020-2021 Pandemic
-Part 2 is the effort to follow up the disruption of 2020-2021 Pandemic to predict the growth pattern of the passenger traffic once the pandemic is over using the latest data available. In this part, I will achieve the goals using Python.
+Part 2 is the effort to follow up the disruption of 2020-2022 Pandemic to predict the growth pattern of the passenger traffic once the pandemic is over using the latest data available. In this part, I will achieve the goals using Python.
 
 ## About the dataset
 The dataset is an open source dataset obtained from <a href="https://datasf.org/opendata/">Open SF</a>. It consists of 12 columns with 22,869 observations. For the convenience, the dataset is cleansed and transformed for this part in the ETL process with <i>etl_2020.py</i>. The ETL process returns 2 csv files, <i>sfo2020pax_eda.csv</i> for EDA and <i>sfo2020pax_month.csv</i> for model training. You may find more detail about the original dataset, transformed datasets, and the ETL scripts in the [Data Folder](../Data). The dataset is a time series data, and therefore, there are constraints to what we can do as some approches may violate some assumptions on certain algorithms, such as linear regression.
@@ -144,4 +144,6 @@ After we modified the model to adjust the new assumption for international passe
 I would say we have two satisfying models to predict the passenger traffic between 2021 and 2024 from step 3 and step 5. However, we have added additional assumption to prevent predict drop below 0 that add some inconsistency to Model 5. I am more confident to use Model 3 to make prediction on the SFO passenger traffic count between 2021 and 2024. Another important note, it is best not to switch back to the model trained in Part 1.1 to predict the passenger traffic in 2025 immediately because the prediction in 2025 relies on data in 2024 which is still a recovery period. The best way to do so is to predict 2025 passenger traffic using the same model in Model 3 but grab an extra year of growth pattern (Trend and seasonality between 2009-2014) and switch back to the Model trained in Part 1.1. The reason to include an additional year pattern because the Part 1.1 model prediction relies on trend and seasonality for the previous 12 months.
 
 ## Next Step
+Once the data is available, we will revisit this predictive model and evaluate the accuracy in [Part 2.1](../Part2_1) and finalize the model in [Part 2.2](../Part2_2).
+<br><br>
 You may find the cargo tonnage to learn more about air cargo traffic during the pandemic and the prediction in [Part 3 folder](../Part3). Or you may go back to the [Main Page](../) for the other parts of the folder.

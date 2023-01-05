@@ -403,7 +403,13 @@ And it could be visualized as follow:
 <br>
 <img src='Images/sfopred.png'>
 
-## Reflection
-Coming Soon...
-<br><br><br>
+
+
+## Next Step
+In 2020, I have downloaded a fresher dataset to compare the real world data with the prediction to evaluate the prediction result. If we plot the prediction with the dataset consists of 2018-2019 data, it will look like this:
 <img src='Images/pred_compare.png'>
+<br><br>
+In [Part 1.2](../Part1_2), we will evaluate the prediction result and conclue with a verdict, and produce a finalized production script in [Part 1.3](../Part1_3).
+<br><br>
+As the world has experienced the 2020-2022 pandemic, there was shock that halted the airline industry due to global lockdown. We will make a prediction on the recovery path in passenger traffic in [Part 2](../Part2).
+
