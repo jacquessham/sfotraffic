@@ -1,4 +1,5 @@
 {
-	"file":"../Data/Air_Traffic_Passenger_Statistics_2022.csv",
-	"pred_period":24
+	"file":"../Data/Air_Traffic_Passenger_Statistics.csv",
+	"pred_period":24,
+	"result_export_csv":false
 }
