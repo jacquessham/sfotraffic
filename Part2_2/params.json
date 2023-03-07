@@ -1,0 +1,8 @@
+{
+	"file":"../Data/Air_Traffic_Passenger_Statistics_2020.csv",
+	"pred_period":24,
+	"result_export_csv":false,
+	"shock_date":"2020-02-29",
+	"shock_bottom":2,
+	"shock_recovery":24
+}
