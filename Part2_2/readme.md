@@ -4,7 +4,7 @@ Part 2.2 will finalize the scripts from Part 2 in order to make prediction after
 ## Terminology
 <ul>
 	<li>Extreme shock: The unexpected event that leads the passenger traffic drop rapidly</li>
-	<li>Normal months: The time period when the passenger traffic is not affected by the shock. In other word, the passenger traffic growth rate is not growing in extreme rate</li>
+	<li>Normal time/Normal months: The time or period when the passenger traffic is not affected by the shock. In other word, the passenger traffic growth rate is not growing in extreme rate</li>
 	<li>Recovery Prediction: The prediction between the extreme shock and prediction back to normality</li>
 	<li>Prediction after Recovery: Prediction after normality</li>
 </ul>
@@ -63,7 +63,33 @@ This script visualize the dataset downloaded from OpenSF and the prediction. It 
 	<li></li>
 </ol>
 
-## Note
+## Example
+Here is the example configuration. You can expect the shock is taken place in Feb, 2020 and takes 30 months to recover, and make a prediction for the next 24 months. The recovery period would be reference the trend and seasonality on Feb, 2009 and the following 30 months. It will also switch the prediction model to additive model, and visualize the dataset, recovery prediction, and prediction after recovery.
+
+```
+{
+	"file":"../Data/Air_Traffic_Passenger_Statistics_2020.csv",
+	"pred_period":24,
+	"result_export_csv":true,
+	"shock_date":"2020-02-29",
+	"recovery_reference":"2009-02-28",
+	"normality_before_shock":2,
+	"shock_recovery":30,
+	"seasonality_mod":0.3,
+	"trend_mode":"add",
+	"seasonal_mode":"add",
+	"diff_pred":true
+}
+```
+
+<br>
+If you have use this configuration, the visualization would look something like this:
+
+<img src="example_viz.png">
+
+## Notes
 <ul>
-	<li>The reason we shift the prediction of the Prediction after Recovery in step 4 becuase we assume the prediction is a continuity of the normal time that the trend should not be disrupted by any shock event. Once the passenger traffic is recovered, the trend will be continued as no shock has been happened.</li>
+	<li>The reason we shift the prediction of the Prediction after Recovery in step 4 becuase we assume the prediction is a continuity of the normal time that the trend should not be disrupted by any shock event. Once the passenger traffic is recovered, the trend will be continued as no shock has been happened. Therefore, the prediction after recovery should based on the trend and seasonality in the normal time</li>
+	<li>Although the result in Part 2.2 that the prediction should be based on Holt-Winters Multiplicative model, the prediction is not realistic that the passenger traffic growth rate is double after the recovery. It is recommend to switch to additive to obtain a more realistic prediction</li>
+	<li>The program does not check whether the <i>recovery_reference</i> is the same month as <i>shock_date</i>, you should match the months in both field to make sure the seasonality prediction is consistent</li>
 </ul>
