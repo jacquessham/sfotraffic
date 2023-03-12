@@ -24,3 +24,6 @@ In the [Part 2.2 folder](/Part2_2), we will revisit the model in Part 2.1 and bu
 
 ## Part 3
 In Part 3, we would expand our scope to cargo operation in SFO and predict the cargo traffic. You may find more details in the [Part 3 folder](/Part3). Coming Soon...
+
+## Part 4
+In Part 4, we are going to utilize <i>GoodData Cloud Native Community Edition</i> to visualize the insight on all avaiable data. You may find more details in the [Part 4](/Part4). Coming soon...
