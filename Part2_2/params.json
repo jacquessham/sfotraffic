@@ -1,0 +1,13 @@
+{
+	"file":"../Data/Air_Traffic_Passenger_Statistics_2020.csv",
+	"pred_period":24,
+	"result_export_csv":true,
+	"shock_date":"2020-02-29",
+	"recovery_reference":"2009-02-28",
+	"normality_before_shock":2,
+	"shock_recovery":30,
+	"seasonality_mod":0.3,
+	"trend_mode":"add",
+	"seasonal_mode":"add",
+	"diff_pred":true
+}
