@@ -4,7 +4,7 @@ Coming soon...
 ## Tools
 <ul>
 	<li>Postgres Database</li>
-	<li>GoodData Cloud Native Community Edition</li>
+	<li>GoodData Cloud Native Community Edition (>v2.0)</li>
 	<li>Python</li>
 </ul>
 
