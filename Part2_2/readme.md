@@ -38,6 +38,9 @@ This JSON file provides the inputs of how the program would run. You must fill i
 	<li>diff_pred: To indicate whether the visualization differentiate the recovery prediction and prediction after recovery. You may set <i>true</i> for differentiation, or <i>false</i> to ignore</li>
 </ul>
 
+#### shock_date vs. normality_before_shock
+One of the reasons we separate <i>shock_date</i> and <i>normality_before_shock</i> is that we experience some unusual drop of passenger traffic before March, 2020 as some Asian countries started to close their border or downscale the flight frequency before the US closed its border in January, 2020. We do not want to take it account into the prediction model. Therefore, the prediction model should only takes data up to <i>normality_before_shock</i> to filter out the adnormality in the prediction model. It means, in reality, if we want to make prediction after air traffic resume in 2022 or 2023, the prediction, the prediction model should only use the data until December, 2019 which is the last normal month.
+
 ### sfo_pred.py
 The driver script to trigger the data cleaning phase, prediction phase, and the visualization phase. Each phase will call functions from <i>etl_prod.py</i>,<i>hw_prod.py</i>,<i>viz_prod.py</i>, respectively.
 
@@ -91,5 +94,5 @@ If you have use this configuration, the visualization would look something like 
 <ul>
 	<li>The reason we shift the prediction of the Prediction after Recovery in step 4 becuase we assume the prediction is a continuity of the normal time that the trend should not be disrupted by any shock event. Once the passenger traffic is recovered, the trend will be continued as no shock has been happened. Therefore, the prediction after recovery should based on the trend and seasonality in the normal time</li>
 	<li>Although the result in Part 2.2 that the prediction should be based on Holt-Winters Multiplicative model, the prediction is not realistic that the passenger traffic growth rate is double after the recovery. It is recommend to switch to additive to obtain a more realistic prediction</li>
-	<li>The program does not check whether the <i>recovery_reference</i> is the same month as <i>shock_date</i>, you should match the months in both field to make sure the seasonality prediction is consistent</li>
+	<li><b>The program does not check whether the <i>recovery_reference</i> is the same month as <i>shock_date</i>, you should match the months in both field to make sure the seasonality prediction is consistent</b></li>
 </ul>
