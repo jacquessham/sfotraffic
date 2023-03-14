@@ -20,7 +20,7 @@ Part 2 is the effort to follow up the disruption of 2020-2022 Pandemic to predic
 <br><br>
 I am going to use the real world data between 2021 and Jun,2022 to verify they accuracy of the predictive model built in Part 2. You may find more details in in the [Part 2.1 folder](/Part2_1).
 <br><br>
-In the [Part 2.2 folder](/Part2_2), we will revisit the model in Part 2.1 and build the production predictive model which takes fresh downloaded data and make prediction. Coming soon...
+In the [Part 2.2 folder](/Part2_2), we will revisit the model in Part 2.1 and build the production predictive model which takes fresh downloaded data and make prediction during the recovery and beyond.
 
 ## Part 3
 In Part 3, we would expand our scope to cargo operation in SFO and predict the cargo traffic. You may find more details in the [Part 3 folder](/Part3). Coming Soon...
