@@ -1,0 +1,5 @@
+{
+	"upload_file":["../../Data/Air_Traffic_Passenger_Statistics_2022.csv","../../Data/Air_Traffic_Cargo_Statistics_2020.csv","../../Data/Air_Traffic_Landings_Statistics_2020.csv"],
+	"dataset":["pax","cargo","landing"],
+	"upload_tag":["pax_2022","cargo_2022","landing_2022"]
+}
