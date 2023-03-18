@@ -55,8 +55,8 @@ for file, dataset, tag in zip(params['upload_file'], params['dataset'], params['
         cursor.execute(query_curr_row)
         conn.commit()
         row_counter += 1
-        if row_counter % 1000:
-        	print(f'{row_counter} rows uploaded')
+        if row_counter % 1000 == 0:
+        	print(f'{row_counter} rows uploaded in {table}')
 
 cursor.close()
 

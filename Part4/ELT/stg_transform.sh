@@ -1,0 +1,1 @@
+psql -h localhost -p 8731 -U sfo -d sfo -a -f stg_transform.sql
