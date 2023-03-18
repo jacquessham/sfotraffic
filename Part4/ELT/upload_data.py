@@ -31,9 +31,9 @@ for file, dataset, tag in zip(params['upload_file'], params['dataset'], params['
     if version is None or version < 1:
         version = 1
     else:
-    	# psycopg2 will return some weird float format, so convert to int
-    	version = int(version) 
-    	version += 1
+        # psycopg2 will return some weird float format, so convert to int
+        version = int(version) 
+        version += 1
 
     # Read file to pandas
     df_curr = pd.read_csv(file, dtype=str)
@@ -56,7 +56,7 @@ for file, dataset, tag in zip(params['upload_file'], params['dataset'], params['
         conn.commit()
         row_counter += 1
         if row_counter % 1000 == 0:
-        	print(f'{row_counter} rows uploaded in {table}')
+            print(f'{row_counter} rows uploaded in {table}')
 
 cursor.close()
 
