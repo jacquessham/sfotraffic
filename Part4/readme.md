@@ -38,7 +38,15 @@ Coming soon...
 
 
 ## Data Model
+The data model used in the workspace look like this:
+<img src=gooddata/ldm.png>
+
+<br><br>
+There are 3 core fact tables on Passenger Traffic, Cargo Traffic, and Landing Traffic, and dimsional tables with shared attributes. As the data of 3 datasets came from 3 denormalized files, the transformation would have done in the Postgres database.
+
+### Data Pipelines
 Coming soon...
 
 ## Gallery
-Coming soon...
+<img src=gooddata/dashbaord1.png>
+<img src=gooddata/dashboard2.png>
