@@ -48,5 +48,5 @@ There are 3 core fact tables on Passenger Traffic, Cargo Traffic, and Landing Tr
 Coming soon...
 
 ## Gallery
-<img src=gooddata/dashbaord1.png>
+<img src=gooddata/dashboard1.png>
 <img src=gooddata/dashboard2.png>
