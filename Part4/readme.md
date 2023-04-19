@@ -33,6 +33,8 @@ By running this script, it will automatically set up the data pipeline ingest, l
 Coming soon...
 
 ### Data Refresh
+Currently the pipeline is only able to initiate the database and an one-time-data-full-load. The data pipeline for data refresh is still in progress. 
+<br><br>
 Coming soon...
 
 
@@ -45,6 +47,32 @@ The data model used in the workspace look like this:
 There are 3 core fact tables on Passenger Traffic, Cargo Traffic, and Landing Traffic, and dimsional tables with shared attributes. As the data of 3 datasets came from 3 denormalized files, the transformation would have done in the Postgres database.
 
 ### Data Pipelines
+Currently the pipeline is only able to initiate the database and an one-time-data-full-load. The data pipeline for data refresh is still in progress. 
+<br><br>
+You should fill out <i>elt_params.json</i> before running the initiation. There are 2 required columns:
+<ul>
+	<li>upload_file</li>
+	<li>dataset</li>
+</ul>
+<br>
+Both columns are arrays. In both columns, you may state the location of the dataset and the dataset type. It is expecting 3 dataset and <i>dataset</i> is expecting 3 following elements:
+<ul>
+	<li>pax (Passenger)</li>
+	<li>cargo (Cargo)</li>
+	<li>landing (Landing)</li>
+</ul>
+<br>
+You are expected to state the location and dataset type in the same position in both array. The example is:
+
+```
+{
+	"upload_file":["../../Data/Air_Traffic_Passenger_Statistics_2022.csv","../../Data/Air_Traffic_Cargo_Statistics_2020.csv","../../Data/Air_Traffic_Landings_Statistics_2020.csv"],
+	"dataset":["pax","cargo","landing"]
+}
+```
+<br>
+The column <i>upload_tag</i> is optional and it is now not used in the data pipeline but you may expect it can be utilize in the future.
+<br><br>
 Coming soon...
 
 ## Gallery
