@@ -1,19 +1,22 @@
 # Part 4 - SFO Insight Dashboard
-Coming soon...
+The goal of Part 4 is to conduct SFO traffic analytics through display statistics and trends on GoodData dashboard. The dashboard will be provide the necessary data, data pipeline, and dashboard solution.
+
+<br><br>
+The current version only provide a one-time-data-full-load upload scripts. The improvement will be coming soon...
 
 ## Tools
+Here are the tools are required to run the dashboard.
 <ul>
-	<li>Postgres Database</li>
-	<li>GoodData Cloud Native Community Edition (>v2.0)</li>
+	<li>Docker</li>
+	<li>Postgres Database, v14.2</li>
+	<li>GoodData Cloud Native Community Edition (>v2.0), the setup will install the latest version</li>
 	<li>Python</li>
 </ul>
 
-<br>
-Coming soon...
 
 ## Instruction
 ### Initiation
-First, initiate GoodData.CN and Postgres database via Docker with the following command:
+First, initiate GoodData.CN and Postgres database via Docker with the following command (The defintion is defined at <i>docker-compose.yml</i>):
 
 ```
 sh initate.sh
@@ -29,14 +32,10 @@ sh setup_sfodb.sh
 
 <br>
 By running this script, it will automatically set up the data pipeline ingest, load, and transform the data to the output stage, and set up the workspace in GoodData. Once it is done, you may get to GoodData.CN's <i>SFO Staistics</i> workspace.
-<br><br>
-Coming soon...
+
 
 ### Data Refresh
-Currently the pipeline is only able to initiate the database and an one-time-data-full-load. The data pipeline for data refresh is still in progress. 
-<br><br>
-Coming soon...
-
+Currently the pipeline is only able to initiate the database and an one-time-data-full-load. The feature of the data pipeline on data refresh will be developed in the future version. Stay tuned!
 
 
 ## Data Model
@@ -72,8 +71,7 @@ You are expected to state the location and dataset type in the same position in 
 ```
 <br>
 The column <i>upload_tag</i> is optional and it is now not used in the data pipeline but you may expect it can be utilize in the future.
-<br><br>
-Coming soon...
+
 
 ## Gallery
 <img src=gooddata/dashboard1.png>
