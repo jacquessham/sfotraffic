@@ -39,3 +39,19 @@ cargo_year[cargo_year$year < 2024,] %>% group_by(year) %>% ggplot() +
   theme_minimal() + theme(legend.position="none") +
   scale_x_continuous(name = "Year", breaks= pretty_breaks()) +
   scale_y_continuous(name = "Cargo (1,000 Tons)", breaks= pretty_breaks())
+
+# Pie Chart for Cargo type
+filter_year <- 2010
+total_tonnage <- cargotraffic[cargotraffic$year >= filter_year,] %>% summarise(total_tonnage = sum(weight_tons)) %>% as.integer()
+cargotype_traffic <- cargotraffic[cargotraffic$year >= filter_year,]
+
+
+cargotype_traffic %>% group_by(cargo_type) %>%
+  summarise(type_traffic = sum(weight_tons)) %>%
+  ggplot(aes(x = "", y = type_traffic, fill = cargo_type)) +
+  geom_bar(width = 1 , stat = "identity") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  scale_fill_brewer(palette = "Set2", name = "Cargo Type", label = c("Cargo", "Express", "Mail")) +
+  ggtitle("Percentage of Cargo Type") +
+  geom_text(aes(x = 1, label = percent(type_traffic / total_tonnage)), position = position_stack(vjust = .5))
