@@ -4,6 +4,7 @@ suppressMessages(library(zoo))
 suppressMessages(library(ggplot2))
 suppressMessages(library(treemapify))
 suppressMessages(library(scales))
+suppressMessages(library(TTR))
 
 # Load Data into dataframe
 path <- "/Users/jacquessham/Documents/GitHub/sfotraffic/Data"
@@ -33,9 +34,21 @@ cargo_year <- cargotraffic %>% group_by(year) %>% summarise(sumcargo = sum(weigh
 
 
 # Line Graph for cargo tonnage
-cargo_year[cargo_year$year < 2024,] %>% group_by(year) %>% ggplot() +
+cargo_roll4yr %>% filter(year>2005&year<2024) %>% group_by(year) %>% ggplot() +
   geom_line(aes(x = ts(year), y = sumcargo/1000, group = 1, color = "red")) +
-  ggtitle("SFO Cargo Tonnage between 1999 and 2023") +
+  ggtitle("SFO Cargo Tonnage between 2005 and 2023") +
+  theme_minimal() + theme(legend.position="none") +
+  scale_x_continuous(name = "Year", breaks= pretty_breaks()) +
+  scale_y_continuous(name = "Cargo (1,000 Tons)", breaks= pretty_breaks())
+
+cargo_roll4yr <- cbind(cargo_year,TTR::SMA(cargo_year$sumcargo, n=4))
+colnames(cargo_roll4yr) <- c("year","sumcargo","rollavg")
+
+
+cargo_roll4yr %>% filter(year>2005&year<2024) %>% group_by(year) %>% ggplot() +
+  geom_line(aes(x = ts(year), y = sumcargo/1000, group = 1, color = "red")) +
+  geom_line(aes(x = ts(year), y = rollavg/1000, group = 1, color = "orange"), linetype="dotdash") +
+  ggtitle("SFO Cargo Tonnage between 2005 and 2023") +
   theme_minimal() + theme(legend.position="none") +
   scale_x_continuous(name = "Year", breaks= pretty_breaks()) +
   scale_y_continuous(name = "Cargo (1,000 Tons)", breaks= pretty_breaks())
@@ -77,8 +90,19 @@ cargotype_traffic %>% group_by(aircraft_type) %>%
   geom_bar(width = 1 , stat = "identity") +
   coord_polar(theta = "y") +
   theme_void() +
-  # scale_fill_brewer(palette = "Set2", name = "Aircraft Type", label = c("Combu", "Freighter", "Passenger")) +
+  # scale_fill_brewer(palette = "Set2", name = "Aircraft Type", label = c("Combi", "Freighter", "Passenger")) +
   ggtitle("Percentage of Aircraft Type") +
+  geom_text(aes(x = 1, label = percent(type_traffic / total_tonnage)), position = position_stack(vjust = .5))
+
+# Pie Chart for Outbound and Inbound Cargo
+cargotype_traffic %>% group_by(activity_type) %>%
+  summarise(type_traffic = sum(weight_tons)) %>%
+  ggplot(aes(x = "", y = type_traffic, fill = activity_type)) +
+  geom_bar(width = 1 , stat = "identity") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  scale_fill_brewer(palette = "Set2", name = "Cargo Type", label = c("Inbound", "Outbound")) +
+  ggtitle("Percentage of Cargo Type") +
   geom_text(aes(x = 1, label = percent(type_traffic / total_tonnage)), position = position_stack(vjust = .5))
 
 

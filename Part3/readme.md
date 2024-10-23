@@ -3,11 +3,9 @@ Coming soon...
 
 ## EDA
 Coming soon...
+<br><br>
+[EDA folder](EDA)
 
-<br><br>
-<img src=EDA/annual_tonnage.png>
-<br><br>
-<img src=EDA/percent_cargo.png>
 
 ## Reference
 Data from Open SF - <a href="https://data.sfgov.org/Transportation/Air-Traffic-Cargo-Statistics/u397-j8nr/about_data">link</a>
