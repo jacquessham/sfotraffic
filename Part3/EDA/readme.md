@@ -23,7 +23,7 @@ We see the monthly average cargo tonnage is relatively consistent, especially on
 3 - Cargo Type Breakdown
 
 <br>
-<img src=EDA/percent_cargo.png>
+<img src=percent_cargo.png>
 <br>
 We saw majority of the cargo traffic is classified as "Cargo", which accounted for 86.6%. For more time-senitive cargo, Mail cargo was accounted for 10.1% and 3.3% for Express cargo of the total cargo traffic.
 
@@ -34,3 +34,10 @@ We saw majority of the cargo traffic is classified as "Cargo", which accounted f
 <img src=aircraft_type.png>
 <br>
 It might be a surprise to most people that most of the cargo was transported by passenger flights, about 68% of the cargo tonnage. Only 31% of the cargo traffic was transported by freighter flights.
+
+## Top 5's
+5 - Domestic and International Top 5 Cargo Operators
+<br><br>
+The top 5 domestic cargo operators in SFO are <b>ABX Air</b>, <b>Delta</b>, <b>American</b>, <b>Fedex</b>, and <b>United</b>.
+<br>
+While the top 5 international cargo operators in SFO are <b>JAL</b>, <b>China Airlines</b>, <b>EVA Air</b>, <b>Korean Airlines</b>, and <b>United</b>.
