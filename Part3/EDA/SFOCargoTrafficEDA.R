@@ -31,25 +31,27 @@ cargotraffic$pub_airlines %<>% recode("Northwest Airlines (became Delta)" = "Del
 ####################### EDA #######################
 # Look at the annual cargo tonnage
 cargo_year <- cargotraffic %>% group_by(year) %>% summarise(sumcargo = sum(weight_tons))
+cargo_roll4yr <- cbind(cargo_year,TTR::SMA(cargo_year$sumcargo, n=4))
+colnames(cargo_roll4yr) <- c("year","sumcargo","rollavg")
 
 
 # Line Graph for cargo tonnage
 cargo_roll4yr %>% filter(year>2005&year<2024) %>% group_by(year) %>% ggplot() +
   geom_line(aes(x = ts(year), y = sumcargo/1000, group = 1, color = "red")) +
   ggtitle("SFO Cargo Tonnage between 2005 and 2023") +
-  theme_minimal() + theme(legend.position="none") +
+  theme_minimal() + theme(legend.position="none", plot.title = element_text(size = 7), 
+                          axis.title=element_text(size=5), axis.text = element_text(size=5)) +
   scale_x_continuous(name = "Year", breaks= pretty_breaks()) +
   scale_y_continuous(name = "Cargo (1,000 Tons)", breaks= pretty_breaks())
 
-cargo_roll4yr <- cbind(cargo_year,TTR::SMA(cargo_year$sumcargo, n=4))
-colnames(cargo_roll4yr) <- c("year","sumcargo","rollavg")
-
+## Image should be shrink to 2xx x 2xx
 
 cargo_roll4yr %>% filter(year>2005&year<2024) %>% group_by(year) %>% ggplot() +
   geom_line(aes(x = ts(year), y = sumcargo/1000, group = 1, color = "red")) +
   geom_line(aes(x = ts(year), y = rollavg/1000, group = 1, color = "orange"), linetype="dotdash") +
   ggtitle("SFO Cargo Tonnage between 2005 and 2023") +
-  theme_minimal() + theme(legend.position="none") +
+  theme_minimal() + theme(legend.position="none", plot.title = element_text(size = 7), 
+                          axis.title=element_text(size=5), axis.text = element_text(size=5)) +
   scale_x_continuous(name = "Year", breaks= pretty_breaks()) +
   scale_y_continuous(name = "Cargo (1,000 Tons)", breaks= pretty_breaks())
 
@@ -59,9 +61,11 @@ cargotraffic %>%
   summarise(avg_cargo = round(mean(weight_tons), digit = 0)) %>% 
   ggplot(aes(x = factor(month, labels = month.abb), y = avg_cargo, fill = geo_summ)) +
   geom_bar(stat = "identity", alpha = 0.8) +
-  theme_minimal() +
+  theme_minimal() + theme(plot.title = element_text(size = 7), legend.title = element_text(size = 5), 
+                          legend.text = element_text(size = 5), legend.key.size = unit(0.2, 'cm'),
+                          axis.title=element_text(size=5), axis.text = element_text(size=5)) +
   scale_y_continuous(labels = comma) + 
-  # scale_fill_discrete(name = "Destination", label = c("Domestic","International")) +
+  scale_fill_discrete(name = "Destination", label = c("Domestic","International")) +
   labs(x = "Month", y = "Tonnage") +
   ggtitle("Monthly Average Cargo Tonnage") +
   geom_text(aes(label = format(avg_cargo, big.mark = ",")), size = 2.75,
@@ -78,7 +82,7 @@ cargotype_traffic %>% group_by(cargo_type) %>%
   ggplot(aes(x = "", y = type_traffic, fill = cargo_type)) +
   geom_bar(width = 1 , stat = "identity") +
   coord_polar(theta = "y") +
-  theme_void() +
+  theme_void() + 
   scale_fill_brewer(palette = "Set2", name = "Cargo Type", label = c("Cargo", "Express", "Mail")) +
   ggtitle("Percentage of Cargo Type") +
   geom_text(aes(x = 1, label = percent(type_traffic / total_tonnage)), position = position_stack(vjust = .5))
@@ -141,5 +145,7 @@ cargotraffic %>%
   scale_x_discrete(name = "Cargo Type") +
   scale_y_discrete(name = "Aircraft Type") +
   scale_fill_gradient2(low = '#709AE1', high = '#FD7446', breaks = c(1000000,3000000,5000000), labels = c("1M tons","3M tons","5M tons")) +
-  theme_minimal() +
+  theme_minimal() + theme(plot.title = element_text(size = 7), legend.title = element_text(size = 5), 
+                          legend.text = element_text(size = 5), legend.key.size = unit(0.2, 'cm'),
+                          axis.title=element_text(size=5), axis.text = element_text(size=5)) +
   ggtitle("Aircraft vs Cargo Type")

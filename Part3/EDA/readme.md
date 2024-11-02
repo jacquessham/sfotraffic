@@ -31,9 +31,10 @@ We saw majority of the cargo traffic is classified as "Cargo", which accounted f
 4 - Aircraft Types
 
 <br>
-<img src=aircraft_type.png>
+<img src=aircraft_v_cargo.png>
 <br>
-It might be a surprise to most people that most of the cargo was transported by passenger flights, about 68% of the cargo tonnage. Only 31% of the cargo traffic was transported by freighter flights.
+It might be a surprise to most people that most of the cargo was transported by passenger flights, about 68% of the cargo tonnage. Only 31% of the cargo traffic was transported by freighter flights. There are very little cargo was transported by Combi fligths, as very few airlines operate combi aircrafts (Such as Alaska Airlines or KLM in the past, but neither of them has operated Combi flights in the last 20 years to SFO).
+
 
 ## Top 5's
 5 - Domestic and International Top 5 Cargo Operators
