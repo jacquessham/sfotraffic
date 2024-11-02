@@ -42,3 +42,11 @@ It might be a surprise to most people that most of the cargo was transported by 
 The top 5 domestic cargo operators in SFO are <b>ABX Air</b>, <b>Delta</b>, <b>American</b>, <b>Fedex</b>, and <b>United</b>.
 <br>
 While the top 5 international cargo operators in SFO are <b>JAL</b>, <b>China Airlines</b>, <b>EVA Air</b>, <b>Korean Airlines</b>, and <b>United</b>.
+
+## Top Operator
+6 - ABX Air's Tonnage between 2010 and 2023
+<br>
+<img src=abx_air_tonnage.png>
+
+<br>
+ABX Air's Tonnage steadily grew month-by-month, and does not seem to have an seasonality effect based on the heatmap. The tonnage jumped significantly after 2016. ABX Air seems to receive contract from DHL for US domestic service, the tonnage continues to grow in the future due to the expectation on growth on e-commerce's shipping service.

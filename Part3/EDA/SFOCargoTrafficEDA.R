@@ -149,3 +149,20 @@ cargotraffic %>%
                           legend.text = element_text(size = 5), legend.key.size = unit(0.2, 'cm'),
                           axis.title=element_text(size=5), axis.text = element_text(size=5)) +
   ggtitle("Aircraft vs Cargo Type")
+
+
+# Top Domestic cargo operator
+# ABX Air Passenger count
+cargotraffic %>%
+  filter(pub_code == "UA" & year >= 2010 & year < 2024) %>%
+  group_by(month, year) %>%
+  summarise(cargo = sum(weight_tons)) %>%
+  ggplot(aes(x = factor(month, labels = month.abb), y = year)) +
+  geom_tile(aes(fill = cargo)) + 
+  scale_x_discrete(name = "Month") +
+  scale_y_continuous(expand = c(0, 0), name = "Year", breaks = seq(min(cargotraffic$year), max(cargotraffic$year), by = 1)) +
+  scale_fill_gradientn(colours = rev(heat.colors(10)), labels = comma) +
+  theme_minimal() + theme(plot.title = element_text(size = 7), legend.title = element_text(size = 5), 
+                          legend.text = element_text(size = 5), legend.key.size = unit(0.2, 'cm'),
+                          axis.title=element_text(size=5), axis.text = element_text(size=5)) +
+  ggtitle("ABX Air Tonnage between 2010 and 2023 ")
