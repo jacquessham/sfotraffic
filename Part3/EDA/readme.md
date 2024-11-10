@@ -1,5 +1,5 @@
 # EDA
-We have the data between July, 1999 and July, 2024. It includes the cargo tonnages on each airline every month in the given period. There are 55,542
+We have the data between July, 1999 and July, 2024. It includes the cargo tonnages on each airline every month in the given period. There are 55,542 rows and 12 columns with in the dataset. The dataset may be found in the [Data folder](../../Data).
 
 ## Overview
 1 - Line Chart for Cargo Tonnage by Year
@@ -50,3 +50,14 @@ While the top 5 international cargo operators in SFO are <b>JAL</b>, <b>China Ai
 
 <br>
 ABX Air's Tonnage steadily grew month-by-month, and does not seem to have an seasonality effect based on the heatmap. The tonnage jumped significantly after 2016. ABX Air seems to receive contract from DHL for US domestic service, the tonnage continues to grow in the future due to the expectation on growth on e-commerce's shipping service.
+
+## Why the Cargo Tonnage Trend Downward?
+<ul>
+	<li>The freight forwarding business is not robust in the Bay Area, LAX is the choice for most of the cargo operators</li>
+	<li>Cargo operators focus more on OAK and SJC for cargo operations for regional logistics</li>
+	<li>There are not a lot of warehouses or manufacturers in the SFO area, and no space to expand such facilities for cargo operations</li>
+	<li>Rail connection is insufficient</li>
+	<li>Cost is higher in SFO than OAK or SJC</li>
+</ul>
+<br><br>
+Reference: Why lack of cargo service in SF Bay Area - <a href="https://www.airliners.net/forum/viewtopic.php?t=1485799">link</a>
