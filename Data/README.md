@@ -7,6 +7,7 @@ In this folder consists of the original data sets, tranformed data sets, and ETL
 	<li>sfopax_month.csv</li>
 	<li>Air_Traffic_Passenger_Statistics_2020.csv</li>
 	<li>Air_Traffic_Cargo_Statistics_2020.csv</li>
+	<li>Air_Traffic_Cargo_Statistics_2024.csv</li>
 	<li>Air_Traffic_Landings_Statistics_2020.csv</li>
 </ul>
 
